@@ -1,23 +1,24 @@
 #include <iostream>
+#include <string>
 #include "dominios.hpp"
 
 using namespace std;
 
 int main(){
 
-    Dinheiro *ptra;
+    Telefone *ptra;
 
-    ptra = new Dinheiro();
+    ptra = new Telefone();
 
-    if(ptra->setDinheiro(1000))
-        cout<<"Dinheiro = "<<ptra->getDinheiro()<<endl;
+    if(ptra->setTelefone("+55061992116412"))
+        cout<<"Telefone: "<<ptra->getTelefone()<<endl;
     else
-        cout<<"Dinheiro invalido"<<endl;
+        cout<<"Telefone invalido!"<<endl;
 
-    if(ptra->setDinheiro(18495.94))
-        cout<<"Dinheiro = "<<ptra->getDinheiro()<<endl;
+    if(ptra->setTelefone("+55011998850010"))
+        cout<<"Telefone: "<<ptra->getTelefone()<<endl;
     else
-        cout<<"Dinheiro invalido"<<endl;
+        cout<<"Telefone invalido!"<<endl;
 
     delete ptra;
 

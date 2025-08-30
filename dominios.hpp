@@ -1,6 +1,8 @@
 #ifndef DOMINIOS_HPP_INCLUDED
 #define DOMINIOS_HPP_INCLUDED
 
+#include <string>
+
 using namespace std;
 
 class Capacidade{
@@ -33,17 +35,56 @@ inline double Dinheiro::getDinheiro(){
 
 class Ramal{
     private:
-        static const int valorMax = 50;
-        int ramal;
-        bool validarRamal(int);
+        static const int valorMax = 50, valorMin = 0;
+        string ramal;
+        bool validarRamal(string);
     public:
-        bool setRamal(int);
-        double getRamal();
+        bool setRamal(string);
+        string getRamal();
 };
 
-inline int Ramal::getRamal(){
+inline string Ramal::getRamal(){
     return ramal;
 }
 
+class Numero{
+    private:
+        static const int valorMin = 1, valorMax = 999;
+        string numero;
+        bool validarNumero(string);
+    public:
+        bool setNumero(string);
+        string getNumero();
+};
 
-#endif // DOMINIOS_HPP_INCLUDED
+inline string Numero::getNumero(){
+    return numero;
+}
+
+class Telefone{
+    private:
+        string telefone;
+        bool validarTelefone(string);
+    public:
+        bool setTelefone(string);
+        string getTelefone();
+};
+
+inline string Telefone::getTelefone(){
+    return telefone;
+}
+
+class Data{
+    private:
+        string data;
+        bool validarData(string);
+    public:
+        bool setData(string);
+        string getData();
+};
+
+inline string Data::getData(){
+    return data;
+}
+
+#endif

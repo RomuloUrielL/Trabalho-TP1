@@ -8,3 +8,15 @@
 	<iostream>
 	"dominios.hpp"
 
+1756578798 source:c:\users\pc\desktop\trabalho-tp1\trabalho-tp1\dominios.cpp
+	"dominios.hpp"
+	<cctype>
+
+1756578814 c:\users\pc\desktop\trabalho-tp1\trabalho-tp1\dominios.hpp
+	<string>
+
+1756579114 source:c:\users\pc\desktop\trabalho-tp1\trabalho-tp1\main.cpp
+	<iostream>
+	<string>
+	"dominios.hpp"
+
