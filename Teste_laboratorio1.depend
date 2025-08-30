@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1756217293 source:/home/r-mulo/TP1/Teste_laboratorio1/dominios.cpp
+	"dominios.hpp"
+
+1756217458 /home/r-mulo/TP1/Teste_laboratorio1/dominios.hpp
+
+1756217350 source:/home/r-mulo/TP1/Teste_laboratorio1/main.cpp
+	<iostream>
+	"dominios.hpp"
+
