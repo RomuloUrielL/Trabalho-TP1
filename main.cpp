@@ -6,19 +6,19 @@ using namespace std;
 
 int main(){
 
-    Telefone *ptra;
+    Codigo *ptra;
 
-    ptra = new Telefone();
+    ptra = new Codigo();
 
-    if(ptra->setTelefone("+55061992116412"))
-        cout<<"Telefone: "<<ptra->getTelefone()<<endl;
+    if(ptra->setCodigo("av04ds23g5"))
+        cout<<"Codigo: "<<ptra->getCodigo()<<endl;
     else
-        cout<<"Telefone invalido!"<<endl;
+        cout<<"Codigo invalido!"<<endl;
 
-    if(ptra->setTelefone("+55011998850010"))
-        cout<<"Telefone: "<<ptra->getTelefone()<<endl;
+    if(ptra->setCodigo("dfgassd123"))
+        cout<<"Codigo: "<<ptra->getCodigo()<<endl;
     else
-        cout<<"Telefone invalido!"<<endl;
+        cout<<"Codigo invalido!"<<endl;
 
     delete ptra;
 

@@ -20,3 +20,15 @@
 	<string>
 	"dominios.hpp"
 
+1756863326 source:/home/r-mulo/Trabalho-TP1/main.cpp
+	<iostream>
+	<string>
+	"dominios.hpp"
+
+1756863628 /home/r-mulo/Trabalho-TP1/dominios.hpp
+	<string>
+
+1756864530 source:/home/r-mulo/Trabalho-TP1/dominios.cpp
+	"dominios.hpp"
+	<cctype>
+

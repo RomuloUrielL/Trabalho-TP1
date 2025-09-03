@@ -86,7 +86,7 @@ bool Telefone::validarTelefone(string telefone){
     if(telefone.length() != 15 || telefone[0] != '+'){
         return false;
     }
-    for(int i = 1; i < telefone.length(); i++){
+    for(int i = 1; i < (int)telefone.length(); i++){
         if(!isdigit(telefone[i])){
             return false;
         }
@@ -111,7 +111,7 @@ bool Data::validarData(string data){
     string mes = data.substr(3, 3);
     string ano = data.substr(7, 4);
 
-    for(char c : data){
+    for(char c : dia){
         if(!isdigit(c)){
             return false;
         }
@@ -121,6 +121,9 @@ bool Data::validarData(string data){
             return false;
         }
     }
+
+    int diaInt = stoi(dia);
+    int anoInt = stoi(ano);
 
     string calendario[12][2] = {
         {"JAN", "31"},
@@ -136,4 +139,45 @@ bool Data::validarData(string data){
         {"NOV", "30"},
         {"DEZ", "31"}
     };
+
+    if(anoInt % 4 == 0){
+        calendario[1][1] = "29";
+    }
+
+
+    for(int i = 0; i < 12; i++){
+        if(mes == calendario[i][0] && diaInt > stoi(calendario[i][1])){
+            return false;
+            break;
+        }
+    }
+    return true;
+}
+
+bool Data::setData(string data){
+    if(!validarData(data)){
+        return false;
+    }
+    this->data = data;
+    return true;
+}
+
+bool Codigo::validarCodigo(string codigo){
+    if(codigo.length() != 10){
+        return false;
+    }
+    for(char c : codigo){
+        if(!(isdigit(c) || (c >= 'a' && c <= 'z'))){
+            return false;
+        }
+    }
+    return true;
+}
+
+bool Codigo::setCodigo(string codigo){
+    if(!validarCodigo(codigo)){
+        return false;
+    }
+    this->codigo = codigo;
+    return true;
 }

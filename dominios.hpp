@@ -87,4 +87,17 @@ inline string Data::getData(){
     return data;
 }
 
+class Codigo{
+    private:
+        string codigo;
+        bool validarCodigo(string);
+    public:
+        bool setCodigo(string);
+        string getCodigo();
+};
+
+inline string Codigo::getCodigo(){
+    return codigo;
+}
+
 #endif
