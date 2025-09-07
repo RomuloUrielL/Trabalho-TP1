@@ -181,3 +181,117 @@ bool Codigo::setCodigo(string codigo){
     this->codigo = codigo;
     return true;
 }
+
+bool Cartao::validarCartao(string cartao){
+    int quantidadeCaracteres = 16;
+    int somaposPares = 0;
+    int somaposImpares = 0;
+
+    if(cartao.length() != quantidadeCaracteres){
+        return false;
+    }
+
+    for(char c : cartao){
+        if(!isdigit(c)){
+            return false;
+        }
+    }
+
+    for(int i = (quantidadeCaracteres - 2); i >= 0; i -= 2){
+        int digito = cartao[i] - '0';
+        int dobro = digito * 2;
+        somaposPares += (dobro / 10)+ (dobro % 10);
+    }
+    for(int i = (quantidadeCaracteres - 1); i >= 0; i -= 2){
+        int digito = cartao[i] - '0';
+        somaposImpares += digito;
+    }
+
+    int somaTotal = somaposImpares + somaposPares;
+
+        return (somaTotal % 10 == 0);
+}
+
+bool Cartao::setCartao(string cartao){
+    if(!validarCartao(cartao)){
+        return false;
+    }
+    this->cartao = cartao;
+    return true;
+}
+
+bool Senha::validarSenha(string senha){
+    int quantidadeCaracteres = 5;
+    int contadorMinuscula = 0;
+    int contadorMaiuscula = 0;
+    int contadorDigito = 0;
+    int contadorCarEspecial = 0;
+
+    int ehLetra = 0;
+    int ehDigito = 1;
+    int ehEspecial = 2;
+
+    int caractereAnterior = -1, caractereAtual;
+
+    if(senha.length() != quantidadeCaracteres){
+        return false;
+    }
+
+    for(int i = 0; i < quantidadeCaracteres; i++){
+        //contar se a senha tem todos os tipos de caracteres requisitos de uma senha
+        char c =  senha[i];
+        if(c >= 'A' && c <= 'Z'){
+            contadorMaiuscula++;
+            caractereAtual = 0;
+        } else if(c >= 'a' && c <= 'z'){
+            contadorMinuscula++;
+            caractereAtual = 0;
+        } else if(c >='0' && c <= '9'){
+            contadorDigito++;
+            caractereAtual = 1;
+        } else if((c >= '!' && c <= '&') || c == '?'){
+            contadorCarEspecial++;
+            caractereAtual = 2;
+        } else {
+            return false;
+        }
+
+        if(caractereAtual == caractereAnterior){
+            return false;
+        }
+
+        caractereAnterior = caractereAtual;
+    }
+
+        //verifica se tem todos os tipos de caracteres
+    if(contadorMinuscula > 0 && contadorMaiuscula > 0 && contadorCarEspecial > 0 && contadorDigito > 0){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool Senha::setSenha(string senha){
+    if(!validarSenha(senha)){
+        return false;
+    }
+    this->senha = senha;
+    return true;
+}
+
+bool Nome::validarNome(string nome){
+    int comprimentoNome = nome.length();
+
+    if(nome.length() < limiteMin || nome.lenght() > limiteMax){
+        return false;
+    }
+
+}
+
+bool Nome:setNome(string nome){
+    if(!validarNome(string)){
+        return false;
+    }
+    this->nome = nome;
+    return true;
+}

@@ -6,19 +6,19 @@ using namespace std;
 
 int main(){
 
-    Codigo *ptra;
+    Senha *ptra;
 
-    ptra = new Codigo();
+    ptra = new Senha();
 
-    if(ptra->setCodigo("av04ds23g5"))
-        cout<<"Codigo: "<<ptra->getCodigo()<<endl;
+    if(ptra->setSenha("A1a$B"))
+        cout<<"Senha: "<<ptra->getSenha()<<endl;
     else
-        cout<<"Codigo invalido!"<<endl;
+        cout<<"Senha invalida!"<<endl;
 
-    if(ptra->setCodigo("dfgassd123"))
-        cout<<"Codigo: "<<ptra->getCodigo()<<endl;
+    if(ptra->setSenha("A5s&e2"))
+        cout<<"Senha: "<<ptra->getSenha()<<endl;
     else
-        cout<<"Codigo invalido!"<<endl;
+        cout<<"Senha invalida!"<<endl;
 
     delete ptra;
 

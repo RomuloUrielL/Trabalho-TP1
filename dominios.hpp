@@ -100,4 +100,44 @@ inline string Codigo::getCodigo(){
     return codigo;
 }
 
+class Cartao{
+    private:
+        string cartao;
+        bool validarCartao(string);
+    public:
+        bool setCartao(string);
+        string getCartao();
+};
+
+inline string Cartao::getCartao(){
+    return cartao;
+}
+
+class Senha{
+    private:
+        string senha;
+        bool validarSenha(string);
+    public:
+        bool setSenha(string);
+        string getSenha();
+};
+
+inline string Senha::getSenha(){
+    return senha;
+}
+
+class Nome{
+    private:
+        static const int limiteMin = 5, limiteMax = 30;
+        string nome;
+        bool validarNome(string);
+    public:
+        bool setNome(string);
+        string getNome();
+};
+
+inline string Nome::getNome(){
+    return nome;
+}
+
 #endif
