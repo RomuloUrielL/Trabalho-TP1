@@ -1,5 +1,6 @@
 #include "dominios.hpp"
-#include<cctype>
+#include <cctype>
+#include <string>
 
 bool Capacidade::validarCapacidade(int capacidade){
     if(capacidade > limiteMax || capacidade < limiteMin){
@@ -282,16 +283,63 @@ bool Senha::setSenha(string senha){
 bool Nome::validarNome(string nome){
     int comprimentoNome = nome.length();
 
-    if(nome.length() < limiteMin || nome.lenght() > limiteMax){
+    if(comprimentoNome < limiteMin || comprimentoNome > limiteMax){
         return false;
     }
 
+    for(int i = 0; i < comprimentoNome; i++){
+        char c = nome[i];
+
+        if(i == 0 && (c < 'A' || c > 'Z')){
+            return false;
+        }
+
+        if(i >= 1){
+            if(nome[i-1] == ' ' && (c < 'A' || c > 'Z')){
+                return false;
+            } else if(!isalpha(c) && c != ' '){
+                return false;
+            }
+        }
+
+        if(i == (comprimentoNome - 1) && c == ' '){
+            return false;
+        }
+    }
+
+    return true;
 }
 
-bool Nome:setNome(string nome){
-    if(!validarNome(string)){
+bool Nome::setNome(string nome){
+    if(!validarNome(nome)){
         return false;
     }
     this->nome = nome;
+    return true;
+}
+
+bool Email::validarEmail(string email){
+    string parteLocal, dominio;
+    int pos@ = email.find('@');
+
+    parteLocal = email.substr(0, pos@);
+    dominio = email.substr(pos@ + 1);
+
+    if(parteLocal.length() < limiteMin || parteLocal.length() > limiteMax_Local){
+        return false;
+    }
+    if(dominio.length() < limiteMin || dominio.length() > limiteMax_Dominio){
+        return false;
+    }
+
+    //verificar validade da parte local
+
+}
+
+bool Email::setEmail(string email){
+    if(!validarEmail(email)){
+        return false;
+    }
+    this->email = email;
     return true;
 }

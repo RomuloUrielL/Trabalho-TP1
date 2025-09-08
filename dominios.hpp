@@ -140,4 +140,18 @@ inline string Nome::getNome(){
     return nome;
 }
 
+class Email{
+    private:
+        static const int limiteMin = 1, limiteMax_Local = 64, limiteMax_Dominio = 255;
+        string email;
+        bool validarEmail(string);
+    public:
+        bool setEmail(string);
+        string getEmail();
+};
+
+inline int Email::getEmail(){
+    return email;
+}
+
 #endif
