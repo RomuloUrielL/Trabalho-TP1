@@ -320,10 +320,14 @@ bool Nome::setNome(string nome){
 
 bool Email::validarEmail(string email){
     string parteLocal, dominio;
-    int pos@ = email.find('@');
+    int pos = email.find('@');
 
-    parteLocal = email.substr(0, pos@);
-    dominio = email.substr(pos@ + 1);
+    if(pos == string::npos){
+        return false;
+    }
+
+    parteLocal = email.substr(0, pos);
+    dominio = email.substr(pos + 1);
 
     if(parteLocal.length() < limiteMin || parteLocal.length() > limiteMax_Local){
         return false;
@@ -334,6 +338,47 @@ bool Email::validarEmail(string email){
 
     //verificar validade da parte local
 
+    for(int i = 0; i < parteLocal.length(); i++){
+        char c = parteLocal[i];
+
+        if((i == 0 || i == parteLocal.length() - 1) && (c == '.' || c == '-')){
+            return false;
+        }
+
+        if(!isalpha(c) && !isdigit(c) && c != '.' && c != '-'){
+            return false;
+        }
+
+        if((c == '.' || c == '-') && i + 1 < parteLocal.length()){
+            if(!isdigit(parteLocal[i+1]) && !isalpha(parteLocal[i+1])){
+                return false;
+            }
+        }
+    }
+
+    //verificar validade da parte dominio
+
+      for(int i = 0; i < dominio.length(); i++){
+       char c = dominio[i];
+
+        if((i == 0 || i == dominio.length() - 1) && c == '-'){
+            return false;
+        }
+
+        if(!islower(c) && !isdigit(c) && c != '.' && c != '-'){
+            return false;
+        }
+
+        if(c == '.' && i + 1 < dominio.length() && dominio[i+1] == '.'){
+            return false;
+        }
+
+        if(c == '.' && (dominio[i+1] == '-' || (i > 0 && dominio[i-1] == '-'))){
+            return false;
+        }
+    }
+
+    return true;
 }
 
 bool Email::setEmail(string email){
@@ -341,5 +386,45 @@ bool Email::setEmail(string email){
         return false;
     }
     this->email = email;
+    return true;
+}
+
+bool Endereco::validarEndereco(string endereco){
+
+    if(endereco.length() < limiteMin || endereco.length() > limiteMax){
+        return false;
+    }
+
+    for(int i = 0; i < endereco.length(); i++){
+        char c = endereco[i];
+
+        if((i == 0 || i == endereco.length() - 1) && (c == ' ' || c == '.' || c == ',')){
+            return false;
+        }
+
+        if(!isalpha(c) && !isdigit(c) && c != ',' && c != '.' && c != ' '){
+            return false;
+        }
+
+        if((c == ',' || c == '.') && i + 1 < endereco.length()){
+            if(endereco[i+1] == ',' || endereco[i+1] == '.'){
+                return false;
+            }
+        }
+
+        if(c == ' ' && i + 1 < endereco.length()){
+            if(!isalpha(endereco[i+1]) && !isdigit(endereco[i+1])){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool Endereco::setEndereco(string endereco){
+    if(!validarEndereco(endereco)){
+        return false;
+    }
+    this->endereco = endereco;
     return true;
 }

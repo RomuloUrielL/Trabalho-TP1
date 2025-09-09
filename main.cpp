@@ -6,19 +6,19 @@ using namespace std;
 
 int main(){
 
-    Nome *ptra;
+    Endereco *ptra;
 
-    ptra = new Nome();
+    ptra = new Endereco();
 
-    if(ptra->setNome("Romulo Uriel"))
-        cout<<"Nome: "<<ptra->getNome()<<endl;
+    if(ptra->setEndereco("Qnm 38 conjunto P casa 13"))
+        cout<<"Endereco: "<<ptra->getEndereco()<<endl;
     else
-        cout<<"Nome invalido!"<<endl;
+        cout<<"Endereco invalido!"<<endl;
 
-    if(ptra->setNome("Romulo"))
-        cout<<"Nome: "<<ptra->getNome()<<endl;
+    if(ptra->setEndereco("Qnm 38.  conjunto P"))
+        cout<<"Endereco: "<<ptra->getEndereco()<<endl;
     else
-        cout<<"Nome invalido!"<<endl;
+        cout<<"Endereco invalido!"<<endl;
 
     delete ptra;
 

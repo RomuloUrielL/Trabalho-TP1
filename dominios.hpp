@@ -150,8 +150,22 @@ class Email{
         string getEmail();
 };
 
-inline int Email::getEmail(){
+inline string Email::getEmail(){
     return email;
+}
+
+class Endereco{
+    private:
+        static const int limiteMin = 5, limiteMax = 30;
+        string endereco;
+        bool validarEndereco(string);
+    public:
+        bool setEndereco(string);
+        string getEndereco();
+};
+
+inline string Endereco::getEndereco(){
+    return endereco;
 }
 
 #endif
