@@ -20,18 +20,24 @@
 	<string>
 	"dominios.hpp"
 
-1757378173 source:/home/r-mulo/Trabalho-TP1/main.cpp
+1758595324 source:/home/r-mulo/Trabalho-TP1/main.cpp
 	<iostream>
 	<string>
+	<limits>
 	"dominios.hpp"
+	"entidades.hpp"
 
-1757382186 /home/r-mulo/Trabalho-TP1/dominios.hpp
+1758595287 /home/r-mulo/Trabalho-TP1/dominios.hpp
 	<string>
 
-1757377974 source:/home/r-mulo/Trabalho-TP1/dominios.cpp
+1758595279 source:/home/r-mulo/Trabalho-TP1/dominios.cpp
 	"dominios.hpp"
 	<cctype>
 	<string>
+	<stdexcept>
 
 1757378692 source:/home/r-mulo/Trabalho-TP1/entidades.cpp
+
+1757427779 /home/r-mulo/Trabalho-TP1/entidades.hpp
+	"dominios.hpp"
 

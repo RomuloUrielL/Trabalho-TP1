@@ -1,24 +1,42 @@
 #include <iostream>
 #include <string>
+#include<limits>
 #include "dominios.hpp"
+#include "entidades.hpp"
 
 using namespace std;
 
 int main(){
 
-    Endereco *ptra;
+    Ramal *ptra;
+    string ramal;
 
-    ptra = new Endereco();
+    ptra = new Ramal();
 
-    if(ptra->setEndereco("Qnm 38 conjunto P casa 13"))
-        cout<<"Endereco: "<<ptra->getEndereco()<<endl;
-    else
-        cout<<"Endereco invalido!"<<endl;
+    while(true){
+        cout << "Digite o ramal: ";
+        if(!(cin >> ramal)){
+            cerr << "Ramal invalido! Digite um numero. \n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        }
+        try{
+            ptra->setRamal(ramal);
+            break;
+        }
+        catch(const length_error&exp){
+            cerr << exp.what() << endl;
+        }
+        catch(const invalid_argument&exp){
+            cerr << exp.what() << endl;
+        }
+        catch(const out_of_range&exp){
+            cerr << exp.what() << endl;
+        }
+    }
 
-    if(ptra->setEndereco("Qnm 38.  conjunto P"))
-        cout<<"Endereco: "<<ptra->getEndereco()<<endl;
-    else
-        cout<<"Endereco invalido!"<<endl;
+    cout << "Ramal aceito." << endl;
 
     delete ptra;
 

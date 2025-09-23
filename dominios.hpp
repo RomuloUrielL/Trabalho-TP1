@@ -9,9 +9,9 @@ class Capacidade{
     private:
         static const int limiteMin = 1, limiteMax = 4;
         int capacidade;
-        bool validarCapacidade(int);
+        void validarCapacidade(int);
     public:
-        bool setCapacidade(int);
+        void setCapacidade(int);
         int getCapacidade();
 };
 
@@ -23,9 +23,9 @@ class Dinheiro{
     private:
         static const double limiteMin, limiteMax;
         double dinheiro;
-        bool validarDinheiro(double);
+        void validarDinheiro(double);
     public:
-        bool setDinheiro(double);
+        void setDinheiro(double);
         double getDinheiro();
 };
 
@@ -37,9 +37,9 @@ class Ramal{
     private:
         static const int valorMax = 50, valorMin = 0;
         string ramal;
-        bool validarRamal(string);
+        void validarRamal(string);
     public:
-        bool setRamal(string);
+        void setRamal(string);
         string getRamal();
 };
 

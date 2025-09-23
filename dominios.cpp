@@ -1,62 +1,51 @@
 #include "dominios.hpp"
 #include <cctype>
 #include <string>
+#include<stdexcept>
 
-bool Capacidade::validarCapacidade(int capacidade){
+void Capacidade::validarCapacidade(int capacidade){
     if(capacidade > limiteMax || capacidade < limiteMin){
-        return false;
+        throw out_of_range("Capacidade invalida, digite um valor entre 1 e 4");
     }
-    return true;
 };
 
-bool Capacidade::setCapacidade(int capacidade){
-    if(!validarCapacidade(capacidade)){
-        return false;
-    }
+void Capacidade::setCapacidade(int capacidade){
+    validarCapacidade(capacidade);
     this->capacidade = capacidade;
-    return  true;
 };
 
 const double Dinheiro::limiteMin = 0.01;
 const double Dinheiro::limiteMax = 1000000.00;
 
-bool Dinheiro::validarDinheiro(double dinheiro){
+void Dinheiro::validarDinheiro(double dinheiro){
     if(dinheiro < limiteMin || dinheiro > limiteMax){
-        return false;
+        throw out_of_range("Dinheiro invalido, digite um valor entre 0.01 e 1000000.00");
     }
-    return true;
 };
 
-bool Dinheiro::setDinheiro(double dinheiro){
-    if(!validarDinheiro(dinheiro)){
-        return false;
-    }
+void Dinheiro::setDinheiro(double dinheiro){
+    validarDinheiro(dinheiro);
     this->dinheiro = dinheiro;
-    return true;
 };
 
-bool Ramal::validarRamal(string ramal){
+void Ramal::validarRamal(string ramal){
     if(ramal.length() != 2){
-        return false;
+        throw length_error("Comprimento invalido! digite um número com 2 algarismos.");
     }
     for(char c : ramal){
         if(!isdigit(c)){
-            return false;
+            throw invalid_argument("Caracteres invalidos! digite apenas digitos.");
         }
     }
     int valor = stoi(ramal);
-    if(valor >= valorMin && valor <= valorMax){
-            return true;
+    if(valor < valorMin || valor > valorMax){
+        throw out_of_range("Ramal invalido! digite um ramal entre 00 e 50");
     }
-    return false;
 };
 
-bool Ramal::setRamal(string ramal){
-    if(!validarRamal(ramal)){
-        return false;
-    }
+void Ramal::setRamal(string ramal){
+    validarRamal(ramal);
     this->ramal = ramal;
-    return true;
 };
 
 bool Numero::validarNumero(string numero){
