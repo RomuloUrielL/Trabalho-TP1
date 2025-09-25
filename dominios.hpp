@@ -5,13 +5,27 @@
 
 using namespace std;
 
+/**
+*@brief Classe domínio que representa a capacidade de um quarto.
+*@details Armazena um inteiro e garante que a capacidade do quarto esteja entre 1 e 4.
+*/
+
 class Capacidade{
     private:
         static const int limiteMin = 1, limiteMax = 4;
         int capacidade;
         void validarCapacidade(int);
     public:
+        /**
+            @brief Define a capacide do quarto.
+            @details Armazena um inteiro. Lança exceção caso o usuário digite uma entrada inválida com letras ou números menores que 1 ou maiores que 4.
+            @param capacidade Valor inteiro a ser atribuido (entre 1 e 4).
+        */
         void setCapacidade(int);
+        /**
+            @brief Retorna a capacidade armazenada.
+            @return Valor da capacidade (inteiro).
+        */
         int getCapacidade();
 };
 
@@ -19,13 +33,27 @@ inline int Capacidade::getCapacidade(){
     return capacidade;
 }
 
+/**
+    @brief Classe domínio que representa o dinheiro.
+    @details Armazena um double e garante que o dinheito esteja dentro da faixa esperada (0.01 e 1000000.00).
+*/
+
 class Dinheiro{
     private:
         static const double limiteMin, limiteMax;
         double dinheiro;
         void validarDinheiro(double);
     public:
+        /**
+            @brief Define o dinheiro.
+            @details Armazena um Double. lança um exceção caso o usuário digite um valor fora da faixa esperada.
+            @param dinheiro Valor double a ser atribuído (entre 0.01 e 1000000.00).
+        */
         void setDinheiro(double);
+        /**
+            @brief Retorna o dinheiro armazenado.
+            @return Valor do dinheito (double).
+        */
         double getDinheiro();
 };
 
@@ -51,9 +79,9 @@ class Numero{
     private:
         static const int valorMin = 1, valorMax = 999;
         string numero;
-        bool validarNumero(string);
+        void validarNumero(string);
     public:
-        bool setNumero(string);
+        void setNumero(string);
         string getNumero();
 };
 
@@ -64,9 +92,9 @@ inline string Numero::getNumero(){
 class Telefone{
     private:
         string telefone;
-        bool validarTelefone(string);
+        void validarTelefone(string);
     public:
-        bool setTelefone(string);
+        void setTelefone(string);
         string getTelefone();
 };
 

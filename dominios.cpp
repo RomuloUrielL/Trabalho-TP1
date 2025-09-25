@@ -48,48 +48,40 @@ void Ramal::setRamal(string ramal){
     this->ramal = ramal;
 };
 
-bool Numero::validarNumero(string numero){
+void Numero::validarNumero(string numero){
     if(numero.length() != 3){
-        return false;
+        throw length_error("Comprimento invalido! digite um número com 3 dígitos.");
     }
     for(char c : numero){
         if(!isdigit(c)){
-            return false;
+            throw invalid_argument("Caracteres invalidos! digite apenas digitos.");
         }
     }
     int valor = stoi(numero);
-    if(valor >= valorMin && valor <= valorMax){
-            return true;
+    if(valor < valorMin || valor > valorMax){
+            throw out_of_range("Numero fora da faixa! digite um valor entre 001 e 999.");
     }
-    return false;
 }
 
-bool Numero::setNumero(string numero){
-    if(!validarNumero(numero)){
-        return false;
-    }
+void Numero::setNumero(string numero){
+    validarNumero(numero);
     this->numero = numero;
-    return true;
 }
 
-bool Telefone::validarTelefone(string telefone){
+void Telefone::validarTelefone(string telefone){
     if(telefone.length() != 15 || telefone[0] != '+'){
-        return false;
+        throw length_error("Comprimento inválido ou sem prefixo '+', digite um telefone no formato +DDDDDDDDDDDDDD.");
     }
     for(int i = 1; i < (int)telefone.length(); i++){
         if(!isdigit(telefone[i])){
-            return false;
+            throw invalid_argument("Caracteres invalidos! Digite + seguido de 14 digitos.");
         }
     }
-    return true;
 }
 
-bool Telefone::setTelefone(string telefone){
-    if(!validarTelefone(telefone)){
-        return false;
-    }
+void Telefone::setTelefone(string telefone){
+    validarTelefone(telefone);
     this->telefone = telefone;
-    return true;
 }
 
 bool Data::validarData(string data){
