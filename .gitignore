@@ -1,0 +1,68 @@
+# ===============================
+# Arquivos e pastas de compilação
+# ===============================
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.exe
+*.out
+*.a
+*.lib
+*.pdb
+*.idb
+
+# ===============================
+# Pastas de build
+# ===============================
+/bin/
+/obj/
+/build/
+/dist/
+
+# ===============================
+# Arquivos do Code::Blocks
+# ===============================
+*.depend
+*.layout
+
+# ===============================
+# Arquivos temporários de IDEs
+# ===============================
+*.user
+*.suo
+*.ncb
+*.sdf
+*.opendb
+*.VC.db
+
+# ===============================
+# Arquivos de backup e temporários
+# ===============================
+*~
+*.swp
+*.tmp
+*.bak
+*.log
+
+# ===============================
+# Sistema operacional
+# ===============================
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+.directory
+
+# ===============================
+# Outros possíveis
+# ===============================
+*.cbp.*     # backups do Code::Blocks
+
