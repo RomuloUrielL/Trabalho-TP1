@@ -46,7 +46,7 @@ class Dinheiro{
     public:
         /**
             @brief Define o dinheiro.
-            @details Armazena um Double. lança um exceção caso o usuário digite um valor fora da faixa esperada.
+            @details Armazena um Double. Lança uma exceção caso o usuário digite um valor fora da faixa esperada.
             @param dinheiro Valor double a ser atribuído (entre 0.01 e 1000000.00).
         */
         void setDinheiro(double);
@@ -61,13 +61,27 @@ inline double Dinheiro::getDinheiro(){
     return dinheiro;
 }
 
+/**
+@brief Classe Ramal que representa o ramal de um Quarto ou de um Gerente.
+@details Armazena uma string e garante que a string recebida possua dois dígitos e esteja entre 00 e 50.
+*/
+
 class Ramal{
     private:
         static const int valorMax = 50, valorMin = 0;
         string ramal;
         void validarRamal(string);
     public:
+        /**
+        @brief Define o Ramal.
+        @details Armazena uma string. Lança uma exceção caso o usuário digite um valor que seja diferente de dois dígitos ou esteja fora da faixa esperada.
+        @param ramal Valor em string a ser atribuido (entre 00 e 50).
+        */
         void setRamal(string);
+        /**
+        @brief Retorna o ramal armazenado.
+        @return Ramal atribuido (string).
+        */
         string getRamal();
 };
 
@@ -75,13 +89,26 @@ inline string Ramal::getRamal(){
     return ramal;
 }
 
+/**
+@brief Classe Numero que armazena o número de um Quarto.
+@details Armazena uma string e garante que a string recebida possua 3 dígitos e esteja entre 001 e 999;
+*/
 class Numero{
     private:
         static const int valorMin = 1, valorMax = 999;
         string numero;
         void validarNumero(string);
     public:
+        /**
+        @brief Define o Numero.
+        @details Armazena uma string. Lança um exceção caso o usuário digite um valor que não possua 3 dígitos ou esteja fora da faixa esperada.
+        @param numero em string a ser atribuido (entre 001 e 999).
+        */
         void setNumero(string);
+        /**
+        @brief Retorna o numero armazenado.
+        @return Numero armazenado.
+        */
         string getNumero();
 };
 
