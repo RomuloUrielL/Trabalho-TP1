@@ -29,7 +29,7 @@ void Dinheiro::setDinheiro(double dinheiro){
 };
 
 void Ramal::validarRamal(string ramal){
-    if(ramal.length() != 2){
+    if((int)ramal.length() != lenght){
         throw length_error("Comprimento invalido! digite um número com 2 algarismos.");
     }
     for(char c : ramal){
@@ -49,7 +49,7 @@ void Ramal::setRamal(string ramal){
 };
 
 void Numero::validarNumero(string numero){
-    if(numero.length() != 3){
+    if((int)numero.length() != length){
         throw length_error("Comprimento invalido! digite um número com 3 dígitos.");
     }
     for(char c : numero){
@@ -69,7 +69,7 @@ void Numero::setNumero(string numero){
 }
 
 void Telefone::validarTelefone(string telefone){
-    if(telefone.length() != 15 || telefone[0] != '+'){
+    if((int)telefone.length() != length || telefone[0] != '+'){
         throw length_error("Comprimento inválido ou sem prefixo '+', digite um telefone no formato +DDDDDDDDDDDDDD.");
     }
     for(int i = 1; i < (int)telefone.length(); i++){
@@ -85,7 +85,7 @@ void Telefone::setTelefone(string telefone){
 }
 
 bool Data::validarData(string data){
-    if(data.length() != 11 || data[2] != '-' || data[6] != '-'){
+    if(data.length() != length || data[2] != '-' || data[6] != '-'){
         return false;
     }
 
@@ -169,7 +169,7 @@ bool Cartao::validarCartao(string cartao){
     int somaposPares = 0;
     int somaposImpares = 0;
 
-    if(cartao.length() != quantidadeCaracteres){
+    if((int)cartao.length() != quantidadeCaracteres){
         return false;
     }
 
@@ -209,13 +209,9 @@ bool Senha::validarSenha(string senha){
     int contadorDigito = 0;
     int contadorCarEspecial = 0;
 
-    int ehLetra = 0;
-    int ehDigito = 1;
-    int ehEspecial = 2;
-
     int caractereAnterior = -1, caractereAtual;
 
-    if(senha.length() != quantidadeCaracteres){
+    if((int)senha.length() != quantidadeCaracteres){
         return false;
     }
 
@@ -303,7 +299,7 @@ bool Email::validarEmail(string email){
     string parteLocal, dominio;
     int pos = email.find('@');
 
-    if(pos == string::npos){
+    if(pos == (int)string::npos){
         return false;
     }
 
@@ -319,10 +315,10 @@ bool Email::validarEmail(string email){
 
     //verificar validade da parte local
 
-    for(int i = 0; i < parteLocal.length(); i++){
+    for(int i = 0; i < (int)parteLocal.length(); i++){
         char c = parteLocal[i];
 
-        if((i == 0 || i == parteLocal.length() - 1) && (c == '.' || c == '-')){
+        if((i == 0 || i == (int)parteLocal.length() - 1) && (c == '.' || c == '-')){
             return false;
         }
 
@@ -330,7 +326,7 @@ bool Email::validarEmail(string email){
             return false;
         }
 
-        if((c == '.' || c == '-') && i + 1 < parteLocal.length()){
+        if((c == '.' || c == '-') && i + 1 < (int)parteLocal.length()){
             if(!isdigit(parteLocal[i+1]) && !isalpha(parteLocal[i+1])){
                 return false;
             }
@@ -339,10 +335,10 @@ bool Email::validarEmail(string email){
 
     //verificar validade da parte dominio
 
-      for(int i = 0; i < dominio.length(); i++){
+      for(int i = 0; i < (int)dominio.length(); i++){
        char c = dominio[i];
 
-        if((i == 0 || i == dominio.length() - 1) && c == '-'){
+        if((i == 0 || i == (int)dominio.length() - 1) && c == '-'){
             return false;
         }
 
@@ -350,7 +346,7 @@ bool Email::validarEmail(string email){
             return false;
         }
 
-        if(c == '.' && i + 1 < dominio.length() && dominio[i+1] == '.'){
+        if(c == '.' && i + 1 < (int)dominio.length() && dominio[i+1] == '.'){
             return false;
         }
 
@@ -376,10 +372,10 @@ bool Endereco::validarEndereco(string endereco){
         return false;
     }
 
-    for(int i = 0; i < endereco.length(); i++){
+    for(int i = 0; i < (int)endereco.length(); i++){
         char c = endereco[i];
 
-        if((i == 0 || i == endereco.length() - 1) && (c == ' ' || c == '.' || c == ',')){
+        if((i == 0 || i == (int)endereco.length() - 1) && (c == ' ' || c == '.' || c == ',')){
             return false;
         }
 
@@ -387,13 +383,13 @@ bool Endereco::validarEndereco(string endereco){
             return false;
         }
 
-        if((c == ',' || c == '.') && i + 1 < endereco.length()){
+        if((c == ',' || c == '.') && i + 1 < (int)endereco.length()){
             if(endereco[i+1] == ',' || endereco[i+1] == '.'){
                 return false;
             }
         }
 
-        if(c == ' ' && i + 1 < endereco.length()){
+        if(c == ' ' && i + 1 < (int)endereco.length()){
             if(!isalpha(endereco[i+1]) && !isdigit(endereco[i+1])){
                 return false;
             }
