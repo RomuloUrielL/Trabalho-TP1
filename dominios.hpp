@@ -6,25 +6,31 @@
 using namespace std;
 
 /**
-*@brief Classe domínio que representa a o limite da quantidade de pessoas em um quarto.
-*@details Armazena um inteiro e garante que a capacidade do quarto esteja entre 1 e 4.
+@class Capacidade
+*@brief Classe domínio que representa o limite da quantidade de pessoas em um
+quarto.
+*@details Armazena um short e garante que a capacidade do quarto esteja entre
+1 e 4.
 */
-
 class Capacidade{
     private:
-        static const int limiteMin = 1, limiteMax = 4;
-        int capacidade;
-        void validarCapacidade(int);
+        static const short limiteMin = 1, limiteMax = 4;
+        unsigned short capacidade;
+        void validarCapacidade(unsigned short);
     public:
         /**
-            @brief Define a capacide do quarto.
-            @details Armazena um inteiro. valida a capacidade ou lança exceção out_of_range caso o usuário digite uma entrada inválida com valores menores que 1 ou valores maiores que 4.
+            @brief Define a capacidade do quarto.
+            @details Armazena um short e, ou valida a capacidade ou lança
+            exceção.
+            @throw out_of_range com a mensagem "Capacidade invalida, digite um
+            valor entre 1 e 4" caso o usuário digite uma entrada com valores
+            menores que 1 ou valores maiores que 4.
             @param capacidade Valor inteiro a ser atribuido (entre 1 e 4).
         */
-        void setCapacidade(int);
+        void setCapacidade(unsigned short);
         /**
             @brief Retorna a capacidade armazenada.
-            @return capacidade Valor da capacidade (inteiro).
+            @return **short** Valor da capacidade armazenada.
         */
         int getCapacidade();
 };
@@ -34,11 +40,12 @@ inline int Capacidade::getCapacidade(){
 }
 
 /**
-    @brief Classe domínio que representa uma quantidade de valor monetário em determinada moeda.
-    @details Armazena um double e garante que o dinheito esteja dentro da faixa esperada (0.01 e 1000000.00).
+@class Dinheiro
+@brief Classe domínio que representa uma quantidade de valor monetário em
+determinada moeda.
+@details Armazena um inteiro para evitar erros de arredondamentos e garante que
+o dinheiro esteja dentro da faixa esperada (0.01 e 1000000.00).
 */
-
-
 //Dar manutençao na classe para terminar a documentação da classe!!!
 class Dinheiro{
     private:
@@ -48,13 +55,18 @@ class Dinheiro{
     public:
         /**
             @brief Define o dinheiro.
-            @details Armazena um Double. Valida o dinheiro ou lança uma exceção caso o usuário digite um valor fora da faixa esperada.
-            @param dinheiro Valor double a ser atribuído (entre 0.01 e 1000000.00).
+            @details Armazena um inteiro. Valida o dinheiro ou lança uma exceção
+             caso o usuário digite um valor inválido.
+            @throw out_of_range com a mensagem "Dinheiro invalido, digite um
+            valor entre 0.01 e 1000000.00" caso o usuário digite um valor fora
+            da faixa 0.01 e 1000000.00.
+            @param dinheiro Valor inteiro a ser atribuído (entre 0.01 e
+            1000000.00).
         */
         void setDinheiro(double);
         /**
             @brief Retorna o dinheiro armazenado.
-            @return dinheiro Valor do dinheito (double).
+            @return **int** Valor do dinheiro armazenado.
         */
         double getDinheiro();
 };
@@ -64,10 +76,12 @@ inline double Dinheiro::getDinheiro(){
 }
 
 /**
-@brief Classe Ramal que representa uma linha telefonica usada para comunicação interna de um hotel.
-@details Armazena uma string e garante que a string recebida possua dois dígitos e esteja entre 00 e 50.
+@class Ramal
+@brief Classe domínio que representa uma linha telefonica usada para comunicação
+interna de um hotel.
+@details Armazena uma string e garante que a string recebida possua dois dígitos
+e esteja entre 00 e 50.
 */
-
 class Ramal{
     private:
         static const int valorMax = 50, valorMin = 0, lenght = 2;
@@ -75,14 +89,22 @@ class Ramal{
         void validarRamal(string);
     public:
         /**
-        @brief Define o Ramal.
-        @details Armazena uma string. Valida o ramal ou lança uma exceção lenght_error caso o usuário digite um valor que seja diferente de dois dígitos ou lança uma exceção invalid_argument caso o usuário não digite apenas números ou lança exceção out_of_range caso seja menor que 00 ou maior que 50.
+        @brief Define o ramal.
+        @details Armazena uma string. Valida o ramal ou lança uma exceção caso o
+        usuário digite um valor inválido.
+        @throw lenght_error com a mensagem "Comprimento invalido! digite um
+        número com 2 algarismos." caso o usuário digite um valor que seja
+        diferente de dois dígitos.
+        @throw invalid_argument com a mensagem "Caracteres invalidos! digite
+        apenas numeros." caso o usuário não digite apenas números.
+        @throw out_of_range com a mensagem "Ramal invalido! digite um ramal
+        entre 00 e 50." caso o ramal digitado seja menor que 00 ou maior que 50.
         @param ramal String a ser atribuida (entre 00 e 50).
         */
         void setRamal(string);
         /**
         @brief Retorna o ramal armazenado.
-        @return ramal Ramal atribuido (string).
+        @return **string** Valor do ramal armazenado.
         */
         string getRamal();
 };
@@ -92,8 +114,11 @@ inline string Ramal::getRamal(){
 }
 
 /**
-@brief Classe Numero que representa a localização de um quarto no hotel com seu andar e número do quarto no andar.
-@details Armazena uma string e garante que a string recebida possua 3 dígitos e esteja entre 001 e 999;
+@class Numero
+@brief Classe dominio que representa a localização de um quarto no hotel com seu
+andar e número do quarto no andar.
+@details Armazena uma string e garante que a string recebida possua 3 dígitos e
+esteja entre 001 e 999;
 */
 class Numero{
     private:
@@ -102,14 +127,22 @@ class Numero{
         void validarNumero(string);
     public:
         /**
-        @brief Define o Numero.
-        @details Armazena uma string. Valida um número ou lança um exceção lenght_error caso o usuário digite um valor que não possua 3 dígitos ou lança uma exceção invalid_argument caso o usuário não digite apenas números ou lança uma exceção out_of_range caso o valor esteja fora da faixa esperada.
+        @brief Define o numero.
+        @details Armazena uma string. Valida um número ou lança um exceção caso
+        o usuário digite um valor inválido.
+        @throw lenght_error com a mensagem "Comprimento invalido! digite um
+        número com 3 dígitos." caso o usuário digite um valor que não possua 3
+        dígitos.
+        @throw invalid_argument "Caracteres invalidos! digite apenas numeros."
+        caso o usuário não digite apenas números.
+        @throw out_of_range com a mensagem "Numero fora da faixa! digite um
+        valor entre 001 e 999." caso o valor esteja fora da faixa esperada.
         @param numero em string a ser atribuido (entre 001 e 999).
         */
         void setNumero(string);
         /**
         @brief Retorna o numero armazenado.
-        @return numero Numero de quarto armazenado.
+        @return **string** numero de quarto armazenado.
         */
         string getNumero();
 };
@@ -119,10 +152,12 @@ inline string Numero::getNumero(){
 }
 
 /**
-@brief Classe Telefone que armazena uma sequência de dígitos que identificam o país e o Estado do número, seguidos por uma sequência única de 9 dígitos.
-@details Armazena uma string e garante que a string recebida inicie com + e seja seguido por 14 dígitos
+@class Telefone
+@brief Classe dominio que armazena uma sequência de dígitos que identificam o
+país e o estado do número, seguidos por uma sequência única de 9 dígitos.
+@details Armazena uma string e garante que a string recebida inicie com + e seja
+seguido por 14 números.
 */
-
 class Telefone{
     private:
         static const int length = 15;
@@ -130,13 +165,20 @@ class Telefone{
         void validarTelefone(string);
     public:
         /**
-        @brief Define o Telefone.
-        @details Armazena uma string. Valida o telefone ou lança exceção lenght_error caso o comprimento seja diferente de 15 ou lança exceção invalid_argument caso o usuário não digite apenas números.
+        @brief Define o telefone.
+        @details Armazena uma string. Valida o telefone ou lança exceção caso o
+        usuário digite um telefone inválido.
+        @throw lenght_error com a mensagem "Comprimento inválido ou sem prefixo
+        '+', digite um telefone no formato +DDDDDDDDDDDDDD." caso o comprimento
+        seja diferente de 15 ou não possua o '+'.
+        @throw invalid_argument com a mensagem "Caracteres invalidos! Digite +
+        seguido de 14 numeros." caso o usuário não digite apenas números.
+        @param telefone String com o numero de telefone a ser armazenado.
         */
         void setTelefone(string);
         /**
         @brief Retorna o telefone armazenado.
-        @return telefone Telefone do hotel armazenado.
+        @return **string** telefone do hotel armazenado.
         */
         string getTelefone();
 };
@@ -146,8 +188,12 @@ inline string Telefone::getTelefone(){
 }
 
 /**
-@brief Classe Data que armazena uma sequência de caracteres que representam um dia, um mês e um ano.
-@details Armazena uma string e valida a data verificando a quantidade de dias do mês e se o dia é valido, verifica se o mês está correto e também verifica se o ano é bissexto permitindo que fevereiro tenha 29 dias.
+@class Data.
+@brief Classe dominio que armazena uma sequência de caracteres que representam
+um dia, um mês e um ano.
+@details Armazena uma string e valida a data verificando a quantidade de dias do
+mês e se o dia é valido, verifica se o mês está correto e também verifica se o
+ano é bissexto permitindo que fevereiro tenha 29 dias.
 */
 class Data{
     private:
@@ -157,7 +203,11 @@ class Data{
     public:
         /**
         @brief Define a Data.
-        @details Armazena uma string. Valida a data ou lança exceção invalid_argument caso o usuário digite uma data com comprimento inválido ou não digite apenas números, lança exceção out_of_range caso o dia seja maior do que os números de dias que o mês possui.
+        @details Armazena uma string. Valida a data ou lança exceção caso o
+        usuário digite uma data inválida.
+        @throw invalid_argument com a mensagem
+        //continuar documentaçao!!!!!
+         caso o usuário digite uma data com comprimento inválido ou não digite apenas números, lança exceção out_of_range caso o dia seja maior do que os números de dias que o mês possui.
         */
         bool setData(string);
         /**
