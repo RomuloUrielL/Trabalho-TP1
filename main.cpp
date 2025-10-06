@@ -9,12 +9,12 @@ using namespace std;
 
 int main(){
 
-    TUCapacidade testeCapacidade;
+    TUTelefone testeTelefone;
 
-    switch(testeCapacidade.run()){
-        case TUCapacidade::SUCESSO: cout << "SUCESSO" << endl;
+    switch(testeTelefone.run()){
+        case TUTelefone::SUCESSO: cout << "SUCESSO" << endl;
         break;
-        case TUCapacidade::FALHA: cout << "FALHA" << endl;
+        case TUTelefone::FALHA: cout << "FALHA" << endl;
         break;
     }
     return 0;

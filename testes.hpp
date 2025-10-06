@@ -23,6 +23,52 @@ class TUCapacidade{
         int run();
 };
 
+class TUCartao{
+    private:
+        static const string VALOR_VALIDO;
+        static const string VALOR_INVALIDO;
+        Cartao *cartao;
+        int estado;
+        void setUp();
+        void tearDown();
+        void testarCenarioValorValido();
+        void testarCenarioValorInvalido();
+    public:
+        const static int SUCESSO = 0;
+        const static int FALHA = -1;
+        int run();
 
+};
 
+class TURamal{
+    private:
+        static const string VALOR_VALIDO;
+        static const string VALOR_INVALIDO;
+        Ramal *ramal;
+        int estado;
+        void setUp();
+        void tearDown();
+        void testarCenarioValorValido();
+        void testarCenarioValorInvalido();
+    public:
+        const static int SUCESSO = 0;
+        const static int FALHA = -1;
+        int run();
+};
+
+class TUTelefone{
+    private:
+        static const string VALOR_VALIDO;
+        static const string VALOR_INVALIDO;
+        Telefone *telefone;
+        int estado;
+        void setUp();
+        void tearDown();
+        void testarCenarioValorValido();
+        void testarCenarioValorInvalido();
+    public:
+        const static int SUCESSO = 0;
+        const static int FALHA = -1;
+        int run();
+};
 #endif // TESTES_HPP_INCLUDED

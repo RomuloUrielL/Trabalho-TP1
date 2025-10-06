@@ -164,18 +164,18 @@ bool Codigo::setCodigo(string codigo){
     return true;
 }
 
-bool Cartao::validarCartao(string cartao){
+void Cartao::validarCartao(string cartao){
     int quantidadeCaracteres = 16;
     int somaposPares = 0;
     int somaposImpares = 0;
 
     if((int)cartao.length() != quantidadeCaracteres){
-        return false;
+        throw invalid_argument("Tamanho invalido");
     }
 
     for(char c : cartao){
         if(!isdigit(c)){
-            return false;
+            throw invalid_argument("O cartao aceita somente numeros");
         }
     }
 
@@ -191,15 +191,14 @@ bool Cartao::validarCartao(string cartao){
 
     int somaTotal = somaposImpares + somaposPares;
 
-        return (somaTotal % 10 == 0);
+        if((somaTotal % 10) != 0){
+            throw invalid_argument("Cartao invalido");
+        };
 }
 
-bool Cartao::setCartao(string cartao){
-    if(!validarCartao(cartao)){
-        return false;
-    }
+void Cartao::setCartao(string cartao){
+    validarCartao(cartao);
     this->cartao = cartao;
-    return true;
 }
 
 bool Senha::validarSenha(string senha){
