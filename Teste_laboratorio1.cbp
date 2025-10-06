@@ -37,6 +37,8 @@
 		<Unit filename="entidades.cpp" />
 		<Unit filename="entidades.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="testes.cpp" />
+		<Unit filename="testes.hpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
