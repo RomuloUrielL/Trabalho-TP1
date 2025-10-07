@@ -71,4 +71,25 @@ class TUTelefone{
         const static int FALHA = -1;
         int run();
 };
+
+class TUNumero{
+    private:
+        const static string VALOR_VALIDO;
+        const static string VALOR_INVALIDO;
+        Numero *numero;
+        int estado;
+        void setUp();
+        void tearDown();
+        void testarCenarioValorValido();
+        void testarCenarioValorInvalido();
+    public:
+        const static int SUCESSO = 0;
+        const static int FALHA = -1;
+        int run();
+
+};
+
+
+
+
 #endif // TESTES_HPP_INCLUDED
