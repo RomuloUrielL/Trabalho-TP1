@@ -3,13 +3,13 @@
 #include <string>
 #include<stdexcept>
 
-void Capacidade::validarCapacidade(int capacidade){
+void Capacidade::validarCapacidade(unsigned short capacidade){
     if(capacidade > limiteMax || capacidade < limiteMin){
         throw out_of_range("Capacidade invalida, digite um valor entre 1 e 4");
     }
 };
 
-void Capacidade::setCapacidade(int capacidade){
+void Capacidade::setCapacidade(unsigned short capacidade){
     validarCapacidade(capacidade);
     this->capacidade = capacidade;
 };
@@ -34,12 +34,12 @@ void Ramal::validarRamal(string ramal){
     }
     for(char c : ramal){
         if(!isdigit(c)){
-            throw invalid_argument("Caracteres invalidos! digite apenas digitos.");
+            throw invalid_argument("Caracteres invalidos! digite apenas numeros.");
         }
     }
     int valor = stoi(ramal);
     if(valor < valorMin || valor > valorMax){
-        throw out_of_range("Ramal invalido! digite um ramal entre 00 e 50");
+        throw out_of_range("Ramal invalido! digite um ramal entre 00 e 50.");
     }
 };
 
@@ -74,7 +74,7 @@ void Telefone::validarTelefone(string telefone){
     }
     for(int i = 1; i < (int)telefone.length(); i++){
         if(!isdigit(telefone[i])){
-            throw invalid_argument("Caracteres invalidos! Digite + seguido de 14 digitos.");
+            throw invalid_argument("Caracteres invalidos! Digite + seguido de 14 numeros.");
         }
     }
 }
