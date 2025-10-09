@@ -30,7 +30,7 @@ class Capacidade{
         void setCapacidade(unsigned short);
         /**
             @brief Retorna a capacidade armazenada.
-            @return **short** Valor da capacidade armazenada.
+            @return Valor da capacidade armazenada.
         */
         int getCapacidade();
 };
@@ -66,7 +66,7 @@ class Dinheiro{
         void setDinheiro(double);
         /**
             @brief Retorna o dinheiro armazenado.
-            @return **int** Valor do dinheiro armazenado.
+            @return Valor do dinheiro armazenado.
         */
         double getDinheiro();
 };
@@ -104,7 +104,7 @@ class Ramal{
         void setRamal(string);
         /**
         @brief Retorna o ramal armazenado.
-        @return **string** Valor do ramal armazenado.
+        @return Valor do ramal armazenado.
         */
         string getRamal();
 };
@@ -142,7 +142,7 @@ class Numero{
         void setNumero(string);
         /**
         @brief Retorna o numero armazenado.
-        @return **string** numero de quarto armazenado.
+        @return Numero de quarto armazenado.
         */
         string getNumero();
 };
@@ -178,7 +178,7 @@ class Telefone{
         void setTelefone(string);
         /**
         @brief Retorna o telefone armazenado.
-        @return **string** telefone do hotel armazenado.
+        @return Telefone do hotel armazenado.
         */
         string getTelefone();
 };
@@ -212,7 +212,7 @@ class Data{
         bool setData(string);
         /**
         @brief Retorna a data armazenada.
-        @return data Data armazenada.
+        @return Data armazenada.
         */
         string getData();
 };
@@ -234,12 +234,33 @@ inline string Codigo::getCodigo(){
     return codigo;
 }
 
+/**
+@brief Classe domínio usada para armazenar o número de identificação de um
+cartão bancário.
+@details Armazena uma cadeia de 16 caracteres com o número do cartão e valida o
+número utilizando o algoritmo de Luhn para verificar a validade do número do
+cartão através do dígito verificador.
+*/
 class Cartao{
     private:
         string cartao;
         void validarCartao(string);
     public:
+        /**
+        @brief Armazena o valor do número do cartão.
+        @details Armazena o número do cartão em um cadeia de caracteres. Valida
+        ou lança exceção caso o número digitado seja inválido.
+        @throw lenght_error caso a quantidade de dígitos do cartão seja
+        diferente de 16 dígitos numéricos.
+        @throw invalid_argument caso o número do cartão digitado não seja
+        válido, ou seja, o número não passou no teste do dígito verificador ou,
+        não foram digitados apenas dígitos numéricos.
+        */
         void setCartao(string);
+        /**
+        @brief Retorna o número de cartão armazenado.
+        @return Cadeia de caracteres que representam o número do cartão.
+        */
         string getCartao();
 };
 
