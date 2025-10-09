@@ -3,42 +3,19 @@
 #include<limits>
 #include "dominios.hpp"
 #include "entidades.hpp"
-
+#include <stdexcept>
+#include "testes.hpp"
 using namespace std;
 
 int main(){
 
-    Telefone *ptra;
-    string telefone;
+    TUNumero testeNumero;
 
-    ptra = new Telefone();
-
-    while(true){
-        cout << "Digite o telefone: ";
-        if(!(cin >> telefone)){
-            cerr << "Telefone invalido! Digite apenas numeros. \n";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            continue;
-        }
-        try{
-            ptra->setTelefone(telefone);
-            break;
-        }
-        catch(const length_error&exp){
-            cerr << exp.what() << endl;
-        }
-        catch(const invalid_argument&exp){
-            cerr << exp.what() << endl;
-        }
-        catch(const out_of_range&exp){
-            cerr << exp.what() << endl;
-        }
+    switch(testeNumero.run()){
+        case TUNumero::SUCESSO: cout << "SUCESSO" << endl;
+        break;
+        case TUNumero::FALHA: cout << "FALHA" << endl;
+        break;
     }
-
-    cout << "Telefone aceito." << endl;
-
-    delete ptra;
-
     return 0;
 }

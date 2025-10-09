@@ -237,9 +237,9 @@ inline string Codigo::getCodigo(){
 class Cartao{
     private:
         string cartao;
-        bool validarCartao(string);
+        void validarCartao(string);
     public:
-        bool setCartao(string);
+        void setCartao(string);
         string getCartao();
 };
 
