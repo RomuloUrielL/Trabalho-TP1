@@ -9,8 +9,8 @@ using namespace std;
 @class Capacidade
 *@brief Classe domínio que representa o limite da quantidade de pessoas em um
 quarto.
-*@details Armazena um short e garante que a capacidade do quarto esteja entre
-1 e 4.
+*@details Armazena um short e garante que a capacidade do quarto esteja no
+formato válido: (1, 2, 3 ou 4).
 */
 class Capacidade{
     private:
@@ -44,7 +44,7 @@ inline int Capacidade::getCapacidade(){
 @brief Classe domínio que representa uma quantidade de valor monetário em
 determinada moeda.
 @details Armazena um inteiro para evitar erros de arredondamentos e garante que
-o dinheiro esteja dentro da faixa esperada (0.01 e 1000000.00).
+o dinheiro esteja no formato válido: (0,01 a 1.000.000,00).
 */
 //Dar manutençao na classe para terminar a documentação da classe!!!
 class Dinheiro{
@@ -80,7 +80,7 @@ inline double Dinheiro::getDinheiro(){
 @brief Classe domínio que representa uma linha telefonica usada para comunicação
 interna de um hotel.
 @details Armazena uma string e garante que a string recebida possua dois dígitos
-e esteja entre 00 e 50.
+e esteja no formato válido: (00 a 50).
 */
 class Ramal{
     private:
@@ -118,7 +118,7 @@ inline string Ramal::getRamal(){
 @brief Classe dominio que representa a localização de um quarto no hotel com seu
 andar e número do quarto no andar.
 @details Armazena uma string e garante que a string recebida possua 3 dígitos e
-esteja entre 001 e 999;
+esteja no formato válido: (000 a 999).
 */
 class Numero{
     private:
@@ -156,7 +156,7 @@ inline string Numero::getNumero(){
 @brief Classe dominio que armazena uma sequência de dígitos que identificam o
 país e o estado do número, seguidos por uma sequência única de 9 dígitos.
 @details Armazena uma string e garante que a string recebida inicie com + e seja
-seguido por 14 números.
+seguido por 14 números. Formato válido: +DDDDDDDDDDDDDD D é dígito (0-9).
 */
 class Telefone{
     private:
@@ -193,7 +193,9 @@ inline string Telefone::getTelefone(){
 um dia, um mês e um ano.
 @details Armazena uma string e valida a data verificando a quantidade de dias do
 mês e se o dia é valido, verifica se o mês está correto e também verifica se o
-ano é bissexto permitindo que fevereiro tenha 29 dias.
+ano é bissexto permitindo que fevereiro tenha 29 dias. Formato válido:
+dia-mês-ano. Dia é número de 1 a 31. Mês é JAN, FEV, MAR, ABR, MAI, JUN, JUL,
+AGO, SET, OUT, NOV ou DEZ. Ano é número de 2000 a 2999.
 */
 class Data{
     private:
@@ -207,7 +209,7 @@ class Data{
         usuário digite uma data inválida.
         @throw invalid_argument com a mensagem
         //continuar documentaçao!!!!!
-         caso o usuário digite uma data com comprimento inválido ou não digite apenas números, lança exceção out_of_range caso o dia seja maior do que os números de dias que o mês possui.
+
         */
         void setData(string);
         /**
@@ -239,7 +241,8 @@ inline string Codigo::getCodigo(){
 cartão bancário.
 @details Armazena uma cadeia de 16 caracteres com o número do cartão e valida o
 número utilizando o algoritmo de Luhn para verificar a validade do número do
-cartão através do dígito verificador.
+cartão através do dígito verificador. Formato válido: 16 dígitos e presença de
+dígito verificador calculado segundo o algorítmo de Luhn.
 */
 class Cartao{
     private:
@@ -255,6 +258,7 @@ class Cartao{
         @throw invalid_argument caso o número do cartão digitado não seja
         válido, ou seja, o número não passou no teste do dígito verificador ou,
         não foram digitados apenas dígitos numéricos.
+        @param cartao Valor que representa o número do cartão.
         */
         void setCartao(string);
         /**
@@ -268,12 +272,36 @@ inline string Cartao::getCartao(){
     return cartao;
 }
 
+/**
+@class Senha.
+@brief Classe domínio usada para armazenar uma chave de acesso ao sistema.
+@details Armazena uma cadeia de caracteres que representam uma senha que pode
+ser usada para verificar a identidade de uma pessoa no sistema. Formato válido:
+5 caracteres. Caracter pode ser letra (a-z ou A-Z), dígito (0-9) ou caracter
+especial ( ! " # $ % & ? ); letra não pode ser seguida por letra, dígito não
+pode ser seguido por dígito; existe pelo menos uma letra minúscula (a-z), uma
+letra maiúscula (A-Z), um dígito (0-9) e um caracter especial.
+*/
 class Senha{
     private:
         string senha;
         void validarSenha(string);
     public:
+        /**
+        @brief Armazena a cadeia de caracteres que representam a senha.
+        @details Armazena a senha. Valida o formato da senha ou lança exceção
+        caso a senha digitada seja inválida.
+        @throw lenght_error caso a senha não possua 5 caracteres.
+        @throw invalid_argument caso a senha digitada não siga as regras de
+        formatação da senha.
+        @param senha Cadeia de caracteres que representam a senha a ser
+        validada.
+        */
         void setSenha(string);
+        /**
+        @brief Retorna a senha armazenada.
+        @return Cadeia de caracteres que representam uma senha.
+        */
         string getSenha();
 };
 
@@ -281,6 +309,15 @@ inline string Senha::getSenha(){
     return senha;
 }
 
+/**
+@class Nome.
+@brief Classe domínio usada para armazenar e validar o nome de uma pessoa.
+@details Armazena uma cadeia de caracteres que representam o nome de uma
+pesosoas e valida o formato do nome. Formato válido: Texto com 5 a 20
+caracteres. Cada caracter pode ser letra (a-z ou A-Z) ou espaço em branco;
+primeiro caracter de cada termo é letra maiúscula (A-Z); espaço em branco é
+seguido por letra; último caracter não pode ser espaço em branco.
+*/
 class Nome{
     private:
         static const int limiteMin = 5, limiteMax = 20;
