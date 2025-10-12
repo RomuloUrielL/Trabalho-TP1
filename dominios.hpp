@@ -199,7 +199,7 @@ class Data{
     private:
         static const int length = 11;
         string data;
-        bool validarData(string);
+        void validarData(string);
     public:
         /**
         @brief Define a Data.
@@ -209,7 +209,7 @@ class Data{
         //continuar documentaçao!!!!!
          caso o usuário digite uma data com comprimento inválido ou não digite apenas números, lança exceção out_of_range caso o dia seja maior do que os números de dias que o mês possui.
         */
-        bool setData(string);
+        void setData(string);
         /**
         @brief Retorna a data armazenada.
         @return Data armazenada.
@@ -224,9 +224,9 @@ inline string Data::getData(){
 class Codigo{
     private:
         string codigo;
-        bool validarCodigo(string);
+        void validarCodigo(string);
     public:
-        bool setCodigo(string);
+        void setCodigo(string);
         string getCodigo();
 };
 
@@ -271,9 +271,9 @@ inline string Cartao::getCartao(){
 class Senha{
     private:
         string senha;
-        bool validarSenha(string);
+        void validarSenha(string);
     public:
-        bool setSenha(string);
+        void setSenha(string);
         string getSenha();
 };
 
@@ -283,11 +283,11 @@ inline string Senha::getSenha(){
 
 class Nome{
     private:
-        static const int limiteMin = 5, limiteMax = 30;
+        static const int limiteMin = 5, limiteMax = 20;
         string nome;
-        bool validarNome(string);
+        void validarNome(string);
     public:
-        bool setNome(string);
+        void setNome(string);
         string getNome();
 };
 
@@ -299,9 +299,9 @@ class Email{
     private:
         static const int limiteMin = 1, limiteMax_Local = 64, limiteMax_Dominio = 255;
         string email;
-        bool validarEmail(string);
+        void validarEmail(string);
     public:
-        bool setEmail(string);
+        void setEmail(string);
         string getEmail();
 };
 
@@ -313,9 +313,9 @@ class Endereco{
     private:
         static const int limiteMin = 5, limiteMax = 30;
         string endereco;
-        bool validarEndereco(string);
+        void validarEndereco(string);
     public:
-        bool setEndereco(string);
+        void setEndereco(string);
         string getEndereco();
 };
 

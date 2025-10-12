@@ -84,9 +84,9 @@ void Telefone::setTelefone(string telefone){
     this->telefone = telefone;
 }
 
-bool Data::validarData(string data){
+void Data::validarData(string data){
     if(data.length() != length || data[2] != '-' || data[6] != '-'){
-        return false;
+        throw std::invalid_argument("Formato de data invalido. Use DD-MES-AAAA (ex: 15-OUT-2025).");
     }
 
     string dia = data.substr(0, 2);
@@ -95,17 +95,21 @@ bool Data::validarData(string data){
 
     for(char c : dia){
         if(!isdigit(c)){
-            return false;
+            throw std::invalid_argument("O dia deve conter apenas digitos.");
         }
     }
     for(char c : ano){
         if(!isdigit(c)){
-            return false;
+            throw std::invalid_argument("O ano deve conter apenas digitos.");
         }
     }
 
     int diaInt = stoi(dia);
     int anoInt = stoi(ano);
+
+    if (anoInt < 2000 || anoInt > 2999) {
+        throw std::out_of_range("Ano invalido. O ano deve estar entre 2000 e 2999.");
+    }
 
     string calendario[12][2] = {
         {"JAN", "31"},
@@ -127,45 +131,45 @@ bool Data::validarData(string data){
     }
 
 
-    for(int i = 0; i < 12; i++){
-        if(mes == calendario[i][0] && diaInt > stoi(calendario[i][1])){
-            return false;
+     bool mesEncontrado = false;
+    for (int i = 0; i < 12; i++) {
+        if (mes == calendario[i][0]) {
+            mesEncontrado = true;
+
+            if (diaInt < 1 || diaInt > stoi(calendario[i][1])) {
+                throw std::out_of_range("Dia invalido para o mes especificado.");
+            }
             break;
         }
     }
-    return true;
-}
-
-bool Data::setData(string data){
-    if(!validarData(data)){
-        return false;
+    if (!mesEncontrado) {
+        throw std::invalid_argument("Mes invalido. Use a abreviacao de 3 letras em maiusculo (JAN, FEV, etc.).");
     }
-    this->data = data;
-    return true;
 }
 
-bool Codigo::validarCodigo(string codigo){
+void Data::setData(string data){
+    validarData(data);
+    this->data = data;
+}
+
+void Codigo::validarCodigo(string codigo){
     if(codigo.length() != 10){
-        return false;
+        throw std::length_error("Codigo deve ter exatamente 10 caracteres.");
     }
     for(char c : codigo){
         if(!(isdigit(c) || (c >= 'a' && c <= 'z'))){
-            return false;
+            throw std::invalid_argument("Codigo deve conter apenas letras minusculas (a-z) e digitos (0-9).");
         }
     }
-    return true;
 }
 
-bool Codigo::setCodigo(string codigo){
-    if(!validarCodigo(codigo)){
-        return false;
-    }
+void Codigo::setCodigo(string codigo){
+    validarCodigo(codigo);
     this->codigo = codigo;
-    return true;
 }
 
 void Cartao::validarCartao(string cartao){
-    int quantidadeCaracteres = 16;
+    const int quantidadeCaracteres = 16;
     int somaposPares = 0;
     int somaposImpares = 0;
 
@@ -201,7 +205,7 @@ void Cartao::setCartao(string cartao){
     this->cartao = cartao;
 }
 
-bool Senha::validarSenha(string senha){
+void Senha::validarSenha(string senha){
     int quantidadeCaracteres = 5;
     int contadorMinuscula = 0;
     int contadorMaiuscula = 0;
@@ -211,7 +215,7 @@ bool Senha::validarSenha(string senha){
     int caractereAnterior = -1, caractereAtual;
 
     if((int)senha.length() != quantidadeCaracteres){
-        return false;
+        throw std::invalid_argument("Senha deve conter exatamente 5 caracteres.");
     }
 
     for(int i = 0; i < quantidadeCaracteres; i++){
@@ -230,86 +234,77 @@ bool Senha::validarSenha(string senha){
             contadorCarEspecial++;
             caractereAtual = 2;
         } else {
-            return false;
+            throw std::invalid_argument("Senha contem um caractere invalido.");
         }
 
         if(caractereAtual == caractereAnterior){
-            return false;
+            throw std::invalid_argument("Senha nao pode ter caracteres do mesmo tipo em sequencia.");
         }
 
         caractereAnterior = caractereAtual;
     }
 
         //verifica se tem todos os tipos de caracteres
-    if(contadorMinuscula > 0 && contadorMaiuscula > 0 && contadorCarEspecial > 0 && contadorDigito > 0){
-        return true;
-    } else {
-        return false;
+   if(contadorMinuscula == 0 || contadorMaiuscula == 0 || contadorCarEspecial == 0 || contadorDigito == 0){
+        throw std::invalid_argument("Senha deve conter ao menos uma letra maiuscula, uma minuscula, um digito e um caractere especial (!, \", #, $, %, &, ?).");
     }
 }
 
-bool Senha::setSenha(string senha){
-    if(!validarSenha(senha)){
-        return false;
-    }
+void Senha::setSenha(string senha){
+    validarSenha(senha);
     this->senha = senha;
-    return true;
 }
 
-bool Nome::validarNome(string nome){
+void Nome::validarNome(string nome){
     int comprimentoNome = nome.length();
 
     if(comprimentoNome < limiteMin || comprimentoNome > limiteMax){
-        return false;
+        throw std::invalid_argument("O nome deve ter entre 5 e 20 caracteres.");
     }
 
     for(int i = 0; i < comprimentoNome; i++){
         char c = nome[i];
 
-        if(i == 0 && (c < 'A' || c > 'Z')){
-            return false;
+    if(!isalpha(c) && c != ' '){
+            throw std::invalid_argument("Nome contem caractere invalido. Apenas letras e espacos sao permitidos.");
         }
 
-        if(i >= 1){
-            if(nome[i-1] == ' ' && (c < 'A' || c > 'Z')){
-                return false;
-            } else if(!isalpha(c) && c != ' '){
-                return false;
-            }
+    if(i == 0 && (c < 'A' || c > 'Z')){
+            throw std::invalid_argument("A primeira letra do nome deve ser maiuscula.");
         }
+
+    if(i > 0 && nome[i-1] == ' ' && (c < 'A' || c > 'Z')){
+            throw std::invalid_argument("A primeira letra de cada termo do nome deve ser maiuscula.");
+        }
+
 
         if(i == (comprimentoNome - 1) && c == ' '){
-            return false;
+            throw std::invalid_argument("O nome nao pode terminar com espaco em branco.");
         }
     }
-
-    return true;
 }
 
-bool Nome::setNome(string nome){
-    if(!validarNome(nome)){
-        return false;
-    }
+void Nome::setNome(string nome){
+    validarNome(nome);
     this->nome = nome;
-    return true;
 }
 
-bool Email::validarEmail(string email){
+void Email::validarEmail(string email){
     string parteLocal, dominio;
     int pos = email.find('@');
 
-    if(pos == (int)string::npos){
-        return false;
+        if(pos == (int)string::npos || email.find('@', pos + 1) != (int)string::npos){
+        throw std::invalid_argument("Formato de email invalido. Deve conter um unico '@'.");
     }
 
     parteLocal = email.substr(0, pos);
     dominio = email.substr(pos + 1);
 
     if(parteLocal.length() < limiteMin || parteLocal.length() > limiteMax_Local){
-        return false;
+        throw std::invalid_argument("A parte local do email (antes do '@') deve ter entre 1 e 64 caracteres.");
     }
     if(dominio.length() < limiteMin || dominio.length() > limiteMax_Dominio){
-        return false;
+        throw std::invalid_argument("A parte do dominio (depois do '@') nao pode ser vazia e deve ter no maximo 255 caracteres.");
     }
 
     //verificar validade da parte local
@@ -318,18 +313,16 @@ bool Email::validarEmail(string email){
         char c = parteLocal[i];
 
         if((i == 0 || i == (int)parteLocal.length() - 1) && (c == '.' || c == '-')){
-            return false;
+            throw std::invalid_argument("A parte local do email nao pode comecar ou terminar com ponto ou hifen.");
         }
 
         if(!isalpha(c) && !isdigit(c) && c != '.' && c != '-'){
-            return false;
+            throw std::invalid_argument("A parte local do email contem um caractere invalido.");
         }
 
-        if((c == '.' || c == '-') && i + 1 < (int)parteLocal.length()){
-            if(!isdigit(parteLocal[i+1]) && !isalpha(parteLocal[i+1])){
-                return false;
-            }
-        }
+       if((c == '.' || c == '-') && (parteLocal[i+1] == '.' || parteLocal[i+1] == '-')){
+            throw std::invalid_argument("A parte local do email nao pode ter dois pontos ou hifens seguidos.");
+         }
     }
 
     //verificar validade da parte dominio
@@ -338,69 +331,59 @@ bool Email::validarEmail(string email){
        char c = dominio[i];
 
         if((i == 0 || i == (int)dominio.length() - 1) && c == '-'){
-            return false;
+            throw std::invalid_argument("O dominio do email nao pode comecar ou terminar com hifen.");
         }
 
         if(!islower(c) && !isdigit(c) && c != '.' && c != '-'){
-            return false;
+            throw std::invalid_argument("O dominio do email contem um caractere invalido (apenas letras minusculas, digitos, ponto e hifen).");
         }
 
         if(c == '.' && i + 1 < (int)dominio.length() && dominio[i+1] == '.'){
-            return false;
+            throw std::invalid_argument("O dominio do email nao pode ter pontos sequenciais.");
         }
 
         if(c == '.' && (dominio[i+1] == '-' || (i > 0 && dominio[i-1] == '-'))){
-            return false;
+            throw std::invalid_argument("Hifen no dominio nao pode ser precedido ou sucedido por um ponto.");
         }
     }
-
-    return true;
 }
-
-bool Email::setEmail(string email){
-    if(!validarEmail(email)){
-        return false;
-    }
+void Email::setEmail(string email){
+    validarEmail(email);
     this->email = email;
-    return true;
 }
 
-bool Endereco::validarEndereco(string endereco){
+void Endereco::validarEndereco(string endereco){
 
     if(endereco.length() < limiteMin || endereco.length() > limiteMax){
-        return false;
+        throw std::invalid_argument("Endereco deve ter entre 5 e 30 caracteres.");
     }
 
     for(int i = 0; i < (int)endereco.length(); i++){
         char c = endereco[i];
 
         if((i == 0 || i == (int)endereco.length() - 1) && (c == ' ' || c == '.' || c == ',')){
-            return false;
+            throw std::invalid_argument("Endereco nao pode comecar ou terminar com espaco, ponto ou virgula.");
         }
 
         if(!isalpha(c) && !isdigit(c) && c != ',' && c != '.' && c != ' '){
-            return false;
+            throw std::invalid_argument("Endereco contem caractere invalido.");
         }
 
         if((c == ',' || c == '.') && i + 1 < (int)endereco.length()){
             if(endereco[i+1] == ',' || endereco[i+1] == '.'){
-                return false;
+                throw std::invalid_argument("Endereco nao pode ter pontuacao em sequencia (ex: '..', ',,', '.,').");
             }
         }
 
         if(c == ' ' && i + 1 < (int)endereco.length()){
             if(!isalpha(endereco[i+1]) && !isdigit(endereco[i+1])){
-                return false;
+                throw std::invalid_argument("Endereco com espaco em branco deve ser seguido por letra ou digito.");
             }
         }
     }
-    return true;
 }
 
-bool Endereco::setEndereco(string endereco){
-    if(!validarEndereco(endereco)){
-        return false;
-    }
+void Endereco::setEndereco(string endereco){
+    validarEndereco(endereco);
     this->endereco = endereco;
-    return true;
 }
