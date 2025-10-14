@@ -207,14 +207,26 @@ class Data{
         @brief Define a Data.
         @details Armazena uma string. Valida a data ou lança exceção caso o
         usuário digite uma data inválida.
-        @throw invalid_argument com a mensagem
-        //continuar documentaçao!!!!!
-
+        @throw invalid_argument com a mensagem "Formato de data invalido. Use
+        DD-MES-AAAA (ex: 15-OUT-2025)." caso a data não possua a data
+        especificada.
+        @throw invalid_argument com a mensagem "O dia deve conter apenas
+        digitos." caso o dia não possua apenas números.
+        @throw invalid_argument com a mensagem "O ano deve conter apenas
+        digitos." caso o ano não possua apenas números.
+        @throw invalid_argument com a mensagem "Ano invalido. O ano deve estar
+        entre 2000 e 2999." caso o ano digitado esteja da faixa esperada.
+        @throw invalid_argument com a mensagem "Dia invalido para o mes
+        especificado." caso o mês digitado não possua aquela quantidade de dias
+        digitados.
+        @throw invalid_argument com a mensagem "Mes invalido. Use a abreviacao
+        de 3 letras em maiusculo (JAN, FEV, etc.)." caso o mês digitado seja
+        inválido.
         */
         void setData(string);
         /**
         @brief Retorna a data armazenada.
-        @return Data armazenada.
+        @return Cadeia de caracteres que representam uma data..
         */
         string getData();
 };
@@ -223,12 +235,36 @@ inline string Data::getData(){
     return data;
 }
 
+/**
+@class Codigo.
+@brief Classe dominio que representa o número de identificação de uma reserva no
+em um hotel.
+@details Armazena uma cadeia de caracteres que representam um código e valida o
+código digitado com base no formato válido. Formato válido: 10 caracteres Cada
+caracter é letra (a-z) ou dígito (0-9).
+*/
 class Codigo{
     private:
         string codigo;
         void validarCodigo(string);
     public:
+        /**
+        @brief Armazena um código.
+        @details Armazena uma cadeia de caracteres que representam um código e
+        válida o código digitado ou lança exceção caso o código digitado seja
+        inválido.
+        @throw length_error com a mensagem "Codigo deve ter exatamente 10
+        caracteres." caso o comprimento do código digitado seja inválido.
+        @throw invalid_argument com a mensagem "Codigo deve conter apenas letras
+        minusculas (a-z) e digitos (0-9)." caso o código digitado possua
+        caracteres inválidos.
+        @param codigo Cadeia de caracteres que representam um código.
+        */
         void setCodigo(string);
+        /**
+        @brief Retorna o código armazenado.
+        @return Cadeia de caracteres que representam um código.
+        */
         string getCodigo();
 };
 
@@ -253,11 +289,13 @@ class Cartao{
         @brief Armazena o valor do número do cartão.
         @details Armazena o número do cartão em um cadeia de caracteres. Valida
         ou lança exceção caso o número digitado seja inválido.
-        @throw lenght_error caso a quantidade de dígitos do cartão seja
-        diferente de 16 dígitos numéricos.
-        @throw invalid_argument caso o número do cartão digitado não seja
-        válido, ou seja, o número não passou no teste do dígito verificador ou,
-        não foram digitados apenas dígitos numéricos.
+        @throw lenght_error com a mensagem "Tamanho invalido" caso a quantidade
+        de dígitos do cartão seja diferente de 16 dígitos numéricos.
+        @throw invalid_argument com a mensagem "O cartao aceita somente numeros"
+        caso o número do cartão digitado não seja válido, ou seja, não foram
+        digitados apenas dígitos numéricos.
+        @throw invalid_argument com a mensagem "Cartao invalido" caso o número
+        do cartão não passe pelo teste do dígito verificador.
         @param cartao Valor que representa o número do cartão.
         */
         void setCartao(string);
@@ -324,7 +362,26 @@ class Nome{
         string nome;
         void validarNome(string);
     public:
+        /**
+        @brief Armazena uma cadeia de caracteres que representam um nome.
+        @details Armazena um nome. Valida ou lança exceção caso o nome digitador
+        seja inválido.
+        @throw invalid_argument com a mensagem "O nome deve ter entre 5 e 20
+        caracteres."
+        @throw invalid_argument com a mensagem "Nome contem caractere invalido.
+        Apenas letras e espacos sao permitidos."
+        @throw invalid_argument com a mensagem "A primeira letra do nome deve
+        ser maiuscula."
+        @throw invalid_argument com a mensagem "A primeira letra de cada termo
+        do nome deve ser maiuscula."
+        @throw invalid_argument "O nome nao pode terminar com espaco em branco."
+        @param nome Cadeia de caracteres representando nome a ser validada.
+        */
         void setNome(string);
+        /**
+        @brief Retorna o nome armazenado.
+        @return Cadeia de caracteres que representam um nome.
+        */
         string getNome();
 };
 
@@ -332,13 +389,49 @@ inline string Nome::getNome(){
     return nome;
 }
 
+/**
+@class Email.
+@brief Classe dominio que representa um endereço de contato por meio de "cartas
+digitais" com alguma pessoa do sistema sendo gerente ou cliente.
+@details  Armazena uma cadeia de caracteres que representam um email e valida o
+formato. Formato válido:
+parte-local@domínio Parte local pode conter letra (a-z), dígito (0-9) ou
+ponto(.) ou hífen (-); não pode iniciar ou terminar com ponto ou hífen; ponto ou
+hífen deve ser seguido por letra(s) ou dígito(s); comprimento máximo é 64
+caracteres. Domínio é composto por uma ou mais partes separadas por ponto (.);
+cada parte pode conter letra (a-z), dígito (0-9) ou hífen (-); não pode iniciar
+ou terminar com hífen; comprimento máximo é 255 caracteres.
+*/
 class Email{
     private:
         static const int limiteMin = 1, limiteMax_Local = 64, limiteMax_Dominio = 255;
         string email;
         void validarEmail(string);
     public:
+        /**
+        @brief Armazena uma cadeia de caracteres que representam um email.
+        @details Armazena um email. Valida um email ou lança exceção caso o
+        email digitado seja inválido.
+        @throw length_error com a mensagem "Endereco deve ter entre 5 e 30
+        caracteres." caso o comprimento do email digitado seja inválido.
+        @throw invalid_argument com a mensagem "Endereco nao pode comecar ou
+        terminar com espaco, ponto ou virgula." caso o email termine ou comece
+        com caracteres inválidos.
+        @throw invalid_argument com a mensagem "Endereco contem caractere
+        invalido." caso algum caractere digitado não seja permitido.
+        @throw invalid_argument com a mensagem "Endereco nao pode ter pontuacao
+        em sequencia (ex: '..', ',,', '.,')." caso o endereço de email possua
+        pontuação em sequência.
+        @throw invalid_argument com a mensagem "Endereco com espaco em branco
+        deve ser seguido por letra ou digito." caso o endereção de email possua
+        dois espaços em branco seguidos.
+        @param endereco Cadeia de caracteres que representam um endereçol.
+        */
         void setEmail(string);
+        /**
+        @brief Retorna o email armazenado.
+        @return Cadeia de caracteres que representam um email.
+        */
         string getEmail();
 };
 
@@ -346,13 +439,48 @@ inline string Email::getEmail(){
     return email;
 }
 
+/**
+@class Endereço.
+@brief Classe dominio que representam a localização de determinado, prédio,
+casa, loja em uma cidade, estado e país.
+@details Armazena uma cadeia de caracteres que representam um endereço e válida
+o endereço. Formato válido: Texto com 5 a 30 caracteres. Caracter pode ser letra
+(a-z ou A-Z), dígito (0-9), vírgula, ponto ou espaço em branco; vírgula não pode
+ser seguida por vírgula ou ponto; ponto não pode ser seguido por vírgula ou
+ponto; espaço em branco é seguido por letra ou dígito; primeiro e último
+ não pode ser vírgula, ponto ou espaço em branco.
+*/
 class Endereco{
     private:
         static const int limiteMin = 5, limiteMax = 30;
         string endereco;
         void validarEndereco(string);
     public:
+        /**
+        @brief Armazena uma cadeia de caracteres que representam um endereço.
+        @details Armazena um endereço. Valida o endereço ou lança exceção caso
+        o endereço digitado seja inválido.
+        @throw length_error com a mensagem "Endereco deve ter entre 5 e 30
+        caracteres." caso o endereço não possua a quantidade de caracteres
+        válida.
+        @throw invalid_argument com a mensagem "Endereco nao pode comecar ou
+        terminar com espaco, ponto ou virgula." caso o endereço comece ou
+        termine com caracteres inválidos.
+        @throw invalid_argument com a mensagem "Endereco contem caractere
+        invalido." caso o caractere não seja válido.
+        @throw "Endereco nao pode ter pontuacao em sequencia
+        (ex: '..', ',,', '.,')." caso o endereço possua uma sequência de
+        caracteres de pontuação.
+        @throw invalid_argument com a mensagem "Endereco com espaco em branco
+        deve ser seguido por letra ou digito." caso o endereço possua dois
+        espaços em branco seguidos.
+        @param endereco Cadeia de caracteres que representam um endereço.
+        */
         void setEndereco(string);
+        /**
+        @brief Retorna o endereço armazenado.
+        @return Cadeia de caracteres que representam um endereço.
+        */
         string getEndereco();
 };
 

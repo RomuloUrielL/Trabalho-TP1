@@ -174,7 +174,7 @@ void Cartao::validarCartao(string cartao){
     int somaposImpares = 0;
 
     if((int)cartao.length() != quantidadeCaracteres){
-        throw invalid_argument("Tamanho invalido");
+        throw length_error("Tamanho invalido");
     }
 
     for(char c : cartao){
@@ -355,7 +355,7 @@ void Email::setEmail(string email){
 void Endereco::validarEndereco(string endereco){
 
     if(endereco.length() < limiteMin || endereco.length() > limiteMax){
-        throw std::invalid_argument("Endereco deve ter entre 5 e 30 caracteres.");
+        throw std::length_error("Endereco deve ter entre 5 e 30 caracteres.");
     }
 
     for(int i = 0; i < (int)endereco.length(); i++){
