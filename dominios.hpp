@@ -440,7 +440,6 @@ inline string Email::getEmail(){
 }
 
 /**
-@class Endereço.
 @brief Classe dominio que representam a localização de determinado, prédio,
 casa, loja em uma cidade, estado e país.
 @details Armazena uma cadeia de caracteres que representam um endereço e válida

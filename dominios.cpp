@@ -5,7 +5,7 @@
 
 void Capacidade::validarCapacidade(unsigned short capacidade){
     if(capacidade > limiteMax || capacidade < limiteMin){
-        throw out_of_range("Capacidade invalida, digite um valor entre 1 e 4");
+        throw std::out_of_range("Capacidade invalida, digite um valor entre 1 e 4");
     }
 };
 
@@ -19,7 +19,7 @@ const double Dinheiro::limiteMax = 1000000.00;
 
 void Dinheiro::validarDinheiro(double dinheiro){
     if(dinheiro < limiteMin || dinheiro > limiteMax){
-        throw out_of_range("Dinheiro invalido, digite um valor entre 0.01 e 1000000.00");
+        throw std::out_of_range("Dinheiro invalido, digite um valor entre 0.01 e 1000000.00");
     }
 };
 
@@ -30,16 +30,16 @@ void Dinheiro::setDinheiro(double dinheiro){
 
 void Ramal::validarRamal(string ramal){
     if((int)ramal.length() != lenght){
-        throw length_error("Comprimento invalido! digite um número com 2 algarismos.");
+        throw std::length_error("Comprimento invalido! digite um número com 2 algarismos.");
     }
     for(char c : ramal){
         if(!isdigit(c)){
-            throw invalid_argument("Caracteres invalidos! digite apenas numeros.");
+            throw std::invalid_argument("Caracteres invalidos! digite apenas numeros.");
         }
     }
     int valor = stoi(ramal);
     if(valor < valorMin || valor > valorMax){
-        throw out_of_range("Ramal invalido! digite um ramal entre 00 e 50.");
+        throw std::out_of_range("Ramal invalido! digite um ramal entre 00 e 50.");
     }
 };
 
@@ -50,16 +50,16 @@ void Ramal::setRamal(string ramal){
 
 void Numero::validarNumero(string numero){
     if((int)numero.length() != length){
-        throw length_error("Comprimento invalido! digite um número com 3 dígitos.");
+        throw std::length_error("Comprimento invalido! digite um número com 3 dígitos.");
     }
     for(char c : numero){
         if(!isdigit(c)){
-            throw invalid_argument("Caracteres invalidos! digite apenas digitos.");
+            throw std::invalid_argument("Caracteres invalidos! digite apenas digitos.");
         }
     }
     int valor = stoi(numero);
     if(valor < valorMin || valor > valorMax){
-            throw out_of_range("Numero fora da faixa! digite um valor entre 001 e 999.");
+            throw std::out_of_range("Numero fora da faixa! digite um valor entre 001 e 999.");
     }
 }
 
@@ -70,11 +70,11 @@ void Numero::setNumero(string numero){
 
 void Telefone::validarTelefone(string telefone){
     if((int)telefone.length() != length || telefone[0] != '+'){
-        throw length_error("Comprimento inválido ou sem prefixo '+', digite um telefone no formato +DDDDDDDDDDDDDD.");
+        throw std::length_error("Comprimento inválido ou sem prefixo '+', digite um telefone no formato +DDDDDDDDDDDDDD.");
     }
     for(int i = 1; i < (int)telefone.length(); i++){
         if(!isdigit(telefone[i])){
-            throw invalid_argument("Caracteres invalidos! Digite + seguido de 14 numeros.");
+            throw std::invalid_argument("Caracteres invalidos! Digite + seguido de 14 numeros.");
         }
     }
 }
@@ -174,12 +174,12 @@ void Cartao::validarCartao(string cartao){
     int somaposImpares = 0;
 
     if((int)cartao.length() != quantidadeCaracteres){
-        throw length_error("Tamanho invalido");
+        throw std::length_error("Tamanho invalido");
     }
 
     for(char c : cartao){
         if(!isdigit(c)){
-            throw invalid_argument("O cartao aceita somente numeros");
+            throw std::invalid_argument("O cartao aceita somente numeros");
         }
     }
 
@@ -196,7 +196,7 @@ void Cartao::validarCartao(string cartao){
     int somaTotal = somaposImpares + somaposPares;
 
         if((somaTotal % 10) != 0){
-            throw invalid_argument("Cartao invalido");
+            throw std::invalid_argument("Cartao invalido");
         };
 }
 
@@ -291,9 +291,9 @@ void Nome::setNome(string nome){
 
 void Email::validarEmail(string email){
     string parteLocal, dominio;
-    int pos = email.find('@');
+    int pos = (int)email.find('@');
 
-        if(pos == (int)string::npos || email.find('@', pos + 1) != (int)string::npos){
+        if(pos == (int)string::npos || (int)email.find('@', pos + 1) != (int)string::npos){
         throw std::invalid_argument("Formato de email invalido. Deve conter um unico '@'.");
     }
 
