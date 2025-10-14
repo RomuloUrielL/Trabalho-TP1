@@ -84,7 +84,7 @@ e esteja no formato válido: (00 a 50).
 */
 class Ramal{
     private:
-        static const int valorMax = 50, valorMin = 0, lenght = 2;
+        static const short valorMax = 50, valorMin = 0, lenght = 2;
         string ramal;
         void validarRamal(string);
     public:
@@ -122,7 +122,7 @@ esteja no formato válido: (000 a 999).
 */
 class Numero{
     private:
-        static const int valorMin = 1, valorMax = 999, length = 3;
+        static const short valorMin = 1, valorMax = 999, length = 3;
         string numero;
         void validarNumero(string);
     public:
@@ -199,7 +199,7 @@ AGO, SET, OUT, NOV ou DEZ. Ano é número de 2000 a 2999.
 */
 class Data{
     private:
-        static const int length = 11;
+        static const short length = 11, anoMin = 2000, anoMax = 2999;
         string data;
         void validarData(string);
     public:

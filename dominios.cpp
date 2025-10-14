@@ -29,7 +29,7 @@ void Dinheiro::setDinheiro(double dinheiro){
 };
 
 void Ramal::validarRamal(string ramal){
-    if((int)ramal.length() != lenght){
+    if((short)ramal.length() != lenght){
         throw std::length_error("Comprimento invalido! digite um número com 2 algarismos.");
     }
     for(char c : ramal){
@@ -37,7 +37,7 @@ void Ramal::validarRamal(string ramal){
             throw std::invalid_argument("Caracteres invalidos! digite apenas numeros.");
         }
     }
-    int valor = stoi(ramal);
+    short valor = (short)stoi(ramal);
     if(valor < valorMin || valor > valorMax){
         throw std::out_of_range("Ramal invalido! digite um ramal entre 00 e 50.");
     }
@@ -49,7 +49,7 @@ void Ramal::setRamal(string ramal){
 };
 
 void Numero::validarNumero(string numero){
-    if((int)numero.length() != length){
+    if((short)numero.length() != length){
         throw std::length_error("Comprimento invalido! digite um número com 3 dígitos.");
     }
     for(char c : numero){
@@ -57,7 +57,7 @@ void Numero::validarNumero(string numero){
             throw std::invalid_argument("Caracteres invalidos! digite apenas digitos.");
         }
     }
-    int valor = stoi(numero);
+    short valor = (short)stoi(numero);
     if(valor < valorMin || valor > valorMax){
             throw std::out_of_range("Numero fora da faixa! digite um valor entre 001 e 999.");
     }
@@ -107,7 +107,7 @@ void Data::validarData(string data){
     int diaInt = stoi(dia);
     int anoInt = stoi(ano);
 
-    if (anoInt < 2000 || anoInt > 2999) {
+    if (anoInt < anoMin || anoInt > anoMax) {
         throw std::out_of_range("Ano invalido. O ano deve estar entre 2000 e 2999.");
     }
 
