@@ -5,14 +5,37 @@
 
 using namespace std;
 
+/**
+@brief Classe entidade que representa um indivíduo no sistema.
+@details A classe Pessoa define um indivíduo no sistema que possuem informações
+cadastrais no sistema, podendo ser especializada em outras classes entidades
+como Gerente ou Hospede.
+@see Nome, Email, Hospede, Gerente.
+*/
 class Pessoa{
     private:
         Nome nome;
         Email email;
     public:
+        /**
+        @brief Define o nome da pessoa.
+        @param nome Objeto da classe 'Nome' contendo o nome a ser atribuído.
+        */
         void setNome(const Nome& nome);
+        /**
+        @brief Retorna o nome da pessoa.
+        @return Objeto da classe 'Nome' associado à pessoa.
+        */
         Nome getNome();
+        /**
+        @brief Define o email da pessoa.
+        @param email Objeto da classe 'Email' contendo o email a ser atribuído.
+        */
         void setEmail(const Email& email);
+        /**
+        @brief Retorna o e-mail da pessoa.
+        @return Objeto da classe 'Email' associado à pessoa.
+        */
         Email getEmail();
 };
 
@@ -37,9 +60,25 @@ class Gerente:public Pessoa{
         Ramal ramal;
         Senha senha;
     public:
+        /**
+        @brief Define o ramal do gerente.
+        @param ramal Objeto da classe 'Ramal' contendo o ramal a ser atribuído.
+        */
         void setRamal(const Ramal& ramal);
+        /**
+        @brief Retorna o ramal do gerente.
+        @return Objeto da classe 'Ramal' associado ao gerente.
+        */
         Ramal getRamal() const;
+        /**
+        @brief Define a senha do gerente.
+        @param senha Objeto da classe 'Senha' contendo a senha a ser atribuída.
+        */
         void setSenha(const Senha& senha);
+        /**
+        @brief Retorna a senha do gerente.
+        @brief Objeto da classe 'Senha' associado ao gerente.
+        */
         Senha getSenha() const;
 };
 
@@ -64,9 +103,27 @@ class Hospede:public Pessoa{
         Endereco endereco;
         Cartao cartao;
     public:
+        /**
+        @brief Define o endereço do hóspede.
+        @param endereco Objeto da classe 'Endereco' contendo o endereço do
+        hóspede a ser atribuído.
+        */
         void setEndereco(const Endereco& endereco);
+        /**
+        @brief Retorna o endereço do hóspede.
+        @return Objeto da classe 'Endereco' associado ao hospede.
+        */
         Endereco getEndereco() const;
+        /**
+        @brief Define o cartão do hóspede.
+        @param cartao Objeto da classe 'Cartao' contendo o número do cartão do
+        hóspede a ser atribuído.
+        */
         void setCartao(const Cartao& cartao);
+        /**
+        @brief Retorna o número do cartão do hóspede.
+        @return Objeto da classe 'Cartao' associado ao hóspede.
+        */
         Cartao getCartao() const;
 };
 
@@ -93,13 +150,49 @@ class Hotel{
         Telefone telefone;
         Codigo codigo;
     public:
+        /**
+        @brief Define o nome do hotel.
+        @param nome Objeto da classe 'Nome' contendo o nome do hotel a ser
+        atribuído.
+        */
         void setNome(const Nome& nome);
+        /**
+        @brief Retorna o nome do hotel.
+        @return Objeto da classe 'Nome' associado ao hotel;
+        */
         Nome getNome() const;
+        /**
+        @brief Define o endereço do hotel.
+        @param endereco Objeto da classe 'Endereco' contendo o endereço do hotel
+        a ser atribuído.
+        */
         void setEndereco(const Endereco& endereco);
+        /**
+        @brief Retorna o endereço do hotel.
+        @return Objeto da classe 'Endereco' associado ao hotel.
+        */
         Endereco getEndereco()const;
+        /**
+        @brief Define o telefone do hotel.
+        @param telefone Objeto da classe 'Telefone' contendo o telefone do hotel
+        a ser atribuído.
+        */
         void setTelefone(const Telefone& telefone);
+        /**
+        @brief Retorna o telefone do hotel.
+        @return Objeto da classe 'Telefone' associado ao hotel.
+        */
         Telefone getTelefone() const;
+        /**
+        @brief Define o código do hotel.
+        @param codigo Objeto da classe 'Codigo' contendo o codigo do hotel a ser
+        atribuído.
+        */
         void setCodigo(const Codigo& codigo);
+        /**
+        @brief Retorna o código do hotel.
+        @return Objeto da classe 'Codigo' associado ao hotel.
+        */
         Codigo getCodigo() const;
 };
 
@@ -142,13 +235,49 @@ class Quarto{
         Dinheiro diaria;
         Ramal ramal;
     public:
+        /**
+        @brief Define o numero do quarto.
+        @param numero Objeto da classe 'Numero' contendo o número do quarto a
+        ser atribuído.
+        */
         void setNumero(const Numero& numero);
+        /**
+        @brief Retorna o número do quarto.
+        @return Objeto da classe 'Numero' associado ao quarto.
+        */
         Numero getNumero()const;
+        /**
+        @brief Define a capacidade do quarto.
+        @param capacidade Objeto da classe 'Capacidade' contendo a capacidade do
+        quarto a ser atribuída.
+        */
         void setCapacidade(const Capacidade& capacidade);
+        /**
+        @brief Retorna a capacidade do quarto.
+        @return Objeto da classe 'Capacidade' associado ao quarto.
+        */
         Capacidade getCapacidade()const;
+        /**
+        @brief Define a diária do quarto.
+        @param diaria Objeto da classe 'Dinheiro' contendo a diária do quarto a
+        ser atribuída.
+        */
         void setDinheiro(const Dinheiro& diaria);
+        /**
+        @brief Retorna a diária do hotel.
+        @return Objeto da classe 'Dinheiro' associada ao quarto.
+        */
         Dinheiro getDiaria()const;
+        /**
+        @brief Define o ramal do quarto.
+        @param ramal Objeto da classe 'Ramal' contendo o ramal do quarto a ser
+        atribuído.
+        */
         void setRamal(const Ramal& ramal);
+        /**
+        @brief Retorna o ramal do quarto.
+        @return Objeto da classe 'Ramal' associado ao quarto.
+        */
         Ramal getRamal()const;
 };
 
