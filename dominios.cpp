@@ -14,18 +14,30 @@ void Capacidade::setCapacidade(unsigned short capacidade){
     this->capacidade = capacidade;
 };
 
-const double Dinheiro::limiteMin = 0.01;
-const double Dinheiro::limiteMax = 1000000.00;
+const long long Dinheiro::limiteMin = 1;
+const long long Dinheiro::limiteMax = 100000000;
 
-void Dinheiro::validarDinheiro(double dinheiro){
-    if(dinheiro < limiteMin || dinheiro > limiteMax){
-        throw std::out_of_range("Dinheiro invalido, digite um valor entre 0.01 e 1000000.00");
+void Dinheiro::validarDinheiro(string dinheiro_string){
+    string auxDinheiro;
+    int length = (int)dinheiro_string.length();
+
+    for(i = 0; i < length; i++){
+        if(dinheiro_string[i] != '.' && dinheiro_string[i] != ','){
+            auxDinheiro += dinheiro_string[i];
+            j++;
+        }
+    }
+
+    dinheiro_int = stoi(auxDinheiro);
+
+    if(dinheiro_int < limiteMin || dinheiro_int > limiteMax){
+        throw std::out_of_range("Dinheiro invalido, digite um valor entre 0.01 e 1.000.000,00");
     }
 };
 
-void Dinheiro::setDinheiro(double dinheiro){
-    validarDinheiro(dinheiro);
-    this->dinheiro = dinheiro;
+void Dinheiro::setDinheiro(string dinheiro_string){
+    validarDinheiro(dinheiro_string);
+    this->dinheiro_string = dinheiro_string;
 };
 
 void Ramal::validarRamal(string ramal){

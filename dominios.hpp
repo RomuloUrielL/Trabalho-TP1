@@ -49,30 +49,32 @@ o dinheiro esteja no formato válido: (0,01 a 1.000.000,00).
 //Dar manutençao na classe para terminar a documentação da classe!!!
 class Dinheiro{
     private:
-        static const double limiteMin, limiteMax;
-        double dinheiro;
-        void validarDinheiro(double);
+        static const long long limiteMin, limiteMax;
+        short i, j = 0;
+        string dinheiro_string;
+        int dinheiro_int;
+        void validarDinheiro(string);
     public:
         /**
             @brief Define o dinheiro.
             @details Armazena um inteiro. Valida o dinheiro ou lança uma exceção
-             caso o usuário digite um valor inválido.
+            caso o usuário digite um valor inválido.
             @throw out_of_range com a mensagem "Dinheiro invalido, digite um
             valor entre 0.01 e 1000000.00" caso o usuário digite um valor fora
             da faixa 0.01 e 1000000.00.
             @param dinheiro Valor inteiro a ser atribuído (entre 0.01 e
             1000000.00).
         */
-        void setDinheiro(double);
+        void setDinheiro(string);
         /**
             @brief Retorna o dinheiro armazenado.
             @return Valor do dinheiro armazenado.
         */
-        double getDinheiro();
+        int getDinheiro();
 };
 
-inline double Dinheiro::getDinheiro(){
-    return dinheiro;
+inline int Dinheiro::getDinheiro(){
+    return dinheiro_int;
 }
 
 /**
