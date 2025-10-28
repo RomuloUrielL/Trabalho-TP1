@@ -284,6 +284,7 @@ dígito verificador calculado segundo o algorítmo de Luhn.
 */
 class Cartao{
     private:
+        static const int quantidadeCaracteres = 16;
         string cartao;
         void validarCartao(string);
     public:

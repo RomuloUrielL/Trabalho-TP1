@@ -181,7 +181,6 @@ void Codigo::setCodigo(string codigo){
 }
 
 void Cartao::validarCartao(string cartao){
-    const int quantidadeCaracteres = 16;
     int somaposPares = 0;
     int somaposImpares = 0;
 
