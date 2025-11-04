@@ -258,3 +258,48 @@ int TUNumero::run(){
     return estado;
 }
 
+const string TUData::VALOR_VALIDO = "15-OUT-2025";
+const string TUData::VALOR_INVALIDO = "15out2025";
+
+void TUData::setUp(){
+    data = new Data();
+    estado = SUCESSO;
+}
+
+void TUData::tearDown(){
+    delete data;
+}
+
+void TUData::testarCenarioValorValido(){
+    try{
+        data->setData(VALOR_VALIDO);
+        if(data->getData() != VALOR_VALIDO){
+            estado = FALHA;
+        }
+    }
+    catch(invalid_argument &excecao){
+        estado = FALHA;
+    }
+    catch(out_of_range &excecao){
+        estado = FALHA;
+    }
+}
+
+void TUData::testarCenarioValorInvalido(){
+    try{
+        data->setData(VALOR_INVALIDO);
+        estado = FALHA;
+    }
+    catch(invalid_argument &excecao){
+        if(data->getData() == VALOR_INVALIDO){
+            estado = FALHA;
+        }
+    }
+    catch(out_of_range &excecao){
+        if(data->getData() == VALOR_INVALIDO){
+            estado = FALHA;
+        }
+
+    }
+}
+
