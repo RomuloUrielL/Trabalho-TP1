@@ -4,6 +4,30 @@
 #include "dominios.hpp"
 #include "entidades.hpp"
 
+class IS_Autenticacao {
+public:
+    virtual bool autenticar(const Email&, const Senha&) = 0;
+    virtual ~IS_Autenticacao(){}
+};
+
+class IS_Pessoal {
+public:
+    virtual bool criarGerente(const Gerente&) = 0;
+    virtual bool lerGerente(const Email&, Gerente&) = 0;
+    virtual bool atualizarGerente(const Gerente&) = 0;
+    virtual bool descadastrarGerente(const Email&) = 0;
+
+    virtual bool criarHospede(const Hospede&) = 0;
+    virtual bool lerHospede(const Email&, Hospede&) = 0;
+    virtual bool atualizarHospede(const Hospede&) = 0;
+    virtual bool descadastrarHospede(const Email&) = 0;
+
+    virtual ~IS_Pessoal(){}
+};
+
+
+//------------------------------//
+
 class IServicoReservas;
 
 class IServicoReservas {
