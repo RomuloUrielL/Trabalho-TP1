@@ -6,31 +6,21 @@
 
 class IS_Autenticacao {
 public:
-    virtual bool autenticar(const Email&, const Senha&) = 0;
+    virtual bool autenticar(Email, Senha) = 0;
     virtual ~IS_Autenticacao(){}
 };
 
 class IS_Pessoal {
 public:
-    virtual bool criarGerente(const Gerente&) = 0;
-    virtual bool lerGerente(const Email&, Gerente&) = 0;
-    virtual bool atualizarGerente(const Gerente&) = 0;
-    virtual bool descadastrarGerente(const Email&) = 0;
+    virtual bool criarGerente(Gerente) = 0;
+    virtual bool lerGerente(Email&, Gerente&) = 0;
+    virtual bool atualizarGerente(Gerente) = 0;
+    virtual bool descadastrarGerente(Email) = 0;
 
-    virtual bool criarHospede(const Hospede&) = 0;
-    virtual bool lerHospede(const Email&, Hospede&) = 0;
-    virtual bool atualizarHospede(const Hospede&) = 0;
-    virtual bool descadastrarHospede(const Email&) = 0;
-
-    virtual ~IS_Pessoal(){}
+    virtual void ~IS_Pessoal(){}
 };
 
-
-//------------------------------//
-
-class IServicoReservas;
-
-class IServicoReservas {
+class IS_Reservas {
     public:
         bool virtual criarHotel(Hotel) = 0;
         bool virtual lerHotel(Hotel&) = 0;
@@ -51,7 +41,29 @@ class IServicoReservas {
         bool virtual lerQuarto(Quarto&) = 0;
         bool virtual editarQuarto(Quarto) = 0;
         bool virtual excluirQuarto(Quarto) = 0;
+
+        virtual void IS_Reservas(){}
 };
 
+/*
+@brief Interface responsável por prover os serviços ao módulo inicialização para
+autenticação de usuários do sistema.
+@details É implementada pelo Módulo Apresentação-Autenticação e solicitada pelo
+Módulo Apresentação-Inicialização para validar um usuário no sistema.
+*/
+class IA_Autenticacao{
+    public:
+    virtual bool autenticar(Email&) = 0;
+    virtual void ~IA_Autenticacao(){}
+};
+
+class IA_Pessoal{
+    public:
+    virtual void criar() = 0;
+    //modificar o retorno da função executar porque pode dar problema caso o
+    //usuário apague a própia conta.
+    virtual void executar(Email) = 0;
+    virtual void ~IA_Pessoal(){}
+};
 
 #endif // INTERFACES_H_INCLUDED
