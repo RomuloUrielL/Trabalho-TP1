@@ -17,7 +17,7 @@ public:
     virtual bool atualizarGerente(Gerente) = 0;
     virtual bool descadastrarGerente(Email) = 0;
 
-    virtual void ~IS_Pessoal(){}
+    virtual ~IS_Pessoal(){}
 };
 
 class IS_Reservas {
@@ -42,7 +42,7 @@ class IS_Reservas {
         bool virtual editarQuarto(Quarto) = 0;
         bool virtual excluirQuarto(Quarto) = 0;
 
-        virtual void ~IS_Reservas(){}
+        virtual ~IS_Reservas(){}
 };
 
 /**
@@ -65,7 +65,7 @@ class IA_Autenticacao{
     /**
     @brief Destrutor virtual padrão.
     */
-    virtual void ~IA_Autenticacao(){}
+    virtual ~IA_Autenticacao(){}
 };
 
 /**
@@ -93,7 +93,7 @@ class IA_Pessoal{
     /**
     @brief Destrutor virtual padrão.
     */
-    virtual void ~IA_Pessoal(){}
+    virtual ~IA_Pessoal(){}
 };
 
 /**
@@ -117,7 +117,7 @@ class IA_Reservas{
         /**
         @brief Destrutor virtual padrão.
         */
-        virtual void ~IA_Reservas(){}
+        virtual ~IA_Reservas(){}
 };
 
 #endif // INTERFACES_H_INCLUDED
