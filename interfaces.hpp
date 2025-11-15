@@ -92,31 +92,198 @@ hóspedes e quartos e também listar hotes, reservas, hóspedes e quartos.
 */
 class IS_Reservas {
     public:
+        /**
+        @brief Serviço relacionado a criação de um hotel no sistema.
+        @param hotel Objeto da classe entidade Hotel contendo um nome, endereço,
+        telefone e código fornecidos para a criação de um hotel.
+        @return true caso o hotel seja criado com sucesso e false caso o hotel
+        não seja criado.
+        */
         bool virtual criarHotel(Hotel) = 0;
+        /**
+        @brief Serviço relacionando a leitura de um hotel armazenado no sistema.
+        @param hotel Endereço de memória de um objeto da classe entidade Hotel
+        fornecido para leitura dos dados do hotel.
+        @return true caso a leitura consiga ser feita e false caso a leitura não
+        consiga ser feita com sucesso.
+        */
         bool virtual lerHotel(Hotel&) = 0;
+        /**
+        @brief Serviço relacionado a edição dos dados de um hotel armazenado no
+        sistema.
+        @param hotel Objeto da classe entidade Hotel contendo um nome, endereço,
+        telefone e código fornecidos para a edição de um hotel.
+        @return true caso a edição dos dados do hotel seja feita com sucesso e
+        false caso a edição dos dados do hotel não seja feito com sucesso.
+        */
         bool virtual editarHotel(Hotel) = 0;
+        /**
+        @brief Serviço relacionado a exclusão de hotéis armazenados no sistema.
+        @param hotel Objeto da classe entidade Hotel contendo um nome, endereço,
+        telefone e código fornecidos para a exclusão de um hotel.
+        @return true caso o hotel seja excluido com sucesso e false caso o hotel
+        não seja excluído com sucesso.
+        */
         bool virtual excluirHotel(Hotel) = 0;
 
+        /**
+        @brief Serviço relacionado a criação de reservas no sistema.
+        @param reserva Objeto da classe entidade Reserva contendo uma data de
+        chegada, uma data de partida, valor da reserva e código da reserva a ser
+        criado.
+        @return true caso a reserva seja criada com sucesso e false caso a
+        reserva não seja criada com sucesso.
+        */
         bool virtual criarReserva(Reserva) = 0;
+        /**
+        @brief Serviço relacionado a leitura de uma reserva armazenada no
+        sistema.
+        @param reserva Endereço de memória de um Objeto da classe entidade
+        Reserva fornecido para a leitura dos dados da reserva.
+        @return true caso a leitura dos dados sejam feitas com sucesso e false
+        caso a leitura dos dados não consiga ser realizada com sucesso.
+        */
         bool virtual lerReserva(Reserva&) = 0;
+        /**
+        @brief Serviço relacionado a edição da dados de reservas armazenados no
+        sistema.
+        @param reserva Objeto da classe entidade Reserva contendo uma data de
+        chegada, uma data de partida, valor da reserva e código da reserva a ser
+        editado.
+        @return true caso os dados da reserva sejam editados com sucesso e false
+        caso os dados da reserva não consigam ser editados com sucesso.
+        */
         bool virtual editarReserva(Reserva) = 0;
+        /**
+        @brief Serviço relacionado a exclusão de dados de reservas armazenados
+        no sistema.
+        @param reserva Objeto da classe entidade Reserva contendo uma data de
+        chegada, uma data de partida, valor da reserva e código da reserva a ser
+        excluido.
+        @return true caso a reserva consiga ser excluída com sucesso false caso
+        a reserva não seja excluída com sucesso.
+        */
         bool virtual excluirReserva(Reserva) = 0;
 
+        /**
+        @brief Serviço relacionado a criação de um hóspede dentro do sistema do
+        hotel.
+        @param hospede Objeto da classe entidade Hospede contendo um nome,
+        email, endereco e cartão a ser criado.
+        @return true caso o hóspede seja adicionado ao sistema com sucesso e
+        false caso o hóspede não seja adicionado ao sistema.
+        */
         bool virtual criarHospede(Hospede) = 0;
+        /**
+        @brief Serviço relacionado a leitura dos dados de um hóspede armazenado
+        no sistema do hotel.
+        @param hospede Endereço de memória de um objeto da classe entidade
+        Hospede fornecido para a leitura dos dados armazenados no sistema do
+        hotel.
+        @return
+        */
         bool virtual lerHospede(Hospede&) = 0;
+        /**
+        @brief Serviço relacionado a edição dos dados de um hóspede armazenado
+        no sistema do hotel.
+        @param hospede Objeto da classe entidade Hospede contendo um nome,
+        email, endereco e cartão a ser editado.
+        @return true caso os dados do hóspede sejam editados com sucesso e false
+        caso os dados do hóspede não consigam ser editados.
+        */
         bool virtual editarHospede(Hospede) = 0;
+        /**
+        @brief Serviço relacionado a exclusão de um hóspede armazenado no
+        sistema do hotel.
+        @param hospede Objeto da classe entidade Hospede contendo um nome,
+        email, endereco e cartão a ser excluido.
+        @return true caso o hóspede seja excluído com sucesso e false caso o
+        hóspede não seja excluído com sucesso.
+        */
         bool virtual excluirHospede(Hospede) = 0;
 
+        /**
+        @brief Serviço relacionado a criação de um quarto dentro do sistema do
+        hotel.
+        @param quarto Objeto da classe entidade Quarto contendo  um número,
+        capacidade, diária e ramal do quarto a ser criado.
+        @return true caso o quarto seja criado com sucesso e false caso o quarto
+        não seja criado.
+        */
         bool virtual criarQuarto(Quarto) = 0;
+        /**
+        @brief Serviço relacionado a leitura dos dados de um quarto armazenado
+        dentro do sistema do hotel.
+        @param quarto Endereço de memória de um objeto da classe entidade Quarto
+        fornecido para a leitura dos dados armazenados no sistema do hotel.
+        @return true caso os dado do quarto consigam ser lidos com sucesso e
+        false caso os dados do quarto não consigam ser lidos.
+        */
         bool virtual lerQuarto(Quarto&) = 0;
+        /**
+        @brief Serviço relacionado a edição dos dados de um quarto armazenado no
+        sistema do hotel.
+        @param quarto Objeto da classe entidade Quarto contendo  um número,
+        capacidade, diária e ramal do quarto a ser editado.
+        @return true caso os dados do quarto consigam ser editados com sucesso e
+        false caso os dados do quarto não consigam ser editados.
+        */
         bool virtual editarQuarto(Quarto) = 0;
+        /**
+        @brief serviço relacionado a exclusão de um quarto do sistema do hotel.
+        @param quarto Objeto da classe entidade Quarto contendo  um número,
+        capacidade, diária e ramal do quarto a ser excluído.
+        @return true caso o quarto seja excluido com sucesso e false caso o
+        quarto não seja excluído do sistema do hotel.
+        */
         bool virtual excluirQuarto(Quarto) = 0;
 
-        virtual bool listarHotel(std::vector<Hotel>& hoteis) = 0;
-        virtual bool listarReservasDoHotel(const Hotel&, vector<Reserva>& reservas) = 0;
-        virtual bool listarHospedesDoHotel(const Hotel&, vector<Hospede>& hospedes) = 0;
-        virtual bool listarQuartosDoHotel(const Hotel&, vector<Quarto>& quartos) = 0;
+        /**
+        @brief Serviço relacionado a listagem dos hotéis armazenados no sistema
+        de hotéis.
+        @param hoteis Vetor que será preenchido com os objetos da classe
+        entidade Hotel encontrados no sistema.
+        @return true caso os hotéis consigam ser listados com sucesso e false
+        caso a listagem de hotéis não seja feita com sucesso.
+        */
+        virtual bool listarHotel(std::vector<Hotel>&) = 0;
+        /**
+        @brief Serviço relacionado a listagem das reservas de determinado hotel
+        no sistema de hotéis.
+        @param hotel Endereço de memória de um objeto da classe entidade Hotel
+        no qual se deseja listar as reservas.
+        @param reservas Vetor que será preenchido com os objetos da classe
+        entidade Reserva encontrados no sistema.
+        @return true caso as reservas consigam ser listadas com sucesso e false
+        caso a listagem de reservas não seja feita com sucesso.
+        */
+        virtual bool listarReservasDoHotel(const Hotel&, vector<Reserva>&) = 0;
+        /**
+        @brief serviço relacionado a listagem dos hóspedes de determinado hotel
+        armazenados no sistema de hotéis.
+        @param hotel Endereço de memória de um objeto da classe entidade Hotel
+        no qual se deseja listar os hóspedes.
+        @param hospedes Vetor que será preenchido com os objetos da classe
+        entidade Hospede encontrados no sistema.
+        @return true caso os hospedes consigam ser listados com sucesso e false
+        caso a listagem de hóspedes do botel não seja feita com sucesso.
+        */
+        virtual bool listarHospedesDoHotel(const Hotel&, vector<Hospede>&) = 0;
+        /**
+        @brief Serviço relacionado a listagem do quartos de determinado hotel
+        armazenados no sistema de hotéis.
+        @paramhotel Endereço de memória de um objeto da classe entidade Hotel
+        no qual se deseja listar os quartos.
+        @param quartos Vetor que será preenchido com os objetos da classe
+        entidade Quarto encontrados no sistema.
+        @return true caso os quartos do hotel consigam ser listados com sucesso
+        e false caso a listagem dos quartos do hotel não seja feita com sucesso.
+        */
+        virtual bool listarQuartosDoHotel(const Hotel&, vector<Quarto>&) = 0;
 
+        /**
+        @brief Destrutor virtual padrão.
+        */
         virtual ~IS_Reservas(){}
 };
 
