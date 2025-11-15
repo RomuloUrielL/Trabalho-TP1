@@ -1,8 +1,11 @@
 #ifndef INTERFACES_H_INCLUDED
 #define INTERFACES_H_INCLUDED
-
+#include <vector>
 #include "dominios.hpp"
 #include "entidades.hpp"
+
+using namespace std;
+using std::vector;
 
 /**
 @brief Interface resposável por prover os serviços ao Modulo Apresentação
@@ -108,6 +111,11 @@ class IS_Reservas {
         bool virtual lerQuarto(Quarto&) = 0;
         bool virtual editarQuarto(Quarto) = 0;
         bool virtual excluirQuarto(Quarto) = 0;
+
+        virtual bool listarHotel(std::vector<Hotel>& hoteis) = 0;
+        virtual bool listarReservasDoHotel(const Hotel&, vector<Reserva>& reservas) = 0;
+        virtual bool listarHospedesDoHotel(const Hotel&, vector<Hospede>& hospedes) = 0;
+        virtual bool listarQuartosDoHotel(const Hotel&, vector<Quarto>& quartos) = 0;
 
         virtual ~IS_Reservas(){}
 };
