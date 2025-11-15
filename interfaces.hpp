@@ -4,22 +4,89 @@
 #include "dominios.hpp"
 #include "entidades.hpp"
 
+/**
+@brief Interface resposável por prover os serviços ao Modulo Apresentação
+Autenticação para o susbsistema de acesso de usuários ao sistema.
+@details É implementada pelo Módulo Serviços Autenticação e solicitada pelo
+Módulo Apresentação Autenticação para validação de um usuário do sistema.
+*/
 class IS_Autenticacao {
 public:
+    /**
+    @brief Serviço resposável por realizar a autenticação de um usuário por meio
+    de email e senha.
+    @param email Objeto da classe domínio Email contendo a cadeira de caracteres
+    que representam um email fornecido para a autenticação.
+    @param senha Objeto da classe domínio Senha contendo uma sequência de
+    caracteres que representam uma senha de acesso ao sistema fornecida para a
+    autenticação do usuário.
+    @return True caso o usuário seja autenticado com sucesso e False caso o
+    usuário não seja autenticado.
+    */
     virtual bool autenticar(Email, Senha) = 0;
+    /**
+    @brief Destrutor virtual padrão.
+    */
     virtual ~IS_Autenticacao(){}
 };
 
+/**
+@brief Interface responsável por prover os serviços ao Módulo Apresententação
+Pessoal para o subsistema de gerenciamento dos gerentes.
+@details É implementada pelo Módulo Serviços Pessoal e solicitada pelo Módulo
+Apresentação Pessoal para realizar o CRUD dos gerentes do sistema.
+*/
 class IS_Pessoal {
 public:
+    /**
+    @brief Serviço relacionado a criação de um novo gerente no sistema.
+    @param gerente Objeto da classe entidade Gerente contendo um nome, email,
+    ramal e senha.
+    @return True caso o gerente seja criando com sucesso e False caso o gerente
+    não seja criado.
+    */
     virtual bool criarGerente(Gerente) = 0;
+    /**
+    @brief Serviço relacionado a leitura de um gerente no sistema.
+    @param email Endereço de memória do email do gerente a ser lido e
+    disponibilizado para o usuário do sistema.
+    @param gerente Endereço de memória do gerente a ser lido e disponibilizado
+    para o usuário do sistema.
+    @return true caso o gerente consiga ser lido com sucesso e false caso o
+    gerente não consiga ser lido.
+    */
     virtual bool lerGerente(Email&, Gerente&) = 0;
+    /**
+    @brief Serviço relacionado a atualização dos dados cadastrais do gerente
+    como nome, email, ramal ou senha.
+    @param gerente Objeto da classe entidade Gerente contendo um nome, email,
+    ramal e senha.
+    @return true caso os dados do gerente sejam atualizados com sucesso e false
+    caso os dados do gerente não consigam ser atualizados com sucesso.
+    */
     virtual bool atualizarGerente(Gerente) = 0;
+    /**
+    @brief Serviço relacionado a exclusão dos dados cadastrais de um gerente do
+    sistema.
+    @param email Objeto da classe domínio Email contendo a cadeira de caracteres
+    que representam um email fornecido para a autenticação.
+    @return true caso o email os dados do gerente sejam excluidos com sucesso e
+    false caso a conta do gerete não consiga ser excluída com sucesso.
+    */
     virtual bool descadastrarGerente(Email) = 0;
-
+    /**
+    @brief Destrutor virtual padrão.
+    */
     virtual ~IS_Pessoal(){}
 };
 
+/**
+@brief Interface responsável por prover os serviços ao Módulo Apresentação
+Reservas para o  subsistema de gerenciamento das reservas do hotel.
+@details É implementada pelo Módulo serviços Reservas e solicitada pelo Módulo
+Apresentação Reservas. É responsável por realizar o CRUD de hoteis, reservas,
+hóspedes e quartos e também listar hotes, reservas, hóspedes e quartos.
+*/
 class IS_Reservas {
     public:
         bool virtual criarHotel(Hotel) = 0;
