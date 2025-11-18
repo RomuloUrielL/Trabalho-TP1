@@ -272,7 +272,7 @@ class IS_Reservas {
         /**
         @brief Serviço relacionado a listagem do quartos de determinado hotel
         armazenados no sistema de hotéis.
-        @paramhotel Endereço de memória de um objeto da classe entidade Hotel
+        @param hotel Endereço de memória de um objeto da classe entidade Hotel
         no qual se deseja listar os quartos.
         @param quartos Vetor que será preenchido com os objetos da classe
         entidade Quarto encontrados no sistema.
@@ -356,6 +356,13 @@ class IA_Reservas{
         @param email A chave de identificação do usuário logado.
         */
         virtual void executar(Email) = 0;
+        /**
+        @brief Método para estabelecer ligação (link) com a controladora de
+        serviço.
+        @param is_reservas Ponteiro para objeto da Interface da camada de
+        serviço relacionada ao sistema de reservas.
+        */
+        virtual void setCntrIS_Reservas(IS_Reservas*) = 0;
         /**
         @brief Destrutor virtual padrão.
         */
