@@ -47,4 +47,16 @@ void inline CntrIUAutenticacao::setCntrSAutenticacao(IS_Autenticacao *cntrServic
         this->cntrServicoAutenticacao = cntrServicoAutenticacao;
 }
 
+class CntrIUReservas : public IA_Reservas{
+    private:
+        IS_Reservas *cntrIS_Reservas;
+    public:
+        void executar(const Email);
+        void setCntrIS_Reservas(IS_Reservas*);
+};
+
+inline void CntrIUReservas::setCntrIS_Reservas(IS_Reservas *cntrIS_Reservas){
+    this->cntrIS_Reservas = cntrIS_Reservas;
+}
+
 #endif // CONTROLADORAS_H_INCLUDED
