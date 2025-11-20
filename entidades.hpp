@@ -37,7 +37,7 @@ class Pessoa{
         @brief Retorna o nome da pessoa.
         @return Objeto da classe 'Nome' associado à pessoa.
         */
-        Nome getNome();
+        Nome getNome() const;
         /**
         @brief Define o email da pessoa.
         @param email Objeto da classe 'Email' contendo o email a ser atribuído.
@@ -47,14 +47,14 @@ class Pessoa{
         @brief Retorna o e-mail da pessoa.
         @return Objeto da classe 'Email' associado à pessoa.
         */
-        Email getEmail();
+        Email getEmail() const;
 };
 
 inline void Pessoa::setNome(const Nome& nome){
     this->nome = nome;
 }
 
-inline Nome Pessoa::getNome(){
+inline Nome Pessoa::getNome() const {
     return nome;
 }
 
@@ -62,7 +62,7 @@ inline void Pessoa::setEmail(const Email& email){
     this->email =  email;
 }
 
-inline Email Pessoa::getEmail(){
+inline Email Pessoa::getEmail() const {
     return email;
 }
 

@@ -32,10 +32,10 @@ class Capacidade{
             @brief Retorna a capacidade armazenada.
             @return Valor da capacidade armazenada.
         */
-        int getCapacidade();
+        int getCapacidade() const;
 };
 
-inline int Capacidade::getCapacidade(){
+inline int Capacidade::getCapacidade() const {
     return capacidade;
 }
 
@@ -70,10 +70,10 @@ class Dinheiro{
             @brief Retorna o dinheiro armazenado.
             @return Valor do dinheiro armazenado.
         */
-        int getDinheiro();
+        int getDinheiro() const;
 };
 
-inline int Dinheiro::getDinheiro(){
+inline int Dinheiro::getDinheiro() const {
     return dinheiro_int;
 }
 
@@ -108,10 +108,10 @@ class Ramal{
         @brief Retorna o ramal armazenado.
         @return Valor do ramal armazenado.
         */
-        string getRamal();
+        string getRamal() const;
 };
 
-inline string Ramal::getRamal(){
+inline string Ramal::getRamal() const {
     return ramal;
 }
 
@@ -146,10 +146,10 @@ class Numero{
         @brief Retorna o numero armazenado.
         @return Numero de quarto armazenado.
         */
-        string getNumero();
+        string getNumero() const;
 };
 
-inline string Numero::getNumero(){
+inline string Numero::getNumero() const {
     return numero;
 }
 
@@ -182,10 +182,10 @@ class Telefone{
         @brief Retorna o telefone armazenado.
         @return Telefone do hotel armazenado.
         */
-        string getTelefone();
+        string getTelefone() const;
 };
 
-inline string Telefone::getTelefone(){
+inline string Telefone::getTelefone() const {
     return telefone;
 }
 
@@ -230,10 +230,10 @@ class Data{
         @brief Retorna a data armazenada.
         @return Cadeia de caracteres que representam uma data..
         */
-        string getData();
+        string getData() const;
 };
 
-inline string Data::getData(){
+inline string Data::getData() const {
     return data;
 }
 
@@ -267,10 +267,10 @@ class Codigo{
         @brief Retorna o código armazenado.
         @return Cadeia de caracteres que representam um código.
         */
-        string getCodigo();
+        string getCodigo() const;
 };
 
-inline string Codigo::getCodigo(){
+inline string Codigo::getCodigo() const {
     return codigo;
 }
 
@@ -306,10 +306,10 @@ class Cartao{
         @brief Retorna o número de cartão armazenado.
         @return Cadeia de caracteres que representam o número do cartão.
         */
-        string getCartao();
+        string getCartao() const;
 };
 
-inline string Cartao::getCartao(){
+inline string Cartao::getCartao() const {
     return cartao;
 }
 
@@ -343,10 +343,10 @@ class Senha{
         @brief Retorna a senha armazenada.
         @return Cadeia de caracteres que representam uma senha.
         */
-        string getSenha();
+        string getSenha() const;
 };
 
-inline string Senha::getSenha(){
+inline string Senha::getSenha() const {
     return senha;
 }
 
@@ -385,10 +385,10 @@ class Nome{
         @brief Retorna o nome armazenado.
         @return Cadeia de caracteres que representam um nome.
         */
-        string getNome();
+        string getNome() const;
 };
 
-inline string Nome::getNome(){
+inline string Nome::getNome() const {
     return nome;
 }
 
@@ -435,10 +435,10 @@ class Email{
         @brief Retorna o email armazenado.
         @return Cadeia de caracteres que representam um email.
         */
-        string getEmail();
+        string getEmail() const;
 };
 
-inline string Email::getEmail(){
+inline string Email::getEmail() const {
     return email;
 }
 
@@ -483,10 +483,10 @@ class Endereco{
         @brief Retorna o endereço armazenado.
         @return Cadeia de caracteres que representam um endereço.
         */
-        string getEndereco();
+        string getEndereco() const;
 };
 
-inline string Endereco::getEndereco(){
+inline string Endereco::getEndereco() const {
     return endereco;
 }
 
