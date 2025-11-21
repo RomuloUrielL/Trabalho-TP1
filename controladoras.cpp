@@ -821,3 +821,201 @@ void CntrIUReservas::executar(Email email){
     }
 }
 
+//-----------------------------falta formatar para seguir o mesmo padrao do outro code(augusto)----------------------------------//
+
+
+void CntrIUPessoal::criar() {
+    cout << "---- Cadastro de Novo Gerente ----" << endl;
+    try {
+        Nome nome;
+        Email email;
+        Senha senha;
+        Ramal ramal;
+        Gerente gerente;
+
+        string entradaNome, entradaEmail, entradaSenha, entradaRamal;
+
+        cout << "Digite o nome: ";
+        getline(cin >> ws, entradaNome);
+        nome.setNome(entradaNome);
+        gerente.setNome(nome);
+
+        cout << "Digite o email: ";
+        cin >> entradaEmail;
+        email.setEmail(entradaEmail);
+        gerente.setEmail(email);
+
+        cout << "Digite a senha: ";
+        cin >> entradaSenha;
+        senha.setSenha(entradaSenha);
+        gerente.setSenha(senha);
+
+        cout << "Digite o ramal: ";
+        cin >> entradaRamal;
+        ramal.setRamal(entradaRamal);
+        gerente.setRamal(ramal);
+
+        bool resultado = cntrIS_Pessoal->criarGerente(gerente);
+
+        if(resultado) {
+            cout << "Gerente cadastrado com sucesso!" << endl;
+        } else {
+            cout << "Falha no cadastro." << endl;
+        }
+    }
+    catch (const invalid_argument &exp) {
+        cout << "Erro nos dados: " << exp.what() << endl;
+    }
+    catch (const out_of_range &exp) {
+        cout << "Erro nos dados: " << exp.what() << endl;
+    }
+    catch (const length_error &exp) {
+        cout << "Erro nos dados: " << exp.what() << endl;
+    }
+}
+
+void CntrIUPessoal::executar(Email emailLogado) {
+    int opcao = -1;
+
+    while(opcao != 0) {
+        cout << endl << "---- MENU DE PESSOAL ----" << endl;
+        cout << "Usuario logado: " << emailLogado.getEmail() << endl;
+        cout << "1. Meus Dados (Ler)" << endl;
+        cout << "2. Editar Meus Dados" << endl;
+        cout << "3. Descadastrar Minha Conta" << endl;
+        cout << "------------------------" << endl;
+        cout << "4. Criar Hospede" << endl;
+        cout << "5. Ler Hospede" << endl;
+        cout << "6. Editar Hospede" << endl;
+        cout << "7. Excluir Hospede" << endl;
+        cout << "0. Sair" << endl;
+        cout << "Digite a opcao: ";
+        cin >> opcao;
+
+        switch(opcao) {
+            case 0:
+                break;
+            // --- GERENCIAR PRÓPRIA CONTA (GERENTE) ---//
+            case 1: {
+                Gerente gerente;
+                if(cntrIS_Pessoal->lerGerente(emailLogado, gerente)) {
+                    cout << "Nome: " << gerente.getNome().getNome() << endl;
+                    cout << "Email: " << gerente.getEmail().getEmail() << endl;
+                    cout << "Ramal: " << gerente.getRamal().getRamal() << endl;
+                } else {
+                    cout << "Erro ao ler dados." << endl;
+                }
+                break;
+            }
+            case 2: {
+                try {
+                    Gerente gerente;
+                    gerente.setEmail(emailLogado);
+
+                    string entradaNome, entradaRamal, entradaSenha;
+                    Nome nome; Ramal ramal; Senha senha;
+
+                    cout << "Novo Nome: ";
+                    getline(cin >> ws, entradaNome);
+                    nome.setNome(entradaNome);
+                    gerente.setNome(nome);
+
+                    cout << "Novo Ramal: ";
+                    cin >> entradaRamal;
+                    ramal.setRamal(entradaRamal);
+                    gerente.setRamal(ramal);
+
+                    cout << "Nova Senha: ";
+                    cin >> entradaSenha;
+                    senha.setSenha(entradaSenha);
+                    gerente.setSenha(senha);
+
+                    if(cntrIS_Pessoal->atualizarGerente(gerente)){
+                        cout << "Dados atualizados!" << endl;
+                    } else {
+                        cout << "Falha na atualizacao." << endl;
+                    }
+                } catch (const exception &e) { cout << "Erro: " << e.what() << endl; }
+                break;
+            }
+            case 3: {
+                char conf;
+                cout << "Tem certeza? (S/N): ";
+                cin >> conf;
+                if(conf == 'S' || conf == 's') {
+                    if(cntrIS_Pessoal->descadastrarGerente(emailLogado)) {
+                        cout << "Conta excluida. O programa deve ser encerrado." << endl;
+                        opcao = 0;
+                    }
+                }
+                break;
+            }
+
+            // --- GERENCIAR HÓSPEDES --- //
+            case 4: {
+                try {
+                    Hospede h;
+                    Nome n; Email e; Endereco end; Cartao c;
+                    string aux;
+
+                    cout << "Nome: "; getline(cin >> ws, aux); n.setNome(aux); h.setNome(n);
+                    cout << "Email: "; cin >> aux; e.setEmail(aux); h.setEmail(e);
+                    cout << "Endereco: "; getline(cin >> ws, aux); end.setEndereco(aux); h.setEndereco(end);
+                    cout << "Cartao: "; cin >> aux; c.setCartao(aux); h.setCartao(c);
+
+                    if(cntrIS_Pessoal->criarHospede(h)) cout << "Hospede criado!" << endl;
+                    else cout << "Erro ao criar." << endl;
+
+                } catch (const exception &e) { cout << "Erro: " << e.what() << endl; }
+                break;
+            }
+            case 5: {
+                try {
+                    Email e; Hospede h; string aux;
+                    cout << "Email do hospede: "; cin >> aux; e.setEmail(aux);
+                    h.setEmail(e); // Chave de busca
+
+                    if(cntrIS_Pessoal->lerHospede(e, h)) {
+                        cout << "Nome: " << h.getNome().getNome() << endl;
+                        cout << "Endereco: " << h.getEndereco().getEndereco() << endl;
+                        cout << "Cartao: " << h.getCartao().getCartao() << endl;
+                    } else {
+                        cout << "Hospede nao encontrado." << endl;
+                    }
+                } catch (const exception &e) { cout << "Erro: " << e.what() << endl; }
+                break;
+            }
+            case 6: {
+                 try {
+                    Hospede h;
+                    string aux;
+                    Email e;
+
+                    cout << "Email do hospede a editar: "; cin >> aux;
+                    e.setEmail(aux); h.setEmail(e);
+
+                    Nome n; Endereco end; Cartao c;
+                    cout << "Novo Nome: "; getline(cin >> ws, aux); n.setNome(aux); h.setNome(n);
+                    cout << "Novo Endereco: "; getline(cin >> ws, aux); end.setEndereco(aux); h.setEndereco(end);
+                    cout << "Novo Cartao: "; cin >> aux; c.setCartao(aux); h.setCartao(c);
+
+                    if(cntrIS_Pessoal->atualizarHospede(h)) cout << "Hospede atualizado!" << endl;
+                    else cout << "Erro ao atualizar." << endl;
+
+                } catch (const exception &e) { cout << "Erro: " << e.what() << endl; }
+                break;
+            }
+            case 7: {
+                try {
+                    Email e; string aux;
+                    cout << "Email do hospede a excluir: "; cin >> aux; e.setEmail(aux);
+                    if(cntrIS_Pessoal->descadastrarHospede(e)) cout << "Hospede excluido!" << endl;
+                    else cout << "Erro ao excluir." << endl;
+                } catch (const exception &e) { cout << "Erro: " << e.what() << endl; }
+                break;
+            }
+            default:
+                cout << "Opcao invalida." << endl;
+        }
+    }
+}

@@ -60,3 +60,36 @@ inline void CntrIUReservas::setCntrIS_Reservas(IS_Reservas *cntrIS_Reservas){
 }
 
 #endif // CONTROLADORAS_H_INCLUDED
+
+//-----------------------------code do augusto(falta formatar algumas coisas)---------------------------------//
+
+/**
+@brief Controladora da Camada de Apresentação responsável pelo gerenciamento de Pessoal (Gerentes e Hóspedes).
+@details Implementa a interface IA_Pessoal e se comunica com a IS_Pessoal.
+*/
+class CntrIUPessoal : public IA_Pessoal {
+    private:
+        IS_Pessoal *cntrIS_Pessoal;
+    public:
+        /**
+        @brief Realiza o cadastro de um novo Gerente (Sign Up).
+        */
+        void criar() override;
+
+        /**
+        @brief Executa o menu de gerenciamento de usuários (CRUD de Gerente e Hóspede).
+        @param email O email do usuário logado.
+        */
+        void executar(Email) override;
+
+        /**
+        @brief Linka com a camada de serviço.
+        */
+        void setCntrIS_Pessoal(IS_Pessoal*);
+};
+
+inline void CntrIUPessoal::setCntrIS_Pessoal(IS_Pessoal *cntrIS_Pessoal){
+    this->cntrIS_Pessoal = cntrIS_Pessoal;
+}
+
+#endif // CONTROLADORAS_H_INCLUDED
