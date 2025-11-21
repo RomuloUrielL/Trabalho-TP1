@@ -19,7 +19,7 @@ int main() {
     cntrReservas.setCntrIS_Reservas(stubReservas);
 
     Email emailLogado;
-    cout << "=== TESTE DO MODULO DE AUTENTICACAO (USANDO STUB) ===" << endl;
+    cout << "=== Credenciais para o teste ===" << endl;
     cout << "Para SUCESSO, use: emailteste@gmail.com / A3n5#" << endl;
     cout << "Para FALHA, use qualquer outra coisa." << endl;
     cout << "-----------------------------------------------------" << endl;
