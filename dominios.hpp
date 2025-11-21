@@ -70,11 +70,11 @@ class Dinheiro{
             @brief Retorna o dinheiro armazenado.
             @return Valor do dinheiro armazenado.
         */
-        int getDinheiro() const;
+        string getDinheiro() const;
 };
 
-inline int Dinheiro::getDinheiro() const {
-    return dinheiro_int;
+inline string Dinheiro::getDinheiro() const {
+    return dinheiro_string;
 }
 
 /**

@@ -37,7 +37,7 @@ void CntrIUReservas::executar(Email email){
     int opcao = -1;
 
     while(opcao != 0){
-        cout << "---- SISTEMA DE RESERVAS ----" << endl;
+        cout << "\n---- SISTEMA DE RESERVAS ----" << endl;
         cout << "0. Voltar ao menu principal" << endl;
         cout << "1. Criar hotel" << endl;
         cout << "2. Ler hotel" << endl;
@@ -60,7 +60,7 @@ void CntrIUReservas::executar(Email email){
         cout << "19. Listar Hospedes" << endl;
         cout << "20. Listar Quartos" << endl;
 
-        cout << "Digite a opção desejada: ";
+        cout << "Digite a opcao desejada: ";
         cin >> opcao;
 
         switch (opcao){
@@ -69,7 +69,7 @@ void CntrIUReservas::executar(Email email){
                 break;
             }
             case 1: {
-                cout << "----Criação de hotéis----" << endl;
+                cout << "\n----Criacao de hoteis----" << endl;
                 try {
                     Nome nome;
                     Endereco endereco;
@@ -100,9 +100,9 @@ void CntrIUReservas::executar(Email email){
                     bool resultado = cntrIS_Reservas->criarHotel(hotel);
 
                     if(resultado){
-                        cout << "Hotel criado com sucesso!" << endl;
+                        cout << "Hotel criado com sucesso!\n" << endl;
                     } else {
-                        cout << "Falha ao criar o hotel." << endl;
+                        cout << "Falha ao criar o hotel.\n" << endl;
                     }
                 }
                 catch (const invalid_argument &exp) {
@@ -126,12 +126,12 @@ void CntrIUReservas::executar(Email email){
                     bool encontrou = cntrIS_Reservas->lerHotel(hotel);
 
                     if(encontrou){
-                        cout << "--Informações do hotel pesquisado" << endl;
+                        cout << "\n----Informacoes do hotel pesquisado----" << endl;
 
                         cout << "Nome: " << hotel.getNome().getNome() << endl;
                         cout << "Endereco: " << hotel.getEndereco().getEndereco() << endl;
                         cout << "Telefone: " << hotel.getTelefone().getTelefone() << endl;
-                        cout << "Codigo: " << hotel.getCodigo().getCodigo() << endl;
+                        cout << "Codigo: " << hotel.getCodigo().getCodigo() << "\n" << endl;
                     } else {
                         cout << "Hotel não foi encontrado com esse codigo." << endl;
                     }
@@ -279,14 +279,14 @@ void CntrIUReservas::executar(Email email){
                     bool encontrou = cntrIS_Reservas->lerReserva(reserva);
 
                     if(encontrou){
-                        cout << "----Informações da reserva pesquisada----" << endl;
+                        cout << "----Informacoes da reserva pesquisada----" << endl;
 
                         cout << "Chegada: " << reserva.getChegada().getData() << endl;
                         cout << "Partida: " << reserva.getPartida().getData() << endl;
                         cout << "Valor: " << reserva.getValor().getDinheiro() << endl;
                         cout << "Codigo: " << reserva.getCodigo().getCodigo() << endl;
                     } else {
-                        cout << "Reserva não foi encontrada com esse codigo." << endl;
+                        cout << "Reserva nao foi encontrada com esse codigo." << endl;
                     }
                 }
                 catch (const invalid_argument &exp) {
@@ -376,7 +376,7 @@ void CntrIUReservas::executar(Email email){
                 break;
             }
             case 9: {
-                cout << "----Criação de hospede----" << endl;
+                cout << "----Criacao de hospede----" << endl;
                 try {
                     Nome nome;
                     Email email;
@@ -433,7 +433,7 @@ void CntrIUReservas::executar(Email email){
                     bool encontrou = cntrIS_Reservas->lerHospede(hospede);
 
                     if(encontrou){
-                        cout << "--Informações do hospede pesquisado" << endl;
+                        cout << "--Informacoes do hospede pesquisado" << endl;
 
                         cout << "Nome: " << hospede.getNome().getNome() << endl;
                         cout << "Endereco: " << hospede.getEndereco().getEndereco() << endl;
@@ -823,7 +823,7 @@ void CntrIUReservas::executar(Email email){
 
 //-----------------------------falta formatar para seguir o mesmo padrao do outro code(augusto)----------------------------------//
 
-
+/*
 void CntrIUPessoal::criar() {
     cout << "---- Cadastro de Novo Gerente ----" << endl;
     try {
@@ -873,7 +873,8 @@ void CntrIUPessoal::criar() {
         cout << "Erro nos dados: " << exp.what() << endl;
     }
 }
-
+*/
+/**
 void CntrIUPessoal::executar(Email emailLogado) {
     int opcao = -1;
 
@@ -1019,3 +1020,5 @@ void CntrIUPessoal::executar(Email emailLogado) {
         }
     }
 }
+
+*/
