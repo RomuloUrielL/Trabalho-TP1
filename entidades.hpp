@@ -491,6 +491,8 @@ class Reserva{
         Dinheiro valor;
         Codigo codigo;
         Codigo codigoHotel;
+        Email emailHospede;
+        Numero numeroQuarto;
     public:
         /**
         @brief Define a data de chegada da reserva,
@@ -546,6 +548,26 @@ class Reserva{
         @return Objeto da classe 'Codigo' associado a reserva.
         */
         Codigo getCodigoHotel() const;
+        /**
+        @brief Define o email do hospede associado ao quarto.
+        @param codigo Endereco de objeto da classe domínio email.
+        */
+        void setEmailHospede(const Email& email);
+        /**
+        @brief Retorna o email do hospede associado a reserva.
+        @return Objeto da classe 'Email' associado a reserva.
+        */
+        Email getEmailHospede() const;
+        /**
+        @brief Define o numero do quarto associado ao quarto.
+        @param codigo Endereco de objeto da classe domínio numero.
+        */
+        void setNumeroQuarto(const Numero& numero);
+        /**
+        @brief Retorna o numero do quarto associado a reserva.
+        @return Objeto da classe 'Numero' associado a reserva.
+        */
+        Numero getNumeroQuarto() const;
 };
 
 inline void Reserva::setChegada(const Data& data){
@@ -586,6 +608,22 @@ inline void Reserva::setCodigoHotel(const Codigo& codigo){
 
 inline Codigo Reserva::getCodigoHotel()const {
     return codigoHotel;
+}
+
+inline void Reserva::setEmailHospede(const Email& email){
+    this->emailHospede = email;
+}
+
+inline Email Reserva::getEmailHospede() const{
+    return emailHospede;
+}
+
+inline void Reserva::setNumeroQuarto(const Numero& numero){
+    this->numeroQuarto = numero;
+}
+
+inline Numero Reserva::getNumeroQuarto() const{
+    return numeroQuarto;
 }
 
 #endif // ENTIDADES_HPP_INCLUDED

@@ -231,7 +231,12 @@ void CntrIUReservas::executar(Email email){
                     Dinheiro valor;
                     Codigo codigo;
                     Reserva reserva;
+                    Codigo codHotel;
+                    Email emailHospede;
+                    Numero numeroQuarto;
                     string entradaChegada, entradaPartida, entradaValor, entradaCodigo;
+                    string entradaEmailHospede;
+                    string entradaNumeroQuarto;
 
 
                     cout << "Digite a data de chegada: ";
@@ -251,12 +256,18 @@ void CntrIUReservas::executar(Email email){
                     codigo.setCodigo(entradaCodigo);
                     reserva.setCodigo(codigo);
 
-                    cout << "Digite o codigo do HOTEL desta reserva: ";
+                    cout << "Digite o codigo do hotel desta reserva: ";
                     cin >> entradaCodigo;
-
-                    Codigo codHotel;
                     codHotel.setCodigo(entradaCodigo);
                     reserva.setCodigoHotel(codHotel);
+                    cout << "Digite o email do hospede responsável: ";
+                    cin >> entradaEmailHospede;
+                    emailHospede.setEmail(entradaEmailHospede);
+                    reserva.setEmailHospede(emailHospede);
+                    cout << "Digite o numero do quarto reservado: ";
+                    cin >> entradaNumeroQuarto;
+                    numeroQuarto.setNumero(entradaNumeroQuarto);
+                    reserva.setNumeroQuarto(numeroQuarto);
 
                     bool resultado = cntrIS_Reservas->criarReserva(reserva);
 
@@ -1065,6 +1076,20 @@ bool CntrISReservas::editarHotel(Hotel hotel){
 }
 
 bool CntrISReservas::excluirHotel(Hotel hotel) {
+    string codigoHotel = hotel.getCodigo().getCodigo();
+
+    vector<Quarto> quartosDoHotel;
+    ContainerQuartos::getInstancia()->listar(codigoHotel, quartosDoHotel);
+    for (const auto& quarto : quartosDoHotel) {
+        ContainerQuartos::getInstancia()->remover(quarto.getNumero().getNumero());
+    }
+
+    vector<Reserva> reservasDoHotel;
+    ContainerReservas::getInstancia()->listar(codigoHotel, reservasDoHotel);
+    for(const auto& reserva : reservasDoHotel) {
+        ContainerReservas::getInstancia()->remover(reserva.getCodigo().getCodigo());
+    }
+
     return ContainerHoteis::getInstancia()->remover(hotel.getCodigo().getCodigo());
 }
 
@@ -1073,6 +1098,21 @@ bool CntrISReservas::listarHotel(vector<Hotel>& hoteis){
 }
 
 bool CntrISReservas::criarReserva(Reserva reserva){
+
+    Quarto quartoBusca;
+    quartoBusca.setNumero(reserva.getNumeroQuarto());
+
+    if (ContainerQuartos::getInstancia()->pesquisar(&quartoBusca) == false) {
+        return false;
+    }
+
+    Hospede hospedeBusca;
+    hospedeBusca.setEmail(reserva.getEmailHospede());
+
+    if (ContainerHospedes::getInstancia()->pesquisar(&hospedeBusca) == false) {
+        return false;
+    }
+
     return ContainerReservas::getInstancia()->incluir(reserva);
 }
 
@@ -1092,6 +1132,14 @@ bool CntrISReservas::listarReservasDoHotel(const Hotel& hotel, vector<Reserva>& 
     return ContainerReservas::getInstancia()->listar(hotel.getCodigo().getCodigo(), reservas);
 }
 
+bool ContainerReservas::listar(vector<Reserva>& reservas) {
+    reservas.clear();
+    for (auto const& [chave, valor] : container) {
+        reservas.push_back(valor);
+    }
+    return true;
+}
+
 bool CntrISReservas::criarHospede(Hospede hospede){
     return ContainerHospedes::getInstancia()->incluir(hospede);
 }
@@ -1105,11 +1153,30 @@ bool CntrISReservas::editarHospede(Hospede hospede){
 }
 
 bool CntrISReservas::excluirHospede(Hospede hospede){
+    string emailAlvo = hospede.getEmail().getEmail();
+
+    vector<Reserva> todasReservas;
+    ContainerReservas::getInstancia()->listar(todasReservas);
+
+    for (const auto& res : todasReservas) {
+        if (res.getEmailHospede().getEmail() == emailAlvo) {
+            return false;
+        }
+    }
+
     return ContainerHospedes::getInstancia()->remover(hospede.getEmail().getEmail());
 }
 
 bool CntrISReservas::listarHospedesDoHotel(const Hotel& hotel, vector<Hospede>& hospedes){
     return ContainerHospedes::getInstancia()->listar(hotel.getCodigo().getCodigo(), hospedes);
+}
+
+bool ContainerHospedes::listar(vector<Hospede>& hospedes) {
+    hospedes.clear();
+    for (auto const& [chave, hospede] : container) {
+        hospedes.push_back(hospede);
+    }
+    return true;
 }
 
 bool CntrISReservas::criarQuarto(Quarto quarto){
@@ -1125,9 +1192,28 @@ bool CntrISReservas::editarQuarto(Quarto quarto){
 }
 
 bool CntrISReservas::excluirQuarto(Quarto quarto){
+    string numeroAlvo = quarto.getNumero().getNumero();
+
+    vector<Reserva> todasReservas;
+    ContainerReservas::getInstancia()->listar(todasReservas);
+
+    for (const auto& res : todasReservas) {
+        if (res.getNumeroQuarto().getNumero() == numeroAlvo) {
+            return false;
+        }
+    }
+
     return ContainerQuartos::getInstancia()->remover(quarto.getNumero().getNumero());
 }
 
 bool CntrISReservas::listarQuartosDoHotel(const Hotel& hotel, vector<Quarto>& quartos){
     return ContainerQuartos::getInstancia()->listar(hotel.getCodigo().getCodigo(), quartos);
+}
+
+bool ContainerQuartos::listar(vector<Quarto>& quartos) {
+    quartos.clear();
+    for (auto const& [chave, quarto] : container) {
+        quartos.push_back(quarto);
+    }
+    return true;
 }

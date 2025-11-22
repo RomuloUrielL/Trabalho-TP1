@@ -36,6 +36,7 @@ class ContainerReservas{
         bool atualizar(Reserva reserva);
         bool remover(string codigo);
         bool listar(string codigoHotelFiltro, vector<Reserva>& reservas);
+        bool listar(vector<Reserva>& reservas);
 };
 
 class ContainerHospedes{
@@ -51,6 +52,7 @@ class ContainerHospedes{
         bool atualizar(Hospede hospede);
         bool remover(string email);
         bool listar(string codigoHotelFiltro, vector<Hospede>& hospedes);
+        bool listar(vector<Hospede>& hospedes);
 };
 
 class ContainerQuartos{
@@ -66,6 +68,7 @@ class ContainerQuartos{
         bool atualizar(Quarto quarto);
         bool remover(string numero);
         bool listar(string codigoHotelFiltro, vector<Quarto>& quartos);
+        bool listar(vector<Quarto>& quarto);
 };
 
 #endif // CONTAINERS_HPP_INCLUDED
