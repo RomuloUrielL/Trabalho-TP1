@@ -1097,6 +1097,21 @@ bool CntrISReservas::listarHotel(vector<Hotel>& hoteis){
     return ContainerHoteis::getInstancia()->listar(hoteis);
 }
 
+long converterData(string data) {
+    map<string, string> meses;
+    meses["JAN"] = "01"; meses["FEV"] = "02"; meses["MAR"] = "03";
+    meses["ABR"] = "04"; meses["MAI"] = "05"; meses["JUN"] = "06";
+    meses["JUL"] = "07"; meses["AGO"] = "08"; meses["SET"] = "09";
+    meses["OUT"] = "10"; meses["NOV"] = "11"; meses["DEZ"] = "12";
+
+    string dia = data.substr(0, 2);
+    string mesTexto = data.substr(3, 3);
+    string ano = data.substr(7, 4);
+
+    string dataFormatada = ano + meses[mesTexto] + dia;
+    return stol(dataFormatada);
+}
+
 bool CntrISReservas::criarReserva(Reserva reserva){
 
     Quarto quartoBusca;
@@ -1113,6 +1128,25 @@ bool CntrISReservas::criarReserva(Reserva reserva){
         return false;
     }
 
+    vector<Reserva> todasReservas;
+    ContainerReservas::getInstancia()->listar(todasReservas);
+    string hotelNova = reserva.getCodigoHotel().getCodigo();
+    string quartoNova = reserva.getNumeroQuarto().getNumero();
+    long inicioNova = converterData(reserva.getChegada().getData());
+    long fimNova = converterData(reserva.getPartida().getData());
+
+    for (const auto& resExistente : todasReservas) {
+        if (resExistente.getCodigoHotel().getCodigo() == hotelNova &&
+            resExistente.getNumeroQuarto().getNumero() == quartoNova) {
+
+            long inicioExistente = converterData(resExistente.getChegada().getData());
+            long fimExistente = converterData(resExistente.getPartida().getData());
+
+            if (inicioNova <= fimExistente && inicioExistente <= fimNova) {
+                return false;
+            }
+        }
+    }
     return ContainerReservas::getInstancia()->incluir(reserva);
 }
 

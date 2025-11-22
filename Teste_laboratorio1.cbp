@@ -32,6 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="containers.cpp" />
+		<Unit filename="containers.hpp" />
 		<Unit filename="controladoras.cpp" />
 		<Unit filename="controladoras.hpp" />
 		<Unit filename="dominios.cpp" />
@@ -40,6 +42,8 @@
 		<Unit filename="entidades.hpp" />
 		<Unit filename="interfaces.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="stubs.cpp" />
+		<Unit filename="stubs.hpp" />
 		<Unit filename="testes.cpp" />
 		<Unit filename="testes.hpp" />
 		<Extensions>
