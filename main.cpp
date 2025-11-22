@@ -13,10 +13,10 @@ int main() {
     CntrIUReservas cntrReservas;
 
     StubISAutenticacao* stubServicoAuth = new StubISAutenticacao();
-    StubISReservas* stubReservas = new StubISReservas();
+    CntrISReservas* servicoReservas = new CntrISReservas();
 
     cntrApresentacaoAuth.setCntrSAutenticacao(stubServicoAuth);
-    cntrReservas.setCntrIS_Reservas(stubReservas);
+    cntrReservas.setCntrIS_Reservas(servicoReservas);
 
     Email emailLogado;
     cout << "=== Credenciais para o teste ===" << endl;
@@ -36,7 +36,7 @@ int main() {
     }
 
     delete stubServicoAuth;
-    delete stubReservas;
+    delete servicoReservas;
 
     return 0;
 }

@@ -115,4 +115,33 @@ inline void CntrIUReservas::setCntrIS_Reservas(IS_Reservas *cntrIS_Reservas){
 //}
 
 
+class CntrISReservas : public IS_Reservas{
+    public:
+
+    bool criarHotel(Hotel hotel) override;
+    bool lerHotel(Hotel& hotel) override;
+    bool editarHotel(Hotel hotel) override;
+    bool excluirHotel(Hotel hotel) override;
+    bool listarHotel(vector<Hotel>& hoteis) override;
+
+    bool criarReserva(Reserva reserva) override;
+    bool lerReserva(Reserva& reserva) override;
+    bool editarReserva(Reserva reserva) override;
+    bool excluirReserva(Reserva reserva) override;
+    bool listarReservasDoHotel(const Hotel& hotel, vector<Reserva>& reservas) override;
+
+    bool criarHospede(Hospede hospede) override;
+    bool lerHospede(Hospede& hospede) override;
+    bool editarHospede(Hospede hospede) override;
+    bool excluirHospede(Hospede hospede) override;
+    bool listarHospedesDoHotel(const Hotel& hotel, vector<Hospede>& hospedes) override;
+
+    bool criarQuarto(Quarto quarto) override;
+    bool lerQuarto(Quarto& quarto) override;
+    bool editarQuarto(Quarto quarto) override;
+    bool excluirQuarto(Quarto quarto) override;
+    bool listarQuartosDoHotel(const Hotel& hotel, vector<Quarto>& quartos) override;
+
+};
+
 #endif // CONTROLADORAS_H_INCLUDED

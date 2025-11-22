@@ -161,6 +161,7 @@ class Hospede:public Pessoa{
     private:
         Endereco endereco;
         Cartao cartao;
+        Codigo codigoHotel;
     public:
         /**
         @brief Define o endereço do hóspede.
@@ -184,6 +185,16 @@ class Hospede:public Pessoa{
         @return Objeto da classe 'Cartao' associado ao hóspede.
         */
         Cartao getCartao() const;
+        /**
+        @brief Define o código do hotel associado ao hospede.
+        @param codigo Endereco de objeto da classe domínio código.
+        */
+        void setCodigoHotel(const Codigo& codigo);
+        /**
+        @brief Retorna o codigo do hotel associado ao hospede.
+        @return Objeto da classe 'Codigo' associado ao hospede.
+        */
+        Codigo getCodigoHotel() const;
 };
 
 inline void Hospede::setEndereco(const Endereco& endereco){
@@ -201,6 +212,15 @@ inline void Hospede::setCartao(const Cartao& cartao){
 inline Cartao Hospede::getCartao() const{
     return cartao;
 }
+
+inline void Hospede::setCodigoHotel(const Codigo& codigo){
+    this->codigoHotel = codigo;
+}
+
+inline Codigo Hospede::getCodigoHotel() const {
+    return codigoHotel;
+}
+
 /**
 @brief Classe entidade que representa um espaço onde pessoas utilizam
 determinado período.
@@ -342,6 +362,7 @@ class Quarto{
         Capacidade capacidade;
         Dinheiro diaria;
         Ramal ramal;
+        Codigo codigoHotel;
     public:
         /**
         @brief Define o numero do quarto.
@@ -387,6 +408,16 @@ class Quarto{
         @return Objeto da classe 'Ramal' associado ao quarto.
         */
         Ramal getRamal()const;
+        /**
+        @brief Define o código do hotel associado ao quarto.
+        @param codigo Endereco de objeto da classe domínio código.
+        */
+        void setCodigoHotel(const Codigo& codigo);
+        /**
+        @brief Retorna o codigo do hotel associado ao quarto.
+        @return Objeto da classe 'Codigo' associado ao quarto.
+        */
+        Codigo getCodigoHotel() const;
 };
 
 inline void Quarto::setNumero(const Numero& numero){
@@ -421,6 +452,13 @@ inline Ramal Quarto::getRamal()const{
     return ramal;
 }
 
+inline void Quarto::setCodigoHotel(const Codigo& codigo){
+    this->codigoHotel = codigo;
+}
+
+inline Codigo Quarto::getCodigoHotel() const {
+    return codigoHotel;
+}
 /**
 @brief Classe entidade que representa um período que um hóspede pode selecionar
 para passar no hotel, além disso, o hospede pode escolher o quarto do hotel;
@@ -452,6 +490,7 @@ class Reserva{
         Data partida;
         Dinheiro valor;
         Codigo codigo;
+        Codigo codigoHotel;
     public:
         /**
         @brief Define a data de chegada da reserva,
@@ -497,6 +536,16 @@ class Reserva{
         @return Objeto da classe 'Codigo' associado ao código da reserval.
         */
         Codigo getCodigo()const;
+        /**
+        @brief Define o código do hotel associado ao quarto.
+        @param codigo Endereco de objeto da classe domínio código.
+        */
+        void setCodigoHotel(const Codigo& codigo);
+        /**
+        @brief Retorna o codigo do hotel associado a reserva.
+        @return Objeto da classe 'Codigo' associado a reserva.
+        */
+        Codigo getCodigoHotel() const;
 };
 
 inline void Reserva::setChegada(const Data& data){
@@ -529,6 +578,14 @@ inline void Reserva::setCodigo(const Codigo& codigo){
 
 inline Codigo Reserva::getCodigo()const{
     return codigo;
+}
+
+inline void Reserva::setCodigoHotel(const Codigo& codigo){
+    this->codigoHotel = codigo;
+}
+
+inline Codigo Reserva::getCodigoHotel()const {
+    return codigoHotel;
 }
 
 #endif // ENTIDADES_HPP_INCLUDED

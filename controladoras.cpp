@@ -1,6 +1,7 @@
 #include "controladoras.hpp"
 #include "dominios.hpp"
 #include "entidades.hpp"
+#include "containers.hpp"
 
 bool CntrIUAutenticacao::autenticar(Email &gerente) {
     Email email;
@@ -250,6 +251,13 @@ void CntrIUReservas::executar(Email email){
                     codigo.setCodigo(entradaCodigo);
                     reserva.setCodigo(codigo);
 
+                    cout << "Digite o codigo do HOTEL desta reserva: ";
+                    cin >> entradaCodigo;
+
+                    Codigo codHotel;
+                    codHotel.setCodigo(entradaCodigo);
+                    reserva.setCodigoHotel(codHotel);
+
                     bool resultado = cntrIS_Reservas->criarReserva(reserva);
 
                     if(resultado){
@@ -383,6 +391,7 @@ void CntrIUReservas::executar(Email email){
                     Endereco endereco;
                     Cartao cartao;
                     Hospede hospede;
+                    string entradaCodigo;
 
                     string entradaNome, entradaEmail, entradaEndereco, entradaCartao;
 
@@ -403,6 +412,13 @@ void CntrIUReservas::executar(Email email){
                     cin >> entradaCartao;
                     cartao.setCartao(entradaCartao);
                     hospede.setCartao(cartao);
+
+                    cout << "Digite o codigo do HOTEL deste hospede: ";
+                    cin >> entradaCodigo;
+
+                    Codigo codHotel;
+                    codHotel.setCodigo(entradaCodigo);
+                    hospede.setCodigoHotel(codHotel);
 
                     bool resultado = cntrIS_Reservas->criarHospede(hospede);
 
@@ -461,33 +477,37 @@ void CntrIUReservas::executar(Email email){
                     Hospede hospedeAtualizado;
                     hospedeAtualizado.setEmail(email);
 
-                    Nome novoNome;
-                    string entradaNome;
-                    cout << "Digite o novo nome do hospede: ";
-                    getline(cin >> ws, entradaNome);
-                    novoNome.setNome(entradaNome);
-                    hospedeAtualizado.setNome(novoNome);
+                    if(cntrIS_Reservas->lerHospede(hospedeAtualizado)){
+                        Nome novoNome;
+                        string entradaNome;
+                        cout << "Digite o novo nome do hospede: ";
+                        getline(cin >> ws, entradaNome);
+                        novoNome.setNome(entradaNome);
+                        hospedeAtualizado.setNome(novoNome);
 
-                    Endereco novoEndereco;
-                    string entradaEndereco;
-                    cout << "Digite o endereco hosppede: ";
-                    getline(cin >> ws, entradaEndereco);
-                    novoEndereco.setEndereco(entradaEndereco);
-                    hospedeAtualizado.setEndereco(novoEndereco);
+                        Endereco novoEndereco;
+                        string entradaEndereco;
+                        cout << "Digite o endereco hosppede: ";
+                        getline(cin >> ws, entradaEndereco);
+                        novoEndereco.setEndereco(entradaEndereco);
+                        hospedeAtualizado.setEndereco(novoEndereco);
 
-                    Cartao novoCartao;
-                    string entradaCartao;
-                    cout << "Digite o novo cartao: ";
-                    cin >> entradaCartao;
-                    novoCartao.setCartao(entradaCartao);
-                    hospedeAtualizado.setCartao(novoCartao);
+                        Cartao novoCartao;
+                        string entradaCartao;
+                        cout << "Digite o novo cartao: ";
+                        cin >> entradaCartao;
+                        novoCartao.setCartao(entradaCartao);
+                        hospedeAtualizado.setCartao(novoCartao);
 
-                    bool sucesso = cntrIS_Reservas->editarHospede(hospedeAtualizado);
+                        bool sucesso = cntrIS_Reservas->editarHospede(hospedeAtualizado);
 
-                    if(sucesso){
-                        cout << "Hospede editado com sucesso!" << endl;
+                        if(sucesso){
+                            cout << "Hospede editado com sucesso!" << endl;
+                        } else {
+                            cout << "Hospede não encontrado ou erro na edição." << endl;
+                        }
                     } else {
-                        cout << "Hospede não encontrado ou erro na edição." << endl;
+                        cout << "Hospede nao encontrado com esse email." << endl;
                     }
                 }
                 catch (const invalid_argument &exp) {
@@ -537,6 +557,7 @@ void CntrIUReservas::executar(Email email){
                     Dinheiro diaria;
                     Ramal ramal;
                     Quarto quarto;
+                    string entradaCodigo;
 
                     short entradaCapacidade;
                     string entradaDiaria, entradaNumero, entradaRamal;
@@ -557,6 +578,13 @@ void CntrIUReservas::executar(Email email){
                     cin >> entradaRamal;
                     ramal.setRamal(entradaRamal);
                     quarto.setRamal(ramal);
+
+                    cout << "Digite o codigo do HOTEL deste quarto: ";
+                    cin >> entradaCodigo;
+
+                    Codigo codHotel;
+                    codHotel.setCodigo(entradaCodigo);
+                    quarto.setCodigoHotel(codHotel);
 
                     bool resultado = cntrIS_Reservas->criarQuarto(quarto);
 
@@ -1022,3 +1050,84 @@ void CntrIUPessoal::executar(Email emailLogado) {
 }
 
 */
+//----------------------------------FIM AUGUSTO-------------------
+
+bool CntrISReservas::criarHotel(Hotel hotel){
+    return ContainerHoteis::getInstancia()->incluir(hotel);
+}
+
+bool CntrISReservas::lerHotel(Hotel& hotel){
+    return ContainerHoteis::getInstancia()->pesquisar(&hotel);
+}
+
+bool CntrISReservas::editarHotel(Hotel hotel){
+    return ContainerHoteis::getInstancia()->atualizar(hotel);
+}
+
+bool CntrISReservas::excluirHotel(Hotel hotel) {
+    return ContainerHoteis::getInstancia()->remover(hotel.getCodigo().getCodigo());
+}
+
+bool CntrISReservas::listarHotel(vector<Hotel>& hoteis){
+    return ContainerHoteis::getInstancia()->listar(hoteis);
+}
+
+bool CntrISReservas::criarReserva(Reserva reserva){
+    return ContainerReservas::getInstancia()->incluir(reserva);
+}
+
+bool CntrISReservas::lerReserva(Reserva& reserva){
+    return ContainerReservas::getInstancia()->pesquisar(&reserva);
+}
+
+bool CntrISReservas::editarReserva(Reserva reserva){
+    return ContainerReservas::getInstancia()->atualizar(reserva);
+}
+
+bool CntrISReservas::excluirReserva(Reserva reserva){
+    return ContainerReservas::getInstancia()->remover(reserva.getCodigo().getCodigo());
+}
+
+bool CntrISReservas::listarReservasDoHotel(const Hotel& hotel, vector<Reserva>& reservas){
+    return ContainerReservas::getInstancia()->listar(hotel.getCodigo().getCodigo(), reservas);
+}
+
+bool CntrISReservas::criarHospede(Hospede hospede){
+    return ContainerHospedes::getInstancia()->incluir(hospede);
+}
+
+bool CntrISReservas::lerHospede(Hospede& hospede){
+    return ContainerHospedes::getInstancia()->pesquisar(&hospede);
+}
+
+bool CntrISReservas::editarHospede(Hospede hospede){
+    return ContainerHospedes::getInstancia()->atualizar(hospede);
+}
+
+bool CntrISReservas::excluirHospede(Hospede hospede){
+    return ContainerHospedes::getInstancia()->remover(hospede.getEmail().getEmail());
+}
+
+bool CntrISReservas::listarHospedesDoHotel(const Hotel& hotel, vector<Hospede>& hospedes){
+    return ContainerHospedes::getInstancia()->listar(hotel.getCodigo().getCodigo(), hospedes);
+}
+
+bool CntrISReservas::criarQuarto(Quarto quarto){
+    return ContainerQuartos::getInstancia()->incluir(quarto);
+}
+
+bool CntrISReservas::lerQuarto(Quarto& quarto){
+    return ContainerQuartos::getInstancia()->pesquisar(&quarto);
+}
+
+bool CntrISReservas::editarQuarto(Quarto quarto){
+    return ContainerQuartos::getInstancia()->atualizar(quarto);
+}
+
+bool CntrISReservas::excluirQuarto(Quarto quarto){
+    return ContainerQuartos::getInstancia()->remover(quarto.getNumero().getNumero());
+}
+
+bool CntrISReservas::listarQuartosDoHotel(const Hotel& hotel, vector<Quarto>& quartos){
+    return ContainerQuartos::getInstancia()->listar(hotel.getCodigo().getCodigo(), quartos);
+}
