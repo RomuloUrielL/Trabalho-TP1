@@ -289,3 +289,43 @@ bool StubISReservas::listarQuartosDoHotel(const Hotel& hotel, vector<Quarto>& qu
     }
     return false;
 }
+
+const string StubISPessoal::TRIGGER_SUCESSO_EMAIL = "admin@teste.com";
+const string StubISPessoal::TRIGGER_ERRO_EMAIL = "erro@teste.com";
+
+bool StubISPessoal::criarGerente(Gerente gerente) {
+    if (gerente.getEmail().getEmail() == TRIGGER_ERRO_EMAIL) {
+        return false;
+    }
+    return true;
+}
+
+bool StubISPessoal::lerGerente(Gerente& gerente) {
+    if (gerente.getEmail().getEmail() == TRIGGER_SUCESSO_EMAIL) {
+        Nome n; n.setNome("Admin Testador");
+        Ramal r; r.setRamal("10");
+        Senha s; s.setSenha("A3n5#");
+
+        gerente.setNome(n);
+        gerente.setRamal(r);
+        gerente.setSenha(s);
+
+        return true;
+    }
+    return false;
+}
+
+bool StubISPessoal::atualizarGerente(Gerente gerente) {
+    if (gerente.getEmail().getEmail() == TRIGGER_SUCESSO_EMAIL) {
+        return true;
+    }
+    return false;
+}
+
+bool StubISPessoal::descadastrarGerente(Gerente gerente) {
+    if (gerente.getEmail().getEmail() == TRIGGER_SUCESSO_EMAIL) {
+        return true;
+    }
+    return false;
+}
+

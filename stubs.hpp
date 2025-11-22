@@ -44,8 +44,17 @@ class StubISReservas : public IS_Reservas{
     bool editarQuarto(Quarto quarto) override;
     bool excluirQuarto(Quarto quarto) override;
     bool listarQuartosDoHotel(const Hotel& hotel, vector<Quarto>& quartos) override;
+};
 
+class StubISPessoal : public IS_Pessoal{
+    public:
+        static const string TRIGGER_SUCESSO_EMAIL;
+        static const string TRIGGER_ERRO_EMAIL;;
 
+        bool criarGerente(Gerente gerente) override;
+        bool lerGerente(Gerente& gerente) override;
+        bool atualizarGerente(Gerente gerente) override;
+        bool descadastrarGerente(Gerente gerente);
 };
 
 #endif // STUBS_HPP_INCLUDED

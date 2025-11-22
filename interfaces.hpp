@@ -58,7 +58,7 @@ public:
     @return true caso o gerente consiga ser lido com sucesso e false caso o
     gerente não consiga ser lido.
     */
-    virtual bool lerGerente(Email&, Gerente&) = 0;
+    virtual bool lerGerente(Gerente&) = 0;
     /**
     @brief Serviço relacionado a atualização dos dados cadastrais do gerente
     como nome, email, ramal ou senha.
@@ -76,7 +76,7 @@ public:
     @return true caso o email os dados do gerente sejam excluidos com sucesso e
     false caso a conta do gerete não consiga ser excluída com sucesso.
     */
-    virtual bool descadastrarGerente(Email) = 0;
+    virtual bool descadastrarGerente(Gerente) = 0;
     /**
     @brief Destrutor virtual padrão.
     */

@@ -862,7 +862,7 @@ void CntrIUReservas::executar(Email email){
 
 //-----------------------------falta formatar para seguir o mesmo padrao do outro code(augusto)----------------------------------//
 
-/*
+
 void CntrIUPessoal::criar() {
     cout << "---- Cadastro de Novo Gerente ----" << endl;
     try {
@@ -912,155 +912,182 @@ void CntrIUPessoal::criar() {
         cout << "Erro nos dados: " << exp.what() << endl;
     }
 }
-*/
-/**
+
 void CntrIUPessoal::executar(Email emailLogado) {
     int opcao = -1;
 
     while(opcao != 0) {
         cout << endl << "---- MENU DE PESSOAL ----" << endl;
         cout << "Usuario logado: " << emailLogado.getEmail() << endl;
-        cout << "1. Meus Dados (Ler)" << endl;
-        cout << "2. Editar Meus Dados" << endl;
-        cout << "3. Descadastrar Minha Conta" << endl;
-        cout << "------------------------" << endl;
-        cout << "4. Criar Hospede" << endl;
-        cout << "5. Ler Hospede" << endl;
-        cout << "6. Editar Hospede" << endl;
-        cout << "7. Excluir Hospede" << endl;
-        cout << "0. Sair" << endl;
+        cout << "0. Voltar ao menu de inicializacao" << endl;
+        cout << "1. Criar Gerente" << endl;
+        cout << "2. Ler Gerente" << endl;
+        cout << "3. Editar Gerente" << endl;
+        cout << "4. Excluir Gerente" << endl;
         cout << "Digite a opcao: ";
         cin >> opcao;
 
         switch(opcao) {
             case 0:
+                cout << "Voltando ao menu principal..." << endl;
                 break;
-            // --- GERENCIAR PRÓPRIA CONTA (GERENTE) ---//
             case 1: {
-                Gerente gerente;
-                if(cntrIS_Pessoal->lerGerente(emailLogado, gerente)) {
-                    cout << "Nome: " << gerente.getNome().getNome() << endl;
-                    cout << "Email: " << gerente.getEmail().getEmail() << endl;
-                    cout << "Ramal: " << gerente.getRamal().getRamal() << endl;
-                } else {
-                    cout << "Erro ao ler dados." << endl;
-                }
-                break;
-            }
-            case 2: {
+                cout << "\n----Criacao de hoteis----" << endl;
                 try {
+                    Nome nome;
+                    Email email;
+                    Ramal ramal;
+                    Senha senha;
                     Gerente gerente;
-                    gerente.setEmail(emailLogado);
 
-                    string entradaNome, entradaRamal, entradaSenha;
-                    Nome nome; Ramal ramal; Senha senha;
+                    string entradaNome, entradaEmail, entradaRamal, entradaSenha;
 
-                    cout << "Novo Nome: ";
+
+                    cout << "Digite o nome do gerente: ";
                     getline(cin >> ws, entradaNome);
                     nome.setNome(entradaNome);
                     gerente.setNome(nome);
-
-                    cout << "Novo Ramal: ";
+                    cout << "Digite o email do gerente: ";
+                    getline(cin >> ws, entradaEmail);
+                    email.setEmail(entradaEmail);
+                    gerente.setEmail(email);
+                    cout << "Digite o ramal do gerente: ";
                     cin >> entradaRamal;
                     ramal.setRamal(entradaRamal);
                     gerente.setRamal(ramal);
-
-                    cout << "Nova Senha: ";
+                    cout << "Digite a senha do gerente: ";
                     cin >> entradaSenha;
                     senha.setSenha(entradaSenha);
                     gerente.setSenha(senha);
 
-                    if(cntrIS_Pessoal->atualizarGerente(gerente)){
-                        cout << "Dados atualizados!" << endl;
+                    bool resultado = cntrIS_Pessoal->criarGerente(gerente);
+
+                    if(resultado){
+                        cout << "gerente criado com sucesso!\n" << endl;
                     } else {
-                        cout << "Falha na atualizacao." << endl;
+                        cout << "Falha ao criar o gerente.\n" << endl;
                     }
-                } catch (const exception &e) { cout << "Erro: " << e.what() << endl; }
-                break;
-            }
-            case 3: {
-                char conf;
-                cout << "Tem certeza? (S/N): ";
-                cin >> conf;
-                if(conf == 'S' || conf == 's') {
-                    if(cntrIS_Pessoal->descadastrarGerente(emailLogado)) {
-                        cout << "Conta excluida. O programa deve ser encerrado." << endl;
-                        opcao = 0;
-                    }
+                }
+                catch (const invalid_argument &exp) {
+                    cout << endl << "Erro: " << exp.what() << endl;
+                    cout << "Por favor, tente novamente." << endl;
                 }
                 break;
             }
+            case 2: {
+                cout << "----Leitura de Gerentes----" << endl;
+                try{
+                    Email email;
+                    Gerente gerente;
+                    string entradaEmail;
 
-            // --- GERENCIAR HÓSPEDES --- //
-            case 4: {
-                try {
-                    Hospede h;
-                    Nome n; Email e; Endereco end; Cartao c;
-                    string aux;
+                    cout << "Digite o email do gerente a ser pesquisado: ";
+                    cin >> entradaEmail;
+                    email.setEmail(entradaEmail);
+                    gerente.setEmail(email);
 
-                    cout << "Nome: "; getline(cin >> ws, aux); n.setNome(aux); h.setNome(n);
-                    cout << "Email: "; cin >> aux; e.setEmail(aux); h.setEmail(e);
-                    cout << "Endereco: "; getline(cin >> ws, aux); end.setEndereco(aux); h.setEndereco(end);
-                    cout << "Cartao: "; cin >> aux; c.setCartao(aux); h.setCartao(c);
+                    bool encontrou = cntrIS_Pessoal->lerGerente(gerente);
 
-                    if(cntrIS_Pessoal->criarHospede(h)) cout << "Hospede criado!" << endl;
-                    else cout << "Erro ao criar." << endl;
+                    if(encontrou){
+                        cout << "\n----Informacoes do gerente pesquisado----" << endl;
 
-                } catch (const exception &e) { cout << "Erro: " << e.what() << endl; }
-                break;
-            }
-            case 5: {
-                try {
-                    Email e; Hospede h; string aux;
-                    cout << "Email do hospede: "; cin >> aux; e.setEmail(aux);
-                    h.setEmail(e); // Chave de busca
-
-                    if(cntrIS_Pessoal->lerHospede(e, h)) {
-                        cout << "Nome: " << h.getNome().getNome() << endl;
-                        cout << "Endereco: " << h.getEndereco().getEndereco() << endl;
-                        cout << "Cartao: " << h.getCartao().getCartao() << endl;
+                        cout << "Nome: " << gerente.getNome().getNome() << endl;
+                        cout << "Email: " << gerente.getEmail().getEmail() << endl;
+                        cout << "Ramal: " << gerente.getRamal().getRamal() << endl;
                     } else {
-                        cout << "Hospede nao encontrado." << endl;
+                        cout << "gerente não foi encontrado com esse email." << endl;
                     }
-                } catch (const exception &e) { cout << "Erro: " << e.what() << endl; }
+                }
+                catch (const invalid_argument &exp) {
+                    cout << endl << "Erro: " << exp.what() << endl;
+                    cout << "Por favor, tente novamente." << endl;
+                }
                 break;
             }
-            case 6: {
-                 try {
-                    Hospede h;
-                    string aux;
-                    Email e;
-
-                    cout << "Email do hospede a editar: "; cin >> aux;
-                    e.setEmail(aux); h.setEmail(e);
-
-                    Nome n; Endereco end; Cartao c;
-                    cout << "Novo Nome: "; getline(cin >> ws, aux); n.setNome(aux); h.setNome(n);
-                    cout << "Novo Endereco: "; getline(cin >> ws, aux); end.setEndereco(aux); h.setEndereco(end);
-                    cout << "Novo Cartao: "; cin >> aux; c.setCartao(aux); h.setCartao(c);
-
-                    if(cntrIS_Pessoal->atualizarHospede(h)) cout << "Hospede atualizado!" << endl;
-                    else cout << "Erro ao atualizar." << endl;
-
-                } catch (const exception &e) { cout << "Erro: " << e.what() << endl; }
-                break;
-            }
-            case 7: {
+            case 3: {
+                cout << "----Edicao de gerentes----" << endl;
                 try {
-                    Email e; string aux;
-                    cout << "Email do hospede a excluir: "; cin >> aux; e.setEmail(aux);
-                    if(cntrIS_Pessoal->descadastrarHospede(e)) cout << "Hospede excluido!" << endl;
-                    else cout << "Erro ao excluir." << endl;
-                } catch (const exception &e) { cout << "Erro: " << e.what() << endl; }
+                    Email email;
+                    string entradaEmail;
+                    cout << "Digite o email do gerente a ser editado: ";
+                    cin >> entradaEmail;
+                    email.setEmail(entradaEmail);
+
+                    Gerente gerenteAtualizado;
+                    gerenteAtualizado.setEmail(email);
+
+                    Nome novoNome;
+                    string entradaNome;
+                    cout << "Digite o novo nome do gerente: ";
+                    getline(cin >> ws, entradaNome);
+                    novoNome.setNome(entradaNome);
+                    gerenteAtualizado.setNome(novoNome);
+
+                    Ramal novoRamal;
+                    string entradaRamal;
+                    cout << "Digite o novo ramal do gerente: ";
+                    getline(cin >> ws, entradaRamal);
+                    novoRamal.setRamal(entradaRamal);
+                    gerenteAtualizado.setRamal(novoRamal);
+
+                    Senha novaSenha;
+                    string entradaSenha;
+                    cout << "Digite a nova senha do gerente: ";
+                    cin >> entradaSenha;
+                    novaSenha.setSenha(entradaSenha);
+                    gerenteAtualizado.setSenha(novaSenha);
+
+                    bool sucesso = cntrIS_Pessoal->atualizarGerente(gerenteAtualizado);
+
+                    if(sucesso){
+                        cout << "Gerente editado com sucesso!" << endl;
+                    } else {
+                        cout << "Gerente não encontrado ou erro na edição." << endl;
+                    }
+                }
+                catch (const invalid_argument &exp) {
+                    cout << endl << "Erro nos dados: " << exp.what() << endl;
+                }
                 break;
             }
-            default:
-                cout << "Opcao invalida." << endl;
+            case 4: {
+                cout << "----Excluir gerentes----" << endl;
+                try{
+                    Gerente gerente;
+                    Email email;
+                    string entradaEmail;
+                    char confirmacao;
+
+                    cout << "Digite o email do gerente a ser excluido: ";
+                    cin >> entradaEmail;
+
+                    email.setEmail(entradaEmail);
+                    gerente.setEmail(email);
+
+                    cout << "Tem certeza que deseja excluir este gerente? (S/N): ";
+                    cin >> confirmacao;
+
+                    if(confirmacao == 'S' || confirmacao == 's'){
+                        bool resultado = cntrIS_Pessoal->descadastrarGerente(gerente);
+                        if(resultado){
+                            cout << "gerente excluido com sucesso!" << endl;
+                        } else {
+                            cout << "Falha ao excluir gerente." << endl;
+                        }
+                    } else {
+                        cout << "Operacao cancelada." << endl;
+                    }
+                }
+                catch (const invalid_argument &exp) {
+                    cout << endl << "Erro: " << exp.what() << endl;
+                    cout << "Por favor, tente novamente." << endl;
+                }
+                break;
+            }
         }
     }
 }
 
-*/
 //----------------------------------FIM AUGUSTO-------------------
 
 bool CntrISReservas::criarHotel(Hotel hotel){

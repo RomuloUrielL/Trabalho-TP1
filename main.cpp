@@ -11,31 +11,84 @@ int main() {
 
     CntrIUAutenticacao cntrApresentacaoAuth;
     CntrIUReservas cntrReservas;
+    CntrIUPessoal cntrPessoal;
 
     StubISAutenticacao* stubServicoAuth = new StubISAutenticacao();
+    StubISPessoal* stubServicoPessoal = new StubISPessoal();
     CntrISReservas* servicoReservas = new CntrISReservas();
 
     cntrApresentacaoAuth.setCntrSAutenticacao(stubServicoAuth);
+    cntrPessoal.setCntrIS_Pessoal(stubServicoPessoal);
     cntrReservas.setCntrIS_Reservas(servicoReservas);
 
+int opcaoInicial = -1;
     Email emailLogado;
-    cout << "=== Credenciais para o teste ===" << endl;
-    cout << "Para SUCESSO, use: emailteste@gmail.com / A3n5#" << endl;
-    cout << "Para FALHA, use qualquer outra coisa." << endl;
-    cout << "-----------------------------------------------------" << endl;
 
-    bool resultado = cntrApresentacaoAuth.autenticar(emailLogado);
+    cout << "----Sistema de hoteis----" << endl;
+    cout << "Dica de Login (Stub): " << StubISAutenticacao::TRIGGER_SUCESSO_EMAIL
+         << " / " << StubISAutenticacao::TRIGGER_SUCESSO_SENHA << endl;
 
-    if (resultado) {
-        cout << "\nRESULTADO: Login realizado com SUCESSO!" << endl;
-        cout << "Usuario logado: " << emailLogado.getEmail() << endl;
+    while (opcaoInicial != 0) {
+        cout << endl << "========= MENU INICIAL =========" << endl;
+        cout << "1. Fazer Login" << endl;
+        cout << "2. Cadastrar Novo Gerente (Sign Up)" << endl;
+        cout << "0. Sair do Sistema" << endl;
+        cout << "Escolha uma opcao: ";
+        cin >> opcaoInicial;
 
-        cntrReservas.executar(emailLogado);
-    } else {
-        cout << "\nFalha no login." << endl;
+        switch (opcaoInicial) {
+            case 1: {
+                if (cntrApresentacaoAuth.autenticar(emailLogado)) {
+
+                    cout << "\nLogin realizado com sucesso! Bem-vindo, " << emailLogado.getEmail() << endl;
+
+                    int opcaoLogado = -1;
+                    while (opcaoLogado != 0) {
+                        cout << endl << "------- MENU PRINCIPAL -------" << endl;
+                        cout << "1. Modulo de Pessoal (Teste com Stub)" << endl;
+                        cout << "2. Modulo de Reservas (Sistema Real)" << endl;
+                        cout << "0. Deslogar (Voltar ao inicio)" << endl;
+                        cout << "Escolha: ";
+                        cin >> opcaoLogado;
+
+                        switch (opcaoLogado) {
+                            case 1:
+                                cntrPessoal.executar(emailLogado);
+                                break;
+
+                            case 2:
+                                cntrReservas.executar(emailLogado);
+                                break;
+
+                            case 0:
+                                cout << "Deslogando..." << endl;
+                                break;
+
+                            default:
+                                cout << "Opcao invalida." << endl;
+                        }
+                    }
+                } else {
+                    cout << "Falha na autenticacao. Verifique suas credenciais." << endl;
+                }
+                break;
+            }
+
+            case 2: {
+                cntrPessoal.criar();
+                break;
+            }
+            case 0: {
+                cout << "Encerrando o programa. Ate logo!" << endl;
+                break;
+            }
+            default:
+                cout << "Opcao invalida." << endl;
+        }
     }
 
     delete stubServicoAuth;
+    delete stubServicoPessoal;
     delete servicoReservas;
 
     return 0;
