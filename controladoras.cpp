@@ -1383,18 +1383,15 @@ bool CntrISPessoal::descadastrarGerente(Gerente gerente){
 }
 
 bool CntrISAutenticacao::autenticar(Email email, Senha senha){
-    ContainerGerentes *container;
+    ContainerGerentes *container = ContainerGerentes::getInstancia();
 
-    container = ContainerGerentes::getInstancia();
+    Gerente gerenteBusca;
+    gerenteBusca.setEmail(email);
 
-    map<string,Gerente>::iterator it = container->find(email.getEmail());
-
-    if(it==container->end()){
-        return false;
-    }else{
-        if(it->second.getSenha().getSenha() != senha.getSenha()){
-            return false;
+    if(container->pesquisar(&gerenteBusca)){
+        if(gerenteBusca.getSenha().getSenha() == senha.getSenha()){
+            return true;
         }
     }
-    return true;
+    return false;
 }

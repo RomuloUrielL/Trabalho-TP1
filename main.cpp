@@ -13,11 +13,11 @@ int main() {
     CntrIUReservas cntrReservas;
     CntrIUPessoal cntrPessoal;
 
-    StubISAutenticacao* stubServicoAuth = new StubISAutenticacao();
+    CntrISAutenticacao* ServicoAuth = new CntrISAutenticacao();
     CntrISPessoal* servicoPessoal = new CntrISPessoal();
     CntrISReservas* servicoReservas = new CntrISReservas();
 
-    cntrApresentacaoAuth.setCntrSAutenticacao(stubServicoAuth);
+    cntrApresentacaoAuth.setCntrSAutenticacao(ServicoAuth);
     cntrPessoal.setCntrIS_Pessoal(servicoPessoal);
     cntrReservas.setCntrIS_Reservas(servicoReservas);
 
@@ -25,8 +25,6 @@ int opcaoInicial = -1;
     Email emailLogado;
 
     cout << "----Sistema de hoteis----" << endl;
-    cout << "Dica de Login (Stub): " << StubISAutenticacao::TRIGGER_SUCESSO_EMAIL
-         << " / " << StubISAutenticacao::TRIGGER_SUCESSO_SENHA << endl;
 
     while (opcaoInicial != 0) {
         cout << endl << "========= MENU INICIAL =========" << endl;
@@ -87,7 +85,7 @@ int opcaoInicial = -1;
         }
     }
 
-    delete stubServicoAuth;
+    delete ServicoAuth;
     delete servicoPessoal;
     delete servicoReservas;
 
