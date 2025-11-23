@@ -1381,3 +1381,20 @@ bool CntrISPessoal::descadastrarGerente(Gerente gerente){
     }
     return ContainerGerentes::getInstancia()->remover(gerente.getEmail().getEmail());
 }
+
+bool CntrISAutenticacao::autenticar(Email email, Senha senha){
+    ContainerGerentes *container;
+
+    container = ContainerGerentes::getInstancia();
+
+    map<string,Gerente>::iterator it = container->find(email.getEmail());
+
+    if(it==container->end()){
+        return false;
+    }else{
+        if(it->second.getSenha().getSenha() != senha.getSenha()){
+            return false;
+        }
+    }
+    return true;
+}

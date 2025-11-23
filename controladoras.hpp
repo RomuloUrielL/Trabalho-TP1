@@ -301,19 +301,68 @@ class CntrISReservas : public IS_Reservas{
 
 };
 
+/**
+@brief Controladora Principal da Camada de Apresentação.
+@details Esta classe é responsável por iniciar o fluxo de interação com o
+usuário, exibindo o menu inicial do sistema (Login, Cadastro, Sair) e,
+após a autenticação bem-sucedida, orquestrar a navegação para os módulos
+específicos (Pessoal e Reservas). Ela implementa a Injeção de Dependência
+para as demais controladoras da camada de Apresentação.
+*/
 class CntrApresentacaoInicial {
     private:
+        /**
+        @brief Ponteiro para a Controladora de Autenticação.
+        @details É a dependência necessária para realizar o login do usuário.
+        */
         IA_Autenticacao *cntrApresentacaoAutenticacao;
+
+        /**
+        @brief Ponteiro para a Controladora do Módulo Pessoal.
+        @details Dependência para acessar as funcionalidades de cadastro/gestão
+        de usuários e hóspedes.
+        */
         IA_Pessoal *cntrApresentacaoPessoal;
+
+        /**
+        @brief Ponteiro para a Controladora do Módulo de Reservas.
+        @details Dependência para acessar as funcionalidades de gestão de hotéis,
+        quartos e reservas.
+        */
         IA_Reservas *cntrApresentacaoReservas;
+
     public:
 
+        /**
+        @brief Executa o fluxo principal do sistema.
+        @details Exibe o Menu Inicial, coleta a opção do usuário e coordena
+        a navegação para os módulos de Autenticação, Cadastro ou a saída
+        do sistema. Após o login, exibe o Menu Principal.
+        */
         void executar();
 
+        /**
+        @brief Define a dependência da Controladora de Autenticação.
+        @details Implementa a injeção de dependência para ligar a controladora
+        inicial à controladora de Autenticação.
+        @param Ponteiro para um objeto que implemente a interface IA_Autenticacao.
+        */
         void setCntrApresentacaoAutenticacao(IA_Autenticacao*);
 
+        /**
+        @brief Define a dependência da Controladora do Módulo Pessoal.
+        @details Implementa a injeção de dependência para ligar a controladora
+        inicial ao módulo de gestão de pessoal/hóspedes.
+        @param Ponteiro para um objeto que implemente a interface IA_Pessoal.
+        */
         void setCntrApresentacaoPessoal(IA_Pessoal*);
 
+        /**
+        @brief Define a dependência da Controladora do Módulo de Reservas.
+        @details Implementa a injeção de dependência para ligar a controladora
+        inicial ao módulo de gestão de reservas, hotéis e quartos.
+        @param Ponteiro para um objeto que implemente a interface IA_Reservas.
+        */
         void setCntrApresentacaoReservas(IA_Reservas*);
 };
 
@@ -336,5 +385,11 @@ class CntrISPessoal : public IS_Pessoal{
         bool lerGerente(Gerente& gerente) override;
         bool atualizarGerente(Gerente gerente) override;
         bool descadastrarGerente(Gerente gerente) override;
+};
+
+
+class CntrISAutenticacao: public IS_Autenticacao{
+    public:
+        bool autenticar(Email email, Senha senha) override;
 };
 #endif // CONTROLADORAS_H_INCLUDED
