@@ -252,6 +252,7 @@ class Hotel{
         Endereco endereco;
         Telefone telefone;
         Codigo codigo;
+        Email emailGerente;
     public:
         /**
         @brief Define o nome do hotel.
@@ -297,6 +298,16 @@ class Hotel{
         @return Objeto da classe 'Codigo' associado ao hotel.
         */
         Codigo getCodigo() const;
+        /**
+        @brief Define o email do gerente associado ao hotel.
+        @param codigo Objeto da classe email contendo o email do gerente.
+        */
+        void setEmailGerente(const Email& email);
+        /**
+        @brief Retorna o email do gerente associado ao hotel.
+        @return Objeto da classe email associado ao gerente do hotel.
+        */
+        Email getEmailGerente() const;
 };
 
 inline void Hotel::setNome(const Nome& nome){
@@ -329,6 +340,14 @@ inline void Hotel::setCodigo(const Codigo& codigo){
 
 inline Codigo Hotel::getCodigo() const{
     return codigo;
+}
+
+inline void Hotel::setEmailGerente(const Email& email){
+    this->emailGerente = email;
+}
+
+inline Email Hotel::getEmailGerente() const{
+    return emailGerente;
 }
 /**
 @brief Classe entidade que representa um espaço dentro do hotel em que um

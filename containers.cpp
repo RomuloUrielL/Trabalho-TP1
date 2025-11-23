@@ -47,6 +47,15 @@ bool ContainerHoteis::listar(vector<Hotel>& hoteis){
     }
     return true;
 }
+bool ContainerHoteis::existeHotelDoGerente(string emailGerente) {
+    for (auto const& [chave, hotel] : container) {
+        if (hotel.getEmailGerente().getEmail() == emailGerente) {
+            return true;
+        }
+    }
+    return false;
+}
+
 
 ContainerReservas* ContainerReservas::instancia = nullptr;
 

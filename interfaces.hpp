@@ -71,10 +71,9 @@ public:
     /**
     @brief Serviço relacionado a exclusão dos dados cadastrais de um gerente do
     sistema.
-    @param email Objeto da classe domínio Email contendo a cadeira de caracteres
-    que representam um email fornecido para a autenticação.
+    @param gerente Objeto da classe entidade Gerente para ser excluido.
     @return true caso o email os dados do gerente sejam excluidos com sucesso e
-    false caso a conta do gerete não consiga ser excluída com sucesso.
+    false caso a conta do gerente não consiga ser excluída com sucesso.
     */
     virtual bool descadastrarGerente(Gerente) = 0;
     /**

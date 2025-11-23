@@ -14,11 +14,11 @@ int main() {
     CntrIUPessoal cntrPessoal;
 
     StubISAutenticacao* stubServicoAuth = new StubISAutenticacao();
-    StubISPessoal* stubServicoPessoal = new StubISPessoal();
+    CntrISPessoal* servicoPessoal = new CntrISPessoal();
     CntrISReservas* servicoReservas = new CntrISReservas();
 
     cntrApresentacaoAuth.setCntrSAutenticacao(stubServicoAuth);
-    cntrPessoal.setCntrIS_Pessoal(stubServicoPessoal);
+    cntrPessoal.setCntrIS_Pessoal(servicoPessoal);
     cntrReservas.setCntrIS_Reservas(servicoReservas);
 
 int opcaoInicial = -1;
@@ -31,7 +31,7 @@ int opcaoInicial = -1;
     while (opcaoInicial != 0) {
         cout << endl << "========= MENU INICIAL =========" << endl;
         cout << "1. Fazer Login" << endl;
-        cout << "2. Cadastrar Novo Gerente (Sign Up)" << endl;
+        cout << "2. Cadastrar Novo Gerente" << endl;
         cout << "0. Sair do Sistema" << endl;
         cout << "Escolha uma opcao: ";
         cin >> opcaoInicial;
@@ -45,7 +45,7 @@ int opcaoInicial = -1;
                     int opcaoLogado = -1;
                     while (opcaoLogado != 0) {
                         cout << endl << "------- MENU PRINCIPAL -------" << endl;
-                        cout << "1. Modulo de Pessoal (Teste com Stub)" << endl;
+                        cout << "1. Modulo de Pessoal (Sistema Real)" << endl;
                         cout << "2. Modulo de Reservas (Sistema Real)" << endl;
                         cout << "0. Deslogar (Voltar ao inicio)" << endl;
                         cout << "Escolha: ";
@@ -88,7 +88,7 @@ int opcaoInicial = -1;
     }
 
     delete stubServicoAuth;
-    delete stubServicoPessoal;
+    delete servicoPessoal;
     delete servicoReservas;
 
     return 0;

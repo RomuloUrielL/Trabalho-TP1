@@ -2,6 +2,7 @@
 #include "dominios.hpp"
 #include "entidades.hpp"
 #include "containers.hpp"
+#include "stubs.hpp"
 
 bool CntrIUAutenticacao::autenticar(Email &gerente) {
     Email email;
@@ -76,9 +77,11 @@ void CntrIUReservas::executar(Email email){
                     Endereco endereco;
                     Telefone telefone;
                     Codigo codigo;
+                    Email emailGerente;
                     Hotel hotel;
 
-                    string entradaNome, entradaEndereco, entradaTelefone, entradaCodigo;
+                    string entradaNome, entradaEndereco, entradaTelefone,
+                    entradaCodigo, entradaEmailGerente;
 
 
                     cout << "Digite o nome do hotel: ";
@@ -97,6 +100,11 @@ void CntrIUReservas::executar(Email email){
                     cin >> entradaCodigo;
                     codigo.setCodigo(entradaCodigo);
                     hotel.setCodigo(codigo);
+                    cout << "Digite o email do gerente responsavel: ";
+                    cin >> entradaEmailGerente;
+                    emailGerente.setEmail(entradaEmailGerente);
+                    hotel.setEmailGerente(emailGerente);
+
 
                     bool resultado = cntrIS_Reservas->criarHotel(hotel);
 
@@ -133,6 +141,7 @@ void CntrIUReservas::executar(Email email){
                         cout << "Endereco: " << hotel.getEndereco().getEndereco() << endl;
                         cout << "Telefone: " << hotel.getTelefone().getTelefone() << endl;
                         cout << "Codigo: " << hotel.getCodigo().getCodigo() << "\n" << endl;
+                        cout << "Gerente:  " << hotel.getEmailGerente().getEmail() << endl;
                     } else {
                         cout << "Hotel não foi encontrado com esse codigo." << endl;
                     }
@@ -260,7 +269,7 @@ void CntrIUReservas::executar(Email email){
                     cin >> entradaCodigo;
                     codHotel.setCodigo(entradaCodigo);
                     reserva.setCodigoHotel(codHotel);
-                    cout << "Digite o email do hospede responsável: ";
+                    cout << "Digite o email do hospede responsavel: ";
                     cin >> entradaEmailHospede;
                     emailHospede.setEmail(entradaEmailHospede);
                     reserva.setEmailHospede(emailHospede);
@@ -319,7 +328,7 @@ void CntrIUReservas::executar(Email email){
                 try {
                     Codigo codigo;
                     string entradaCodigo;
-                    cout << "Digite o codigo do hotel a ser editado: ";
+                    cout << "Digite o codigo da reserva a ser editada: ";
                     cin >> entradaCodigo;
                     codigo.setCodigo(entradaCodigo);
 
@@ -328,14 +337,14 @@ void CntrIUReservas::executar(Email email){
 
                     Data novaChegada;
                     string entradaChegada;
-                    cout << "Digite o nova chegada do hotel: ";
+                    cout << "Digite o nova data de chegada da reserva: ";
                     cin >> entradaChegada;
                     novaChegada.setData(entradaChegada);
                     reservaAtualizada.setChegada(novaChegada);
 
                     Data novaPartida;
                     string entradaPartida;
-                    cout << "Digite a nova data de partida: ";
+                    cout << "Digite a nova data de partida da reserva: ";
                     cin >> entradaPartida;
                     novaPartida.setData(entradaPartida);
                     reservaAtualizada.setPartida(novaPartida);
@@ -352,7 +361,7 @@ void CntrIUReservas::executar(Email email){
                     if(sucesso){
                         cout << "Reserva editada com sucesso!" << endl;
                     } else {
-                        cout << "Reserva não encontrada ou erro na edição." << endl;
+                        cout << "Reserva nao encontrada ou erro na edicao." << endl;
                     }
                 }
                 catch (const invalid_argument &exp) {
@@ -424,7 +433,7 @@ void CntrIUReservas::executar(Email email){
                     cartao.setCartao(entradaCartao);
                     hospede.setCartao(cartao);
 
-                    cout << "Digite o codigo do HOTEL deste hospede: ";
+                    cout << "Digite o codigo do hotel deste hospede: ";
                     cin >> entradaCodigo;
 
                     Codigo codHotel;
@@ -515,7 +524,7 @@ void CntrIUReservas::executar(Email email){
                         if(sucesso){
                             cout << "Hospede editado com sucesso!" << endl;
                         } else {
-                            cout << "Hospede não encontrado ou erro na edição." << endl;
+                            cout << "Hospede não encontrado ou erro na edicao." << endl;
                         }
                     } else {
                         cout << "Hospede nao encontrado com esse email." << endl;
@@ -561,7 +570,7 @@ void CntrIUReservas::executar(Email email){
                 break;
             }
             case 13: {
-                cout << "----Criação de Quartos----" << endl;
+                cout << "----Criacao de Quartos----" << endl;
                 try {
                     Numero numero;
                     Capacidade capacidade;
@@ -590,7 +599,7 @@ void CntrIUReservas::executar(Email email){
                     ramal.setRamal(entradaRamal);
                     quarto.setRamal(ramal);
 
-                    cout << "Digite o codigo do HOTEL deste quarto: ";
+                    cout << "Digite o codigo do hotel deste quarto: ";
                     cin >> entradaCodigo;
 
                     Codigo codHotel;
@@ -626,14 +635,15 @@ void CntrIUReservas::executar(Email email){
                     bool encontrou = cntrIS_Reservas->lerQuarto(quarto);
 
                     if(encontrou){
-                        cout << "--Informações do quarto pesquisado" << endl;
+                        cout << "--Informacoes do quarto pesquisado" << endl;
 
                         cout << "Numero: " << quarto.getNumero().getNumero() << endl;
                         cout << "Capacidade: " << quarto.getCapacidade().getCapacidade() << endl;
                         cout << "Diaria: " << quarto.getDiaria().getDinheiro() << endl;
                         cout << "Ramal: " << quarto.getRamal().getRamal() << endl;
+                        cout << "Hotel: " << quarto.getCodigoHotel().getCodigo() << endl;
                     } else {
-                        cout << "Quarto não foi encontrado com esse codigo." << endl;
+                        cout << "Quarto nao foi encontrado com esse codigo." << endl;
                     }
                 }
                 catch (const invalid_argument &exp) {
@@ -680,7 +690,7 @@ void CntrIUReservas::executar(Email email){
                     if(sucesso){
                         cout << "Quarto editado com sucesso!" << endl;
                     } else {
-                        cout << "Quarto não encontrado ou erro na edição." << endl;
+                        cout << "Quarto nao encontrado ou erro na edicao." << endl;
                     }
                 }
                 catch (const invalid_argument &exp) {
@@ -770,6 +780,8 @@ void CntrIUReservas::executar(Email email){
                                 cout << "Chegada: " << reserva.getChegada().getData() << endl;
                                 cout << "Partida: " << reserva.getPartida().getData() << endl;
                                 cout << "Valor:   " << reserva.getValor().getDinheiro() << endl;
+                                cout << "Hospede: " << reserva.getEmailHospede().getEmail() << endl;
+                                cout << "Quarto:  " << reserva.getNumeroQuarto().getNumero() << endl;
                             }
                             cout << "------------------------" << endl;
                         }
@@ -995,7 +1007,7 @@ void CntrIUPessoal::executar(Email emailLogado) {
                         cout << "Email: " << gerente.getEmail().getEmail() << endl;
                         cout << "Ramal: " << gerente.getRamal().getRamal() << endl;
                     } else {
-                        cout << "gerente não foi encontrado com esse email." << endl;
+                        cout << "gerente nao foi encontrado com esse email." << endl;
                     }
                 }
                 catch (const invalid_argument &exp) {
@@ -1042,7 +1054,7 @@ void CntrIUPessoal::executar(Email emailLogado) {
                     if(sucesso){
                         cout << "Gerente editado com sucesso!" << endl;
                     } else {
-                        cout << "Gerente não encontrado ou erro na edição." << endl;
+                        cout << "Gerente nao encontrado ou erro na edicao." << endl;
                     }
                 }
                 catch (const invalid_argument &exp) {
@@ -1297,7 +1309,7 @@ void CntrApresentacaoInicial::executar(){
 
             switch(opcaoInicial){
                 case 1:{
-                    if(cntrApresentacaoAutenticacao.autenticar(emailLogado)){
+                    if(cntrApresentacaoAutenticacao->autenticar(emailLogado)){
                         cout<<"\nLogin realizado com sucesso! Bem vindo(a), "<<emailLogado.getEmail() << endl;
 
                         int opcaoLogado = -1;
@@ -1311,11 +1323,11 @@ void CntrApresentacaoInicial::executar(){
 
                             switch(opcaoLogado){
                                 case 1:{
-                                    cntrApresentacaoPessoal.executar(emailLogado);
+                                    cntrApresentacaoPessoal->executar(emailLogado);
                                     break;
                                 }
                                 case 2:{
-                                    cntrApresentacaoReservas.executar(emailLogado);
+                                    cntrApresentacaoReservas->executar(emailLogado);
                                     break;
 
                                 }
@@ -1335,7 +1347,7 @@ void CntrApresentacaoInicial::executar(){
                     break;
                 }
                 case 2:{
-                    cntrApresentacaoPessoal.criar();
+                    cntrApresentacaoPessoal->criar();
                     break;
                 }
                 case 0:{
@@ -1348,4 +1360,24 @@ void CntrApresentacaoInicial::executar(){
 
             }
         }
+}
+
+bool CntrISPessoal::criarGerente(Gerente gerente){
+    return ContainerGerentes::getInstancia()->incluir(gerente);
+}
+
+bool CntrISPessoal::lerGerente(Gerente& gerente){
+    return ContainerGerentes::getInstancia()->pesquisar(&gerente);
+}
+
+bool CntrISPessoal::atualizarGerente(Gerente gerente){
+    return ContainerGerentes::getInstancia()->atualizar(gerente);
+}
+
+bool CntrISPessoal::descadastrarGerente(Gerente gerente){
+    string emailAlvo = gerente.getEmail().getEmail();
+    if (ContainerHoteis::getInstancia()->existeHotelDoGerente(emailAlvo)) {
+        return false;
+    }
+    return ContainerGerentes::getInstancia()->remover(gerente.getEmail().getEmail());
 }

@@ -70,6 +70,13 @@ class ContainerHoteis{
         @return true se a operação foi realizada com sucesso.
         */
         bool listar(vector<Hotel>& hoteis);
+         /**
+        @brief Verifica se existe gerente associado ao hotel.
+        @param emailGerente Email do gerente a ser procurado.
+        @return true se a operação foi realizada com sucesso. false caso
+        contrário.
+        */
+        bool existeHotelDoGerente(string emailGerente);
 };
 
 /**

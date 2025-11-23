@@ -328,4 +328,13 @@ inline void CntrApresentacaoInicial::setCntrApresentacaoPessoal(IA_Pessoal* cntr
 inline void CntrApresentacaoInicial::setCntrApresentacaoReservas(IA_Reservas* cntr){
     cntrApresentacaoReservas = cntr;
 }
+
+class CntrISPessoal : public IS_Pessoal{
+    public:
+
+        bool criarGerente(Gerente gerente) override;
+        bool lerGerente(Gerente& gerente) override;
+        bool atualizarGerente(Gerente gerente) override;
+        bool descadastrarGerente(Gerente gerente) override;
+};
 #endif // CONTROLADORAS_H_INCLUDED
