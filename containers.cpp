@@ -188,3 +188,44 @@ bool ContainerQuartos::listar(string codigoHotelFiltro, vector<Quarto>& quartos)
     }
     return true;
 }
+
+ContainerGerentes* ContainerGerentes::instancia = nullptr;
+
+ContainerGerentes* ContainerGerentes::getInstancia(){
+    if(instancia == nullptr){
+        instancia = new ContainerGerentes();
+    }
+    return instancia;
+}
+
+bool ContainerGerentes::incluir(Gerente gerente){
+    return container.insert(make_pair(gerente.getEmail().getEmail(), gerente)).second;
+}
+bool ContainerGerentes::pesquisar(Gerente* gerente){
+    map<string, Gerente>::iterator it = container.find(gerente->getEmail().getEmail());
+
+    if(it != container.end()){
+        *gerente = it->second;
+        return true;
+    }
+    return false;
+}
+bool ContainerGerentes::atualizar(Gerente gerente){
+    map<string, Gerente>::iterator it = container.find(gerente.getEmail().getEmail());
+
+    if(it != container.end()){
+        it->second = gerente;
+        return true;
+    }
+    return false;
+}
+bool ContainerGerentes::remover(string email){
+     map<string, Gerente>::iterator it = container.find(email);
+
+    if(it != container.end()){
+        container.erase(it);
+        return true;
+    }
+    return false;
+}
+

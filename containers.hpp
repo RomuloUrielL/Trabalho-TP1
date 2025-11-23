@@ -71,4 +71,18 @@ class ContainerQuartos{
         bool listar(vector<Quarto>& quarto);
 };
 
+class ContainerGerentes{
+    private:
+        static ContainerGerentes* instancia;
+        map<string, Gerente> container;
+        ContainerGerentes(){}
+    public:
+        static ContainerGerentes* getInstancia();
+
+        bool incluir(Gerente gerente);
+        bool pesquisar(Gerente* gerente);
+        bool atualizar(Gerente gerente);
+        bool remover(string email);
+};
+
 #endif // CONTAINERS_HPP_INCLUDED
