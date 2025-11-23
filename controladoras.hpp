@@ -301,4 +301,31 @@ class CntrISReservas : public IS_Reservas{
 
 };
 
+class CntrApresentacaoInicial {
+    private:
+        IA_Autenticacao *cntrApresentacaoAutenticacao;
+        IA_Pessoal *cntrApresentacaoPessoal;
+        IA_Reservas *cntrApresentacaoReservas;
+    public:
+
+        void executar();
+
+        void setCntrApresentacaoAutenticacao(IA_Autenticacao*);
+
+        void setCntrApresentacaoPessoal(IA_Pessoal*);
+
+        void setCntrApresentacaoReservas(IA_Reservas*);
+};
+
+inline void CntrApresentacaoInicial::setCntrApresentacaoAutenticacao(IA_Autenticacao* cntr){
+    cntrApresentacaoAutenticacao = cntr;
+}
+
+inline void CntrApresentacaoInicial::setCntrApresentacaoPessoal(IA_Pessoal* cntr){
+    cntrApresentacaoPessoal = cntr;
+}
+
+inline void CntrApresentacaoInicial::setCntrApresentacaoReservas(IA_Reservas* cntr){
+    cntrApresentacaoReservas = cntr;
+}
 #endif // CONTROLADORAS_H_INCLUDED
