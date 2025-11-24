@@ -378,18 +378,68 @@ inline void CntrApresentacaoInicial::setCntrApresentacaoReservas(IA_Reservas* cn
     cntrApresentacaoReservas = cntr;
 }
 
+/**
+@brief Controladora da camada de serviço responsável pela gestão de entidades do tipo Gerente.
+@details Implementa as funcionalidades de cadastrar, ler, atualizar e remover objetos do tipo Gerente.
+*/
+
 class CntrISPessoal : public IS_Pessoal{
     public:
 
+        /**
+        @brief Cria um novo gerente no sistema.
+        @param gerente Objeto contendo os dados do gerente a ser cadastrado.
+        @return true se o cadastro for bem-sucedido, false caso contrário.
+        */
+
         bool criarGerente(Gerente gerente) override;
+
+         /**
+        @brief Recupera os dados de um gerente existente no sistema.
+        @details Busca no repositório de gerentes utilizando os critérios definidos
+        no objeto gerente fornecido (email e senha).
+        @param gerente Referência para objeto Gerente que será preenchido
+        com os dados completos se encontrado.
+        @return true se o gerente foi encontrado e os dados foram recuperados,
+        false caso contrário.
+        */
+
         bool lerGerente(Gerente& gerente) override;
+
+        /**
+        @brief Atualiza os dados de um gerente cadastrado.
+        @details Implementa a lógica de atualização de dados do gerente.
+        @param gerente Objeto contendo os dados atualizados do gerente.
+        @return true se a atualização foi bem-sucedida, false caso contrário.
+        */
+
         bool atualizarGerente(Gerente gerente) override;
+
+        /**
+        @brief Remove o cadastro de um gerente do sistema.
+        @details Implementa a lógica de exclusão de gerentes.
+        @param gerente Objeto contendo os dados do gerente a ser descadastrado.
+        @return true se o descadastramento foi bem-sucedido, false caso contrário.
+        */
+
         bool descadastrarGerente(Gerente gerente) override;
 };
 
+/**
+@brief Controladora da camada de serviço responsável pela autenticação de usuários.
+@details Responsável por validar as credenciais de acesso de um usuário utilizando Email e Senha.
+*/
 
 class CntrISAutenticacao: public IS_Autenticacao{
     public:
+
+        /**
+        @brief Realiza a autenticação do usuário. Verifica se o par Email e Senha corresponde a um registro válido no sistema.
+        @param email Endereço de email utilizado como identificador do usuário.
+        @param senha Senha associada à conta do usuário.
+        @return true se as credenciais são válidas e o acesso pode ser concedido,false caso contrário.
+        */
+
         bool autenticar(Email email, Senha senha) override;
 };
 #endif // CONTROLADORAS_H_INCLUDED
